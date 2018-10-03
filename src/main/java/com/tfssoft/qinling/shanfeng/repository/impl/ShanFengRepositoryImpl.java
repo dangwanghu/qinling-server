@@ -1,0 +1,20 @@
+package com.tfssoft.qinling.shanfeng.repository.impl;
+
+import java.util.List;
+
+import org.springframework.stereotype.Repository;
+
+import com.tfssoft.qinling.base.domain.Topic;
+import com.tfssoft.qinling.base.repository.impl.AbstractRepository;
+import com.tfssoft.qinling.shanfeng.domain.ShanFengSql;
+import com.tfssoft.qinling.shanfeng.repository.ShanFengRepository;
+
+@Repository
+public class ShanFengRepositoryImpl extends AbstractRepository<Topic> implements ShanFengRepository {
+
+	@Override
+	public List<Topic> getShanFengList() {
+		return this.findAll(ShanFengSql.GET_SHANFENG_LIST);
+	}
+
+}

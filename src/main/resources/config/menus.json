@@ -1,0 +1,38 @@
+[{
+	"name": "自然地理",
+	"children": [
+		{
+			"name": "峪口",
+			"url": "/yukou/list"
+		},
+		{
+			"name": "河流",
+			"url": "/unknown"
+		},
+		{
+			"name": "山峰",
+			"url": "/shanfeng/list"
+		}
+	] 
+},
+{
+	"name": "人文地理",
+	"children": [
+		{
+			"name": "寺庙",
+			"url": "/simiao/list"
+		},
+		{
+			"name": "景点",
+			"url": "/jingdian/list"
+		},
+		{
+			"name": "农家乐",
+			"url": "/unknown"
+		},
+		{
+			"name": "关口",
+			"url": "/unknown"
+		}
+	] 
+}]
