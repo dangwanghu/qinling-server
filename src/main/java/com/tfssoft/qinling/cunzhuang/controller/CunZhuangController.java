@@ -14,6 +14,10 @@ import com.tfssoft.qinling.base.controller.BaseController;
 import com.tfssoft.qinling.base.domain.Topic;
 import com.tfssoft.qinling.cunzhuang.service.CunZhuangService;
 
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
+
+@Api(tags = {"CunZhuang"}, description = "Api list")
 @Controller
 @RequestMapping("/cunzhuang")
 public class CunZhuangController extends BaseController {
@@ -21,7 +25,7 @@ public class CunZhuangController extends BaseController {
 	@Autowired
 	private CunZhuangService cunZhuangService;
 
-	
+	@ApiOperation(value = "获取村庄列表", httpMethod = "GET")
 	@RequestMapping(value = "/list", method = RequestMethod.GET)
 	public void getCunZhuangList(HttpServletRequest request, HttpServletResponse response) {
 		try {

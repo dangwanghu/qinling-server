@@ -14,6 +14,10 @@ import com.tfssoft.qinling.base.controller.BaseController;
 import com.tfssoft.qinling.base.domain.Topic;
 import com.tfssoft.qinling.zongjiao.service.SiMiaoService;
 
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
+
+@Api(tags = {"SiMiao"}, description = "Api list")
 @Controller
 @RequestMapping("/simiao")
 public class SiMiaoController extends BaseController {
@@ -21,7 +25,7 @@ public class SiMiaoController extends BaseController {
 	@Autowired
 	private SiMiaoService siMiaoService;
 
-	
+	@ApiOperation(value = "获取寺庙列表", httpMethod = "GET")
 	@RequestMapping(value = "/list", method = RequestMethod.GET)
 	public void getSiMiaoList(HttpServletRequest request, HttpServletResponse response) {
 		try {

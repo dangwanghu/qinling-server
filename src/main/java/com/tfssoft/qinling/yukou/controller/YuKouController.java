@@ -14,6 +14,10 @@ import com.tfssoft.qinling.base.controller.BaseController;
 import com.tfssoft.qinling.base.domain.Topic;
 import com.tfssoft.qinling.yukou.service.YuKouService;
 
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
+
+@Api(tags = {"YuKou"}, description = "Api list")
 @Controller
 @RequestMapping("/yukou")
 public class YuKouController extends BaseController {
@@ -21,7 +25,7 @@ public class YuKouController extends BaseController {
 	@Autowired
 	private YuKouService yuKouService;
 
-	
+	@ApiOperation(value = "获取峪口列表", httpMethod = "GET")
 	@RequestMapping(value = "/list", method = RequestMethod.GET)
 	public void getYuKouList(HttpServletRequest request, HttpServletResponse response) {
 		try {

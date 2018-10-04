@@ -14,6 +14,10 @@ import com.tfssoft.qinling.base.controller.BaseController;
 import com.tfssoft.qinling.base.domain.Topic;
 import com.tfssoft.qinling.jingdian.service.JingDianService;
 
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
+
+@Api(tags = {"JingDian"}, description = "Api list")
 @Controller
 @RequestMapping("/jingdian")
 public class JingDianController extends BaseController {
@@ -21,7 +25,7 @@ public class JingDianController extends BaseController {
 	@Autowired
 	private JingDianService jingdianService;
 
-	
+	@ApiOperation(value = "获取景点列表", httpMethod = "GET")
 	@RequestMapping(value = "/list", method = RequestMethod.GET)
 	public void getJingDianList(HttpServletRequest request, HttpServletResponse response) {
 		try {

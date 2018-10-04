@@ -14,6 +14,10 @@ import com.tfssoft.qinling.base.controller.BaseController;
 import com.tfssoft.qinling.fagui.domain.Rule;
 import com.tfssoft.qinling.fagui.service.FaGuiService;
 
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
+
+@Api(tags = {"FaGui"}, description = "Api list")
 @Controller
 @RequestMapping("/fagui")
 public class FaGuiController extends BaseController {
@@ -21,7 +25,7 @@ public class FaGuiController extends BaseController {
 	@Autowired
 	private FaGuiService faGuiService;
 
-	
+	@ApiOperation(value = "获取法规列表", httpMethod = "GET")
 	@RequestMapping(value = "/list", method = RequestMethod.GET)
 	public void getFaGuiList(HttpServletRequest request, HttpServletResponse response) {
 		try {

@@ -14,8 +14,11 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import com.tfssoft.qinling.base.controller.BaseController;
 import com.tfssoft.qinling.util.JsonReader;
 
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import net.sf.json.JSONArray;
 
+@Api(tags = {"Menu"}, description = "Api list")
 @Controller
 @RequestMapping("/menu")
 public class MenuController extends BaseController {
@@ -23,9 +26,9 @@ public class MenuController extends BaseController {
 	@Value(value="classpath:config/menus.json")
 	private Resource data;
 
-	
+	@ApiOperation(value = "获取菜单列表", httpMethod = "GET")
 	@RequestMapping(value = "/list", method = RequestMethod.GET)
-	public void getContactByName(HttpServletRequest request, HttpServletResponse response) {
+	public void getMenuList(HttpServletRequest request, HttpServletResponse response) {
 		try {
 			File file = data.getFile();
 			String jsonData = JsonReader.read(file);

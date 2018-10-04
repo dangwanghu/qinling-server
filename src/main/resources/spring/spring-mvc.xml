@@ -16,6 +16,11 @@
 	
 	<!-- <bean id="oAuthAspectJ" class="com.tfssoft.qinling.base.aop.OAuthAspectJ" /> -->
 	
+	<bean id="swaggerConfig" class="com.tfssoft.qinling.base.config.SwaggerConfig" />
+	
+	<mvc:resources mapping="swagger-ui.html" location="classpath:/META-INF/resources/"/>
+	<mvc:resources mapping="/webjars/**" location="classpath:/META-INF/resources/webjars/"/>
+       
 	<bean id="urlAnnotationMapping" class="org.springframework.web.servlet.mvc.annotation.DefaultAnnotationHandlerMapping" />
 
 	<bean id="messageAdapter" class="org.springframework.web.servlet.mvc.annotation.AnnotationMethodHandlerAdapter" />
