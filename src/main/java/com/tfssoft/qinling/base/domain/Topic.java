@@ -2,32 +2,48 @@ package com.tfssoft.qinling.base.domain;
 
 import java.io.Serializable;
 
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
+
+@ApiModel(value = "Topic", description = "专题")
 public class Topic implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
+	@ApiModelProperty(hidden = true)
 	private Integer id;
 
+	@ApiModelProperty(value = "村庄名称", required = true)
 	private String name;
 
+	@ApiModelProperty(value = "位置描述", required = true)
 	private String locationDescription;
 
+	@ApiModelProperty(value = "村庄简介", required = true)
 	private String introduction;
 
+	@ApiModelProperty(value = "人文历史", required = true)
 	private String history;
 
+	@ApiModelProperty(value = "自然风貌")
 	private String naturalFeatures;
 
+	@ApiModelProperty(value = "其他说明", required = true)
 	private String otherComments;
 
+	@ApiModelProperty(value = "纬度", required = true)
 	private Double xLat;
 
+	@ApiModelProperty(value = "经度", required = true)
 	private Double yLng;
 
+	@ApiModelProperty(value = "区县")
 	private String county;
 
+	@ApiModelProperty(value = "乡镇")
 	private String town;
 
+	@ApiModelProperty(value = "峪口")
 	private String yuKou;
 
 	public Topic() {

@@ -18,6 +18,11 @@ public class CunZhuangServiceImpl implements CunZhuangService {
 	
 	public List<Topic> getCunZhuangList() {
 		return cunZhuangRepository.getCunZhuangList();
+	}
+
+	@Override
+	public void addCunZhuang(Topic instance) {
+		cunZhuangRepository.addCunZhuang(instance);
 	}	
 
 }

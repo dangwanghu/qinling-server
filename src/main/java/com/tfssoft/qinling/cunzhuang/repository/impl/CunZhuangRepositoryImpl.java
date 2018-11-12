@@ -9,12 +9,17 @@ import com.tfssoft.qinling.base.repository.impl.AbstractRepository;
 import com.tfssoft.qinling.cunzhuang.domain.CunZhuangSql;
 import com.tfssoft.qinling.cunzhuang.repository.CunZhuangRepository;
 
-@Repository
+@Repository	
 public class CunZhuangRepositoryImpl extends AbstractRepository<Topic> implements CunZhuangRepository {
 
 	@Override
 	public List<Topic> getCunZhuangList() {
 		return this.findAll(CunZhuangSql.GET_CUNZHUANG_LIST);
+	}
+
+	@Override
+	public void addCunZhuang(Topic instance) {
+		this.insert(CunZhuangSql.INSRT_CUNZHUANG, CunZhuangSql.getInsertObject(instance));
 	}
 
 }

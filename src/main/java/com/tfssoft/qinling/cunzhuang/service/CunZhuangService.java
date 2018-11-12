@@ -8,4 +8,6 @@ public interface CunZhuangService {
 	
 	public List<Topic> getCunZhuangList();
 
+	public void addCunZhuang(Topic instance);
+
 }
