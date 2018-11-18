@@ -29,4 +29,8 @@
 
 	<bean id="springContextHolder" class="com.tfssoft.qinling.web.SpringContextHolder" scope="singleton" />
 
+ 	<bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+ 		<property name="defaultEncoding" value="UTF-8" />
+ 		<property name="maxUploadSize" value="10240000" />
+ 	</bean>
 </beans>
