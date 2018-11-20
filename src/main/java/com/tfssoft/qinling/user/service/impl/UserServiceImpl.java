@@ -17,9 +17,11 @@ public class UserServiceImpl implements UserService {
 	@Override
 	public User userLogin(String phone, String password) {
 		User instance = userRepository.queryByPhoneAndPassword(phone, password);
-		// set token
-		instance.setToken(null);
-		userRepository.updateUser(instance);
+		if (null != instance) {
+			// set token
+			instance.setToken(null);
+			userRepository.updateUser(instance);
+		}
 		return instance;
 	}
 
