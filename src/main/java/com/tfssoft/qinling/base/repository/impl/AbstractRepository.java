@@ -24,7 +24,7 @@ public abstract class AbstractRepository<T extends Serializable> implements Repo
 
 	@Override
 	public List<T> findAll(String sql) {
-		return (List<T>) jdbcTemplate.query(sql,  new Object[]{}, new BeanPropertyRowMapper<T>(entity));
+		return (List<T>) jdbcTemplate.query(sql, new Object[] {}, new BeanPropertyRowMapper<T>(entity));
 	}
 
 	@Override
@@ -34,7 +34,11 @@ public abstract class AbstractRepository<T extends Serializable> implements Repo
 
 	@Override
 	public T findOne(String sql) {
-		return jdbcTemplate.queryForObject(sql, entity);
+		List<T> list = (List<T>) jdbcTemplate.query(sql, new Object[] {}, new BeanPropertyRowMapper<T>(entity));
+		if (list.size() > 0) {
+			return list.get(0);
+		}
+		return null;
 	}
 
 	@Override
