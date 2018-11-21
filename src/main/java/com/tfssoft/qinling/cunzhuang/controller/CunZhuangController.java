@@ -43,7 +43,7 @@ public class CunZhuangController extends BaseController {
 	public void postCunZhuang(@RequestBody Topic topic, HttpServletRequest request, HttpServletResponse response) {
 		try {
 			cunZhuangService.addCunZhuang(topic);
-			success(response);
+			success("保存成功", response);
 		} catch (Exception e) {
 			e.printStackTrace();
 			error("保存出错！", response);

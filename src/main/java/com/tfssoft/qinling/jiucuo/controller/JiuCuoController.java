@@ -29,7 +29,7 @@ public class JiuCuoController extends BaseController {
 	public void postJiuCuo(@RequestBody Correction correction, HttpServletRequest request, HttpServletResponse response) {
 		try {
 			jiuCuoService.addJiuCuo(correction);
-			success(response);
+			success("保存成功", response);
 		} catch (Exception e) {
 			e.printStackTrace();
 			error("保存出错！", response);

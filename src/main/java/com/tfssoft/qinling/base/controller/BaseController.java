@@ -30,7 +30,9 @@ public abstract class BaseController {
 			
 			Map<String, Object> map = new HashMap<String, Object>();
 			map.put("success", true);
-			map.put("msg", object);
+			map.put("data", object);
+			map.put("msg", "请求成功");
+
 			
 			ObjectMapper objectMapper = new ObjectMapper();
 			JsonGenerator jsonGenerator = objectMapper.getJsonFactory().createJsonGenerator(response.getOutputStream(),JsonEncoding.UTF8);
@@ -44,13 +46,14 @@ public abstract class BaseController {
 		}
 	}
 	
-	public void success(HttpServletResponse response) {
+	public void success(String msg, HttpServletResponse response) {
 		try {
 			response.setContentType("text/html;charset=utf-8");
 
 			Map<String, Object> map = new HashMap<String, Object>();
 			map.put("success", true);
-			map.put("msg", null);
+			map.put("data", null);
+			map.put("msg", msg);
 
 			ObjectMapper objectMapper = new ObjectMapper();
 			JsonGenerator jsonGenerator = objectMapper.getJsonFactory().createJsonGenerator(response.getOutputStream(), JsonEncoding.UTF8);
@@ -69,6 +72,7 @@ public abstract class BaseController {
 
 			Map<String, Object> map = new HashMap<String, Object>();
 			map.put("success", false);
+			map.put("data", null);
 			map.put("msg", msg);
 
 			ObjectMapper objectMapper = new ObjectMapper();

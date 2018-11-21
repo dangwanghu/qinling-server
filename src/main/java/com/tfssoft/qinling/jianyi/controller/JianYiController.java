@@ -29,7 +29,7 @@ public class JianYiController extends BaseController {
 	public void postJianYi(@RequestBody Suggest suggest, HttpServletRequest request, HttpServletResponse response) {
 		try {
 			jianYiService.addJianYi(suggest);
-			success(response);
+			success("保存成功", response);
 		} catch (Exception e) {
 			e.printStackTrace();
 			error("保存出错！", response);

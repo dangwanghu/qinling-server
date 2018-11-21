@@ -29,7 +29,7 @@ public class JuBaoController extends BaseController {
 	public void postJianYi(@RequestBody Report report, HttpServletRequest request, HttpServletResponse response) {
 		try {
 			juBaoService.addJuBao(report);
-			success(response);
+			success("保存成功", response);
 		} catch (Exception e) {
 			e.printStackTrace();
 			error("保存出错！", response);

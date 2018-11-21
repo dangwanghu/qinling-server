@@ -34,7 +34,7 @@ public class UserController extends BaseController {
 			if (null != instance) {
 				writeJson(instance, response);
 			} else {
-				writeJson("用户名或密码错误", response);
+				error("用户名或密码错误", response);
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
