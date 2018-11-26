@@ -13,13 +13,23 @@ import com.tfssoft.qinling.cunzhuang.repository.CunZhuangRepository;
 public class CunZhuangRepositoryImpl extends AbstractRepository<Topic> implements CunZhuangRepository {
 
 	@Override
-	public List<Topic> getCunZhuangList() {
-		return this.findAll(CunZhuangSql.GET_CUNZHUANG_LIST);
+	public List<Topic> getCunZhuangList(String name) {
+		return this.findAll(CunZhuangSql.getListSql(name));
 	}
 
 	@Override
 	public void addCunZhuang(Topic instance) {
 		this.insert(CunZhuangSql.INSRT_CUNZHUANG, CunZhuangSql.getInsertObject(instance));
+	}
+
+	@Override
+	public List<Topic> getCunZhuangPageList(String name, int skip, int limit) {
+		return this.findAll(CunZhuangSql.getPageListSql(name, skip, limit));
+	}
+
+	@Override
+	public long getCunZhuangCount(String name) {
+		return this.findCount(CunZhuangSql.getCountSql(name));
 	}
 
 }

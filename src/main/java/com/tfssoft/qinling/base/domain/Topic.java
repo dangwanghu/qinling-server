@@ -45,6 +45,9 @@ public class Topic implements Serializable {
 
 	@ApiModelProperty(value = "峪口")
 	private String yuKou;
+	
+	@ApiModelProperty(hidden = true)
+	private Integer type;
 
 	public Topic() {
 	}
@@ -153,4 +156,13 @@ public class Topic implements Serializable {
 	public int hashCode() {
 		return name.hashCode();
 	}
+
+	public Integer getType() {
+		return type;
+	}
+
+	public void setType(Integer type) {
+		this.type = type;
+	}
+	
 }

@@ -12,6 +12,8 @@ public interface Repository<T extends Serializable> {
 	public int update(String sql);
 
 	public T findOne(String sql);
+	
+	public long findCount(String sql);
 
 	public List<T> findAll(String sql);
 

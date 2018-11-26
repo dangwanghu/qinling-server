@@ -40,6 +40,12 @@ public abstract class AbstractRepository<T extends Serializable> implements Repo
 		}
 		return null;
 	}
+	
+	@SuppressWarnings("deprecation")
+	@Override
+	public long findCount(String sql) {
+		return jdbcTemplate.queryForLong(sql);
+	}
 
 	@Override
 	public int insert(String sql, Object... args) {

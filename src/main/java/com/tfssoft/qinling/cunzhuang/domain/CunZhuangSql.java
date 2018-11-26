@@ -10,6 +10,8 @@ public class CunZhuangSql {
 			+ "left join dict_qvxian d on d.id = a.qx " 
 			+ "left join dict_xiangzhen e on e.id = a.xz "
 			+ "left join yukou f on f.id = a.yk ";
+	
+	public static final String GET_CUNZHUANG_COUNT = "SElECT count(id) FROM cunzhuang a ";
 
 	public static final String INSRT_CUNZHUANG = "INSERT INTO cunzhuang "
 			+ "(czmc, wzms, czjj, czrwls, czqtsm, x, y, qx, xz, yk) " + "values "
@@ -28,6 +30,30 @@ public class CunZhuangSql {
 				instance.getTown(),
 				instance.getYuKou()
 		};
+	}
+
+	public static String getPageListSql(String name, int skip, int limit) {
+		String conditions = "";
+		if (null != name) {
+			conditions = "where czmc like '%" + name + "%'";
+		}
+		return GET_CUNZHUANG_LIST + conditions + " limit " + skip + "," + limit;
+	}
+
+	public static String getListSql(String name) {
+		String conditions = "";
+		if (null != name) {
+			conditions = "where czmc like '%" + name + "%'";
+		}
+		return GET_CUNZHUANG_LIST + conditions;
+	}
+
+	public static String getCountSql(String name) {
+		String conditions = "";
+		if (null != name) {
+			conditions = "where czmc like '%" + name + "%'";
+		}
+		return GET_CUNZHUANG_COUNT + conditions;
 	}
 
 }

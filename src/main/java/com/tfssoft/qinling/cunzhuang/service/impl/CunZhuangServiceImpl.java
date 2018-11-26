@@ -16,13 +16,27 @@ public class CunZhuangServiceImpl implements CunZhuangService {
 	@Autowired
 	private CunZhuangRepository cunZhuangRepository;
 	
-	public List<Topic> getCunZhuangList() {
-		return cunZhuangRepository.getCunZhuangList();
+	public List<Topic> getCunZhuangList(Integer skip, Integer limit, String name) {
+		if (null == skip && null != limit) {
+			return cunZhuangRepository.getCunZhuangPageList(name, 0, limit.intValue());
+		} else if (null != skip && null == limit) {
+			return cunZhuangRepository.getCunZhuangPageList(name, skip.intValue(), 10);
+		} else if (null != skip && null != limit) {
+			return cunZhuangRepository.getCunZhuangPageList(name, skip.intValue(), limit.intValue());
+		} else {
+			return cunZhuangRepository.getCunZhuangList(name);
+		}
 	}
 
 	@Override
 	public void addCunZhuang(Topic instance) {
 		cunZhuangRepository.addCunZhuang(instance);
+	}
+
+	@Override
+	public long getCunZhuangCount(String name) {
+		return cunZhuangRepository.getCunZhuangCount(name);
+
 	}	
 
 }
