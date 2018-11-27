@@ -13,9 +13,12 @@ public class CunZhuangSql {
 	
 	public static final String GET_CUNZHUANG_COUNT = "SElECT count(id) FROM cunzhuang a ";
 
-	public static final String INSRT_CUNZHUANG = "INSERT INTO cunzhuang "
+	public static final String INSERT_CUNZHUANG = "INSERT INTO cunzhuang "
 			+ "(czmc, wzms, czjj, czrwls, czqtsm, x, y, qx, xz, yk) " + "values "
 			+ "(?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+	
+	public static final String DELETE_CUNZHUANG = "DELETE FROM cunzhuang "
+			+ "where id = ?";
 
 	public static Object[] getInsertObject(Topic instance) {
 		return new Object[] {
@@ -54,6 +57,22 @@ public class CunZhuangSql {
 			conditions = "where czmc like '%" + name + "%'";
 		}
 		return GET_CUNZHUANG_COUNT + conditions;
+	}
+
+	public static String getUpdateCunZhuangSql(Topic instance) {
+		String sql = "update cunzhuang set czmc = '" + instance.getName() + "'";
+		sql += ", wzms = '" + instance.getLocationDescription() + "'";
+		sql += ", czjj = '" + instance.getIntroduction() + "'";
+		sql += ", czrwls = '" + instance.getHistory() + "'";
+		sql += ", czqtsm = '" + instance.getOtherComments() + "'";
+		sql += ", x = '" + instance.getxLat() + "'";
+		sql += ", y = '" + instance.getyLng() + "'";
+		sql += ", qx = '" + instance.getCounty() + "'";
+		sql += ", xz = '" + instance.getTown() + "'";
+		sql += ", yk = '" + instance.getYuKou() + "'";
+
+		sql += " where id = " + instance.getId().intValue();
+		return sql;
 	}
 
 }

@@ -19,7 +19,7 @@ public class CunZhuangRepositoryImpl extends AbstractRepository<Topic> implement
 
 	@Override
 	public void addCunZhuang(Topic instance) {
-		this.insert(CunZhuangSql.INSRT_CUNZHUANG, CunZhuangSql.getInsertObject(instance));
+		this.insert(CunZhuangSql.INSERT_CUNZHUANG, CunZhuangSql.getInsertObject(instance));
 	}
 
 	@Override
@@ -30,6 +30,16 @@ public class CunZhuangRepositoryImpl extends AbstractRepository<Topic> implement
 	@Override
 	public long getCunZhuangCount(String name) {
 		return this.findCount(CunZhuangSql.getCountSql(name));
+	}
+
+	@Override
+	public void updateCunZhuang(Topic instance) {
+		this.update(CunZhuangSql.getUpdateCunZhuangSql(instance));
+	}
+
+	@Override
+	public void deleteCunZhuang(int id) {
+		this.removeOne(CunZhuangSql.DELETE_CUNZHUANG, id);
 	}
 
 }

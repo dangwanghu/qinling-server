@@ -26,7 +26,7 @@ public class SearchController extends BaseController {
 
 	@ApiOperation(value = "专题搜索", httpMethod = "GET")
 	@RequestMapping(value = "/subject", method = RequestMethod.GET)
-	public void postFile(@RequestParam("keywords") String keywords, HttpServletRequest request,
+	public void searchTopic(@RequestParam("keywords") String keywords, HttpServletRequest request,
 			HttpServletResponse response) {
 		try {
 			List<Topic> result = topicService.getTopicList(keywords);

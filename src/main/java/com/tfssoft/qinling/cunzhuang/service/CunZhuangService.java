@@ -12,4 +12,8 @@ public interface CunZhuangService {
 
 	public long getCunZhuangCount(String name);
 
+	public void updateCunZhuang(Topic instance);
+
+	public void deleteCunZhuang(int id);
+
 }

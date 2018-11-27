@@ -66,5 +66,29 @@ public class CunZhuangController extends BaseController {
 			error("保存出错！", response);
 		}
 	}
+	
+	@ApiOperation(value = "修改村庄", httpMethod = "PUT")
+	@RequestMapping(value = "", method = RequestMethod.PUT)
+	public void putCunZhuang(@RequestBody Topic topic, HttpServletRequest request, HttpServletResponse response) {
+		try {
+			cunZhuangService.updateCunZhuang(topic);
+			success("更新成功", response);
+		} catch (Exception e) {
+			e.printStackTrace();
+			error("更新出错！", response);
+		}
+	}
+	
+	@ApiOperation(value = "删除村庄", httpMethod = "DELETE")
+	@RequestMapping(value = "", method = RequestMethod.DELETE)
+	public void deleteCunZhuang(@RequestParam(required = true) Integer id, HttpServletRequest request, HttpServletResponse response) {
+		try {
+			cunZhuangService.deleteCunZhuang(id.intValue());
+			success("删除成功", response);
+		} catch (Exception e) {
+			e.printStackTrace();
+			error("删除出错！", response);
+		}
+	}
 
 }

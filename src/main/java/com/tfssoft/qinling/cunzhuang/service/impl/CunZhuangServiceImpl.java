@@ -37,6 +37,16 @@ public class CunZhuangServiceImpl implements CunZhuangService {
 	public long getCunZhuangCount(String name) {
 		return cunZhuangRepository.getCunZhuangCount(name);
 
+	}
+
+	@Override
+	public void updateCunZhuang(Topic instance) {
+		cunZhuangRepository.updateCunZhuang(instance);
+	}
+
+	@Override
+	public void deleteCunZhuang(int id) {
+		cunZhuangRepository.deleteCunZhuang(id);
 	}	
 
 }

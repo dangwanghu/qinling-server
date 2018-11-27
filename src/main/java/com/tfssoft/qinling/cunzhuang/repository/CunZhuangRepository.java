@@ -13,4 +13,8 @@ public interface CunZhuangRepository {
 	public List<Topic> getCunZhuangPageList(String name, int skip, int limit);
 
 	public long getCunZhuangCount(String name);
+
+	public void updateCunZhuang(Topic instance);
+
+	public void deleteCunZhuang(int id);
 }

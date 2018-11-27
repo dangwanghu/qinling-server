@@ -59,7 +59,7 @@ public abstract class AbstractRepository<T extends Serializable> implements Repo
 
 	@Override
 	public int removeOne(String sql, int id) {
-		return jdbcTemplate.update(sql, id);
+		return jdbcTemplate.update(sql, new Object[] { id });
 	}
 
 }
