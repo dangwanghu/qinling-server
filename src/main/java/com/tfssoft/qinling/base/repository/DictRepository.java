@@ -7,4 +7,6 @@ import com.tfssoft.qinling.base.domain.Dict;
 public interface DictRepository {
 
 	public List<Dict> getQxList();
+
+	public List<Dict> getXzList(Integer quxian);
 }

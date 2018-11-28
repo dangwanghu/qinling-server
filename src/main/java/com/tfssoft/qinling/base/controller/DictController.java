@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.tfssoft.qinling.base.domain.Dict;
 import com.tfssoft.qinling.base.service.DictService;
@@ -22,12 +23,25 @@ import io.swagger.annotations.ApiOperation;
 public class DictController extends BaseController {
 	@Autowired
 	private DictService dictService;
-	
-	@ApiOperation(value = "区县搜索", httpMethod = "GET")
+
+	@ApiOperation(value = "区县列表", httpMethod = "GET")
 	@RequestMapping(value = "/quxian", method = RequestMethod.GET)
 	public void getCountyDict(HttpServletRequest request, HttpServletResponse response) {
 		try {
 			List<Dict> result = dictService.getQxList();
+			writeJson(result, response);
+		} catch (Exception e) {
+			e.printStackTrace();
+			error("查询出错！", response);
+		}
+	}
+
+	@ApiOperation(value = "乡镇列表", httpMethod = "GET")
+	@RequestMapping(value = "/xiangzhen", method = RequestMethod.GET)
+	public void getCountyDict(@RequestParam(value = "quxian", required = false) Integer quxian,
+			HttpServletRequest request, HttpServletResponse response) {
+		try {
+			List<Dict> result = dictService.getXzList(quxian);
 			writeJson(result, response);
 		} catch (Exception e) {
 			e.printStackTrace();

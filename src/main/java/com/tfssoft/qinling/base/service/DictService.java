@@ -8,4 +8,6 @@ public interface DictService {
 	
 	public List<Dict> getQxList();
 
+	public List<Dict> getXzList(Integer quxian);
+
 }

@@ -16,4 +16,9 @@ public class DictRepositoryImpl extends AbstractRepository<Dict> implements Dict
 		return this.findAll(DictSql.GET_DICT_QX_LIST);
 	}
 
+	@Override
+	public List<Dict> getXzList(Integer quxian) {
+		return this.findAll(DictSql.getXzListSql(quxian));
+	}
+
 }

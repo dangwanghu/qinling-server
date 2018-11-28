@@ -15,6 +15,14 @@ public class YuKouSql {
 			+ "e.xzmc AS town "
 			+ "FROM yukou a "
 			+ "left join dict_qvxian d on d.id = a.qx " 
-			+ "left join dict_xiangzhen e on e.id = a.xz";
+			+ "left join dict_xiangzhen e on e.id = a.xz ";
+	
+	public static String getYuListSql(Integer xiangzhen) {
+		String conditions = "";
+		if (null != xiangzhen) {
+			conditions += "where xz = " + xiangzhen;
+		}
+		return GET_YUKOU_LIST + conditions;
+	}
 
 }

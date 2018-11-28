@@ -21,4 +21,9 @@ public class DictServiceImpl implements DictService {
 		return dictRepository.getQxList();
 	}
 
+	@Override
+	public List<Dict> getXzList(Integer quxian) {
+		return dictRepository.getXzList(quxian);
+	}
+
 }

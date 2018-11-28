@@ -6,5 +6,5 @@ import com.tfssoft.qinling.base.domain.Topic;
 
 public interface YuKouRepository {
 
-	public List<Topic> getYuKouList();
+	public List<Topic> getYuKouList(Integer xiangzhen);
 }
