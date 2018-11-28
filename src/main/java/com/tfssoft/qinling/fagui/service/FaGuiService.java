@@ -6,6 +6,6 @@ import com.tfssoft.qinling.fagui.domain.Rule;
 
 public interface FaGuiService {
 	
-	public List<Rule> getFaGuiList();
+	public List<Rule> getFaGuiList(Integer skip, Integer limit, String name);
 
 }

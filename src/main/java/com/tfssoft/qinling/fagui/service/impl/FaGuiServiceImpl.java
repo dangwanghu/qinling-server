@@ -16,8 +16,17 @@ public class FaGuiServiceImpl implements FaGuiService {
 	@Autowired
 	private FaGuiRepository faGuiRepository;
 	
-	public List<Rule> getFaGuiList() {
-		return faGuiRepository.getFaGuiList();
+	@Override
+	public List<Rule> getFaGuiList(Integer skip, Integer limit, String name) {
+		if (null == skip && null != limit) {
+			return faGuiRepository.getFaGuiPageList(name, 0, limit.intValue());
+		} else if (null != skip && null == limit) {
+			return faGuiRepository.getFaGuiPageList(name, skip.intValue(), 10);
+		} else if (null != skip && null != limit) {
+			return faGuiRepository.getFaGuiPageList(name, skip.intValue(), limit.intValue());
+		} else {
+			return faGuiRepository.getFaGuiList(name);
+		}
 	}	
 
 }

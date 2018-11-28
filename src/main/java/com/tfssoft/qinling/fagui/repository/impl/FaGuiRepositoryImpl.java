@@ -13,8 +13,13 @@ import com.tfssoft.qinling.fagui.repository.FaGuiRepository;
 public class FaGuiRepositoryImpl extends AbstractRepository<Rule> implements FaGuiRepository {
 
 	@Override
-	public List<Rule> getFaGuiList() {
-		return this.findAll(FaGuiSql.GET_FAGUI_LIST);
+	public List<Rule> getFaGuiList(String name) {
+		return this.findAll(FaGuiSql.getListSql(name));
+	}
+
+	@Override
+	public List<Rule> getFaGuiPageList(String name, int skip, int limit) {
+		return this.findAll(FaGuiSql.getPageListSql(name, skip, limit));
 	}
 
 }
