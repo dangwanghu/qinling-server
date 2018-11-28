@@ -32,6 +32,21 @@ public class FaGuiServiceImpl implements FaGuiService {
 	@Override
 	public long getFaGuiCount(String name) {
 		return faGuiRepository.getCunZhuangCount(name);
+	}
+
+	@Override
+	public void addFaGui(Rule instance) {
+		faGuiRepository.addFaGui(instance);
+	}
+
+	@Override
+	public void deleteFaGui(int id) {
+		faGuiRepository.deleteFaGui(id);
+	}
+
+	@Override
+	public void updateFaGui(Rule instance) {
+		faGuiRepository.updateFaGui(instance);
 	}	
 
 }

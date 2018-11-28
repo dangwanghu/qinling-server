@@ -10,4 +10,10 @@ public interface FaGuiService {
 
 	public long getFaGuiCount(String name);
 
+	public void addFaGui(Rule instance);
+
+	public void deleteFaGui(int id);
+
+	public void updateFaGui(Rule instance);
+
 }

@@ -1,5 +1,7 @@
 package com.tfssoft.qinling.fagui.domain;
 
+import java.util.Date;
+
 public class FaGuiSql {
 	public static final String GET_FAGUI_LIST = 
 			"SElECT id, "
@@ -13,6 +15,25 @@ public class FaGuiSql {
 			+ "FROM fagui ";
 	
 	public static final String GET_FAGUI_COUNT = "SElECT count(id) FROM fagui ";
+	
+	public static final String INSERT_FAGUI = "INSERT INTO fagui "
+			+ "(fgmc, fbdw, fbsj, sssj, lx, url, qtsm) " + "values "
+			+ "(?, ?, ?, ?, ?, ?, ?)";
+	
+	public static final String DELETE_FAGUI = "DELETE FROM fagui "
+			+ "where id = ?";
+	
+	public static Object[] getInsertObject(Rule instance) {
+		return new Object[] {
+				instance.getName(),
+				instance.getPublishUnit(),
+				new Date(),
+				instance.getImplementTime(),
+				instance.getUrlType(),
+				instance.getUrl(),
+				instance.getUrlTypeDescription()
+		};
+	}
 
 	public static String getPageListSql(String name, int skip, int limit) {
 		String conditions = "";
@@ -38,6 +59,18 @@ public class FaGuiSql {
 			conditions += "where fgmc like '%" + name + "%'";
 		}
 		return GET_FAGUI_COUNT + conditions;
+	}
+	
+	public static String getUpdateFaGuiSql(Rule instance) {
+		String sql = "update fagui set fgmc = '" + instance.getName() + "'";
+		sql += ", fbdw = '" + instance.getPublishUnit() + "'";
+		sql += ", sssj = '" + instance.getImplementTime() + "'";
+		sql += ", lx = '" + instance.getUrlType() + "'";
+		sql += ", url = '" + instance.getUrl() + "'";
+		sql += ", qtsm = '" + instance.getUrlTypeDescription() + "'";
+
+		sql += " where id = " + instance.getId().intValue();
+		return sql;
 	}
 
 }

@@ -27,4 +27,19 @@ public class FaGuiRepositoryImpl extends AbstractRepository<Rule> implements FaG
 		return this.findCount(FaGuiSql.getCountSql(name));
 	}
 
+	@Override
+	public void addFaGui(Rule instance) {
+		this.insert(FaGuiSql.INSERT_FAGUI, FaGuiSql.getInsertObject(instance));
+	}
+
+	@Override
+	public void deleteFaGui(int id) {
+		this.removeOne(FaGuiSql.DELETE_FAGUI, id);
+	}
+
+	@Override
+	public void updateFaGui(Rule instance) {
+		this.update(FaGuiSql.getUpdateFaGuiSql(instance));
+	}
+
 }

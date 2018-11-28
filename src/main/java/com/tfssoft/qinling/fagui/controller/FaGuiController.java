@@ -7,6 +7,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -54,4 +55,39 @@ public class FaGuiController extends BaseController {
 		}
 	}
 
+	@ApiOperation(value = "新增法规", httpMethod = "POST")
+	@RequestMapping(value = "", method = RequestMethod.POST)
+	public void postFaGui(@RequestBody Rule rule, HttpServletRequest request, HttpServletResponse response) {
+		try {
+			faGuiService.addFaGui(rule);
+			success("保存成功", response);
+		} catch (Exception e) {
+			e.printStackTrace();
+			error("保存出错！", response);
+		}
+	}
+	
+	@ApiOperation(value = "修改法规", httpMethod = "PUT")
+	@RequestMapping(value = "", method = RequestMethod.PUT)
+	public void putCunZhuang(@RequestBody Rule rule, HttpServletRequest request, HttpServletResponse response) {
+		try {
+			faGuiService.updateFaGui(rule);
+			success("更新成功", response);
+		} catch (Exception e) {
+			e.printStackTrace();
+			error("更新出错！", response);
+		}
+	}
+	
+	@ApiOperation(value = "删除法规", httpMethod = "DELETE")
+	@RequestMapping(value = "", method = RequestMethod.DELETE)
+	public void deleteFaGui(@RequestParam(required = true) Integer id, HttpServletRequest request, HttpServletResponse response) {
+		try {
+			faGuiService.deleteFaGui(id.intValue());
+			success("删除成功", response);
+		} catch (Exception e) {
+			e.printStackTrace();
+			error("删除出错！", response);
+		}
+	}
 }

@@ -11,4 +11,10 @@ public interface FaGuiRepository {
 	public List<Rule> getFaGuiPageList(String name, int skip, int limit);
 
 	public long getCunZhuangCount(String name);
+
+	public void addFaGui(Rule instance);
+
+	public void deleteFaGui(int id);
+
+	public void updateFaGui(Rule instance);
 }
