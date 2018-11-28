@@ -22,4 +22,9 @@ public class FaGuiRepositoryImpl extends AbstractRepository<Rule> implements FaG
 		return this.findAll(FaGuiSql.getPageListSql(name, skip, limit));
 	}
 
+	@Override
+	public long getCunZhuangCount(String name) {
+		return this.findCount(FaGuiSql.getCountSql(name));
+	}
+
 }

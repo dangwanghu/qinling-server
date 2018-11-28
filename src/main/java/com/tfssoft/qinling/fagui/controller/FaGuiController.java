@@ -40,5 +40,18 @@ public class FaGuiController extends BaseController {
 			error("查询出错！", response);
 		}
 	}
+	
+	@ApiOperation(value = "获取法规总数", httpMethod = "GET")
+	@RequestMapping(value = "/total", method = RequestMethod.GET)
+	public void getFaGuiCount(@RequestParam(value = "name", required = false) String name, HttpServletRequest request,
+			HttpServletResponse response) {
+		try {
+			long count = faGuiService.getFaGuiCount(name);
+			writeJson(count, response);
+		} catch (Exception e) {
+			e.printStackTrace();
+			error("查询出错！", response);
+		}
+	}
 
 }

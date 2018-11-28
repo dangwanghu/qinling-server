@@ -8,4 +8,6 @@ public interface FaGuiService {
 	
 	public List<Rule> getFaGuiList(Integer skip, Integer limit, String name);
 
+	public long getFaGuiCount(String name);
+
 }

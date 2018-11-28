@@ -36,7 +36,6 @@ public class CunZhuangServiceImpl implements CunZhuangService {
 	@Override
 	public long getCunZhuangCount(String name) {
 		return cunZhuangRepository.getCunZhuangCount(name);
-
 	}
 
 	@Override

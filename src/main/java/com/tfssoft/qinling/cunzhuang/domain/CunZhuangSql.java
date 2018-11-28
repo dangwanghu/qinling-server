@@ -38,7 +38,7 @@ public class CunZhuangSql {
 	public static String getPageListSql(String name, int skip, int limit) {
 		String conditions = "";
 		if (null != name) {
-			conditions = "where czmc like '%" + name + "%'";
+			conditions += "where czmc like '%" + name + "%'";
 		}
 		return GET_CUNZHUANG_LIST + conditions + " limit " + skip + "," + limit;
 	}
@@ -46,7 +46,7 @@ public class CunZhuangSql {
 	public static String getListSql(String name) {
 		String conditions = "";
 		if (null != name) {
-			conditions = "where czmc like '%" + name + "%'";
+			conditions += "where czmc like '%" + name + "%'";
 		}
 		return GET_CUNZHUANG_LIST + conditions;
 	}
@@ -54,7 +54,7 @@ public class CunZhuangSql {
 	public static String getCountSql(String name) {
 		String conditions = "";
 		if (null != name) {
-			conditions = "where czmc like '%" + name + "%'";
+			conditions += "where czmc like '%" + name + "%'";
 		}
 		return GET_CUNZHUANG_COUNT + conditions;
 	}

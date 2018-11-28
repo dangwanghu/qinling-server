@@ -11,6 +11,8 @@ public class FaGuiSql {
 			+ "lx AS urlType, "
 			+ "qtsm AS urlTypeDescription "
 			+ "FROM fagui ";
+	
+	public static final String GET_FAGUI_COUNT = "SElECT count(id) FROM fagui ";
 
 	public static String getPageListSql(String name, int skip, int limit) {
 		String conditions = "";
@@ -28,6 +30,14 @@ public class FaGuiSql {
 		}
 		conditions += " order by publishTime desc";
 		return GET_FAGUI_LIST + conditions;
+	}
+	
+	public static String getCountSql(String name) {
+		String conditions = "";
+		if (null != name) {
+			conditions += "where fgmc like '%" + name + "%'";
+		}
+		return GET_FAGUI_COUNT + conditions;
 	}
 
 }
