@@ -25,7 +25,7 @@ public class DictController extends BaseController {
 	private DictService dictService;
 
 	@ApiOperation(value = "区县列表", httpMethod = "GET")
-	@RequestMapping(value = "/quxian", method = RequestMethod.GET)
+	@RequestMapping(value = "/quxian/list", method = RequestMethod.GET)
 	public void getCountyDict(HttpServletRequest request, HttpServletResponse response) {
 		try {
 			List<Dict> result = dictService.getQxList();
@@ -37,7 +37,7 @@ public class DictController extends BaseController {
 	}
 
 	@ApiOperation(value = "乡镇列表", httpMethod = "GET")
-	@RequestMapping(value = "/xiangzhen", method = RequestMethod.GET)
+	@RequestMapping(value = "/xiangzhen/list", method = RequestMethod.GET)
 	public void getCountyDict(@RequestParam(value = "quxian", required = false) Integer quxian,
 			HttpServletRequest request, HttpServletResponse response) {
 		try {
