@@ -18,7 +18,7 @@ public class UserSql {
 			+ "FROM user where status = 1 and ";
 	
 	public static final String INSRT_USER = "INSERT INTO user "
-			+ "(open_id, open_type, user_platform, nick_name, avatar, sex, status, create_time) "
+			+ "(open_id, open_type, user_platform, nick_name, phone, avatar, sex, status, create_time) "
 			+ "values " + "(?, ?, ?, ?, ?, ?, ?, ?)";
 
 	public static Object[] getInsertObject(User instance) {
@@ -27,6 +27,7 @@ public class UserSql {
 				instance.getOpenType(),
 				instance.getUserPlatform(),
 				instance.getNickName(),
+				instance.getPhone(),
 				instance.getAvatar(),
 				instance.getSex(),
 				1,
