@@ -34,7 +34,6 @@ public class UserRepositoryImpl extends AbstractRepository<User> implements User
 	@Override
 	public User queryByPhone(String phone) {
 		return this.findOne(UserSql.getUserByPhoneSql(phone));
-
 	}
 
 }
