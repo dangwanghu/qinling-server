@@ -8,5 +8,11 @@ public interface UserService {
 	public User userLogin(String phone, String password);
 
 	public User userThirdPartyLogin(UserThirdPartyVO user);
+	
+	public User phoneUserLogin(String phone);
+
+	public String bindingPhone(Integer userId, String phone);
+
+	public void resetPassword(Integer userId, String password);
 
 }

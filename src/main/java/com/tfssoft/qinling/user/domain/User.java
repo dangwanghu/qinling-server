@@ -11,6 +11,7 @@ public class User implements Serializable {
 	private String openType;
 	private String userPlatform;
 	private String nickName;
+	private String password;
 	private String avatar;
 	private String realName;
 	private String sex;
@@ -172,6 +173,16 @@ public class User implements Serializable {
 
 	public void setCreateTime(Date createTime) {
 		this.createTime = createTime;
+	}
+
+
+	public String getPassword() {
+		return password;
+	}
+
+
+	public void setPassword(String password) {
+		this.password = password;
 	}
 
 }

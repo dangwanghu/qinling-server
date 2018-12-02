@@ -39,6 +39,11 @@ public class UserSql {
 				+ "phone = '" + phone + "'"
 				+ " and password = MD5('" + password + "')";
 	}
+	
+	public static String getUserByPhoneSql(String phone) {
+		return GET_USER_BY_CONDITIONS 
+				+ "phone = '" + phone + "'";
+	}
 
 	public static String getUserThirdPartyLoginSql(String openId, String openType) {
 		return GET_USER_BY_CONDITIONS 
@@ -47,12 +52,21 @@ public class UserSql {
 	}
 	
 	public static String getUpdateUserSql(User user) {
-		String sql = "update user set nick_name = '" + user.getNickName() + "'";
+		String sql = "update user set update_time = now()";
+		if (null != user.getNickName()) {
+			sql += ", nick_name = '" + user.getNickName() + "'";
+		}
 		if (null != user.getAvatar()) {
 			sql += ", avatar = '" + user.getAvatar() + "'";
 		}
 		if (null != user.getSex()) {
 			sql += ", sex = '" + user.getSex() + "'";
+		}
+		if (null != user.getPhone()) {
+			sql += ", phone = '" + user.getPhone() + "'";
+		}
+		if (null != user.getPassword()) {
+			sql += ", password = MD5('" + user.getPassword() + "')";
 		}
 		sql += " where id = " + user.getId().intValue();
 		return sql;

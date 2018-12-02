@@ -31,4 +31,10 @@ public class UserRepositoryImpl extends AbstractRepository<User> implements User
 		this.insert(UserSql.INSRT_USER, UserSql.getInsertObject(user));
 	}
 
+	@Override
+	public User queryByPhone(String phone) {
+		return this.findOne(UserSql.getUserByPhoneSql(phone));
+
+	}
+
 }

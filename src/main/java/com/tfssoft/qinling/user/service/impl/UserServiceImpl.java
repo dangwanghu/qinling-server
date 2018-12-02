@@ -50,5 +50,43 @@ public class UserServiceImpl implements UserService {
 		}
 		return instance;
 	}
+	
 
+	@Override
+	public User phoneUserLogin(String phone) {
+		// if not exits phone then create user
+		User user = userRepository.queryByPhone(phone);
+		if (null == user) {
+			user = new User();
+			user.setPhone(phone);
+			user.setUserPlatform("APP");
+			userRepository.addUser(user);
+		} 
+		
+		return user;
+	}
+
+	@Override
+	public String bindingPhone(Integer userId, String phone) {
+		// if exits phone then error
+		User user = userRepository.queryByPhone(phone);
+		if (null != user) {
+			return "手机号已占用";
+		}
+		
+		// binding phone
+		user = new User();
+		user.setId(userId);
+		user.setPhone(phone);
+		userRepository.updateUser(user);
+		return null;
+	}
+
+	@Override
+	public void resetPassword(Integer userId, String password) {
+		User user = new User();
+		user.setId(userId);
+		user.setPassword(password);
+		userRepository.updateUser(user);
+	}
 }
