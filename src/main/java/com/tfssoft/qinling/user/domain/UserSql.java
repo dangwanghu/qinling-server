@@ -19,7 +19,7 @@ public class UserSql {
 	
 	public static final String INSRT_USER = "INSERT INTO user "
 			+ "(open_id, open_type, user_platform, nick_name, phone, avatar, sex, status, create_time) "
-			+ "values " + "(?, ?, ?, ?, ?, ?, ?, ?)";
+			+ "values " + "(?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
 	public static Object[] getInsertObject(User instance) {
 		return new Object[] {
