@@ -83,9 +83,13 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
-	public void resetPassword(Integer userId, String password) {
-		User user = new User();
-		user.setId(userId);
+	public void resetPassword(String phone, String password) throws Exception {
+		
+		User user = userRepository.queryByPhone(phone);
+		if (null == user) {
+			throw new Exception();
+		}
+		
 		user.setPassword(password);
 		userRepository.updateUser(user);
 	}

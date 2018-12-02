@@ -42,7 +42,7 @@ public class UserController extends BaseController {
 			if (null != instance) {
 				writeJson(instance, response);
 			} else {
-				error("用户名或密码错误", response);
+				error("手机号或密码错误", response);
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -117,7 +117,8 @@ public class UserController extends BaseController {
 			if (null == val || !rPVO.getCode().equals(val.toString())) {
 				error("验证码错误", response);
 			} else {
-				userService.resetPassword(rPVO.getUserId(), rPVO.getPassword());
+				userService.resetPassword(rPVO.getPhone(), rPVO.getPassword());
+				success("修改成功", response);
 			}
 			cacheManager.del("phone_" + rPVO.getPhone());
 		} catch (Exception e) {

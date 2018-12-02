@@ -13,6 +13,6 @@ public interface UserService {
 
 	public String bindingPhone(Integer userId, String phone);
 
-	public void resetPassword(Integer userId, String password);
+	public void resetPassword(String phone, String password) throws Exception;
 
 }

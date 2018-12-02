@@ -15,9 +15,6 @@ public class ResetPasswordVO implements Serializable {
 	
 	@ApiModelProperty(value = "新密码", required = true)
 	private String password;
-
-	@ApiModelProperty(value = "用户ID", required = true)
-	private Integer userId;
 	
 	@ApiModelProperty(value = "验证码", required = true)
 	private String code;
@@ -41,13 +38,6 @@ public class ResetPasswordVO implements Serializable {
 		this.password = password;
 	}
 
-	public Integer getUserId() {
-		return userId;
-	}
-
-	public void setUserId(Integer userId) {
-		this.userId = userId;
-	}
 
 	public String getCode() {
 		return code;
