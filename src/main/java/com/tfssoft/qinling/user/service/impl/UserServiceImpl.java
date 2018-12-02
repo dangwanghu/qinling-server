@@ -61,6 +61,8 @@ public class UserServiceImpl implements UserService {
 			user.setPhone(phone);
 			user.setUserPlatform("APP");
 			userRepository.addUser(user);
+			
+			user = userRepository.queryByPhone(phone);
 		} 
 		
 		return user;
