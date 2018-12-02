@@ -31,7 +31,7 @@ public class FaGuiServiceImpl implements FaGuiService {
 
 	@Override
 	public long getFaGuiCount(String name) {
-		return faGuiRepository.getCunZhuangCount(name);
+		return faGuiRepository.getFaGuiCount(name);
 	}
 
 	@Override

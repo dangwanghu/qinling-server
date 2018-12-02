@@ -10,7 +10,7 @@ public interface FaGuiRepository {
 
 	public List<Rule> getFaGuiPageList(String name, int skip, int limit);
 
-	public long getCunZhuangCount(String name);
+	public long getFaGuiCount(String name);
 
 	public void addFaGui(Rule instance);
 

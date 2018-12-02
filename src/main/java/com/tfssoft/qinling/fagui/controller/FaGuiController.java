@@ -69,7 +69,7 @@ public class FaGuiController extends BaseController {
 	
 	@ApiOperation(value = "修改法规", httpMethod = "PUT")
 	@RequestMapping(value = "", method = RequestMethod.PUT)
-	public void putCunZhuang(@RequestBody Rule rule, HttpServletRequest request, HttpServletResponse response) {
+	public void putFaGui(@RequestBody Rule rule, HttpServletRequest request, HttpServletResponse response) {
 		try {
 			faGuiService.updateFaGui(rule);
 			success("更新成功", response);

@@ -23,7 +23,7 @@ public class FaGuiRepositoryImpl extends AbstractRepository<Rule> implements FaG
 	}
 
 	@Override
-	public long getCunZhuangCount(String name) {
+	public long getFaGuiCount(String name) {
 		return this.findCount(FaGuiSql.getCountSql(name));
 	}
 
