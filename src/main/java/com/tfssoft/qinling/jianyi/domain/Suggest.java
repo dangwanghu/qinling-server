@@ -28,6 +28,9 @@ public class Suggest implements Serializable {
 	@ApiModelProperty(hidden = true)
 	private String status;
 
+	@ApiModelProperty(hidden = true)
+	private String updateTime;
+	
 	public Suggest() {
 	}
 
@@ -77,6 +80,14 @@ public class Suggest implements Serializable {
 
 	public void setStatus(String status) {
 		this.status = status;
+	}
+
+	public String getUpdateTime() {
+		return updateTime;
+	}
+
+	public void setUpdateTime(String updateTime) {
+		this.updateTime = updateTime;
 	}
 	
 }

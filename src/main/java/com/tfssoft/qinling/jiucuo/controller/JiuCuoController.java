@@ -1,5 +1,7 @@
 package com.tfssoft.qinling.jiucuo.controller;
 
+import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -8,6 +10,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.tfssoft.qinling.base.controller.BaseController;
 import com.tfssoft.qinling.jiucuo.domain.Correction;
@@ -33,6 +36,60 @@ public class JiuCuoController extends BaseController {
 		} catch (Exception e) {
 			e.printStackTrace();
 			error("保存出错！", response);
+		}
+	}
+	
+	@ApiOperation(value = "获取纠错列表", httpMethod = "GET")
+	@RequestMapping(value = "/list", method = RequestMethod.GET)
+	public void getJiuCuoList(@RequestParam(value = "skip", required = false) Integer skip,
+			@RequestParam(value = "limit", required = false) Integer limit,
+			@RequestParam(value = "content", required = false) String content, HttpServletRequest request,
+			HttpServletResponse response) {
+		try {
+			List<Correction> jianyiList = jiuCuoService.getJiuCuoList(skip, limit, content);
+			writeJson(jianyiList, response);
+		} catch (Exception e) {
+			e.printStackTrace();
+			error("查询出错！", response);
+		}
+	}
+
+	@ApiOperation(value = "获取纠错总数", httpMethod = "GET")
+	@RequestMapping(value = "/total", method = RequestMethod.GET)
+	public void getJiuCuoCount(@RequestParam(value = "content", required = false) String content,
+			HttpServletRequest request, HttpServletResponse response) {
+		try {
+			long count = jiuCuoService.getJiuCuoCount(content);
+			writeJson(count, response);
+		} catch (Exception e) {
+			e.printStackTrace();
+			error("查询出错！", response);
+		}
+	}
+
+	@ApiOperation(value = "标记纠错已处理", httpMethod = "PUT")
+	@RequestMapping(value = "", method = RequestMethod.PUT)
+	public void putJiuCuo(@RequestParam(required = true) Integer id, HttpServletRequest request,
+			HttpServletResponse response) {
+		try {
+			jiuCuoService.updateJiuCuoToHandled(id.intValue());
+			success("更新成功", response);
+		} catch (Exception e) {
+			e.printStackTrace();
+			error("更新出错！", response);
+		}
+	}
+
+	@ApiOperation(value = "删除纠错", httpMethod = "DELETE")
+	@RequestMapping(value = "", method = RequestMethod.DELETE)
+	public void deleteJiuCuo(@RequestParam(required = true) Integer id, HttpServletRequest request,
+			HttpServletResponse response) {
+		try {
+			jiuCuoService.deleteJiuCuo(id.intValue());
+			success("删除成功", response);
+		} catch (Exception e) {
+			e.printStackTrace();
+			error("删除出错！", response);
 		}
 	}
 

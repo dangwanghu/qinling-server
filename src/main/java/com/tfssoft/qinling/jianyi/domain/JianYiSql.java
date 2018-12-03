@@ -8,7 +8,7 @@ public class JianYiSql {
 			+ "(?, ?, ?, ?)";
 	
 	public static final String GET_JIANYI_LIST = 
-			"SElECT id, "
+			"SElECT id, update_time AS updateTime, "
 			+ "content, "
 			+ "submitter, "
 			+ "phone, "
@@ -57,7 +57,7 @@ public class JianYiSql {
 	}
 
 	public static String getUpdateJianYiSql(Suggest instance) {
-		String sql = "update jianyi set status = '" + instance.getStatus() + "'";
+		String sql = "update jianyi set update_time = now(), status = '" + instance.getStatus() + "'";
 
 		sql += " where id = " + instance.getId().intValue();
 		return sql;

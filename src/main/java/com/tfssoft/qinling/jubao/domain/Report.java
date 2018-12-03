@@ -30,7 +30,10 @@ public class Report implements Serializable {
 
 	@ApiModelProperty(hidden = true)
 	private String status;
-
+	
+	@ApiModelProperty(hidden = true)
+	private String updateTime;
+	
 	public Report() {
 	}
 
@@ -89,6 +92,13 @@ public class Report implements Serializable {
 	public void setAttachments(String attachments) {
 		this.attachments = attachments;
 	}
-	
+
+	public String getUpdateTime() {
+		return updateTime;
+	}
+
+	public void setUpdateTime(String updateTime) {
+		this.updateTime = updateTime;
+	}
 	
 }

@@ -10,7 +10,7 @@ public class JuBaoSql {
 			+ "(?, ?, ?, ?, ?)";
 	
 	public static final String GET_JUBAO_LIST = 
-			"SElECT id, "
+			"SElECT id, update_time AS updateTime, "
 			+ "attachments, "
 			+ "content, "
 			+ "submitter, "
@@ -61,7 +61,7 @@ public class JuBaoSql {
 	}
 
 	public static String getUpdateJuBaoSql(Report instance) {
-		String sql = "update jubao set status = '" + instance.getStatus() + "'";
+		String sql = "update jubao set update_time = now(), status = '" + instance.getStatus() + "'";
 
 		sql += " where id = " + instance.getId().intValue();
 		return sql;

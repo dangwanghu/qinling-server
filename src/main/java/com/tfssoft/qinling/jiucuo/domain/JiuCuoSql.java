@@ -18,4 +18,54 @@ public class JiuCuoSql {
 		};
 	}
 
+	public static final String GET_JIUCUO_LIST = 
+			"SElECT id, update_time AS updateTime, "
+			+ "(case type when 'CZ' then '村庄' when 'JD' then '景点'"
+			+ " when 'SF' then '山峰' when 'YK' then '峪口' when 'ZJ' then '宗教' else '其它' end) type, "
+			+ "rel_id AS relId,"
+			+ "content, "
+			+ "submitter, "
+			+ "phone, "
+			+ "create_time AS createTime, "
+			+ "(case status when 0 then '未处理' when 1 then '已处理' end) status"
+			+ " FROM jiucuo ";
+	
+	public static final String GET_JIUCUO_COUNT = "SElECT count(id) FROM jiucuo ";
+	
+	public static final String DELETE_JIUCUO = "DELETE FROM jiucuo "
+			+ "where id = ?";
+	
+	public static String getPageListSql(String content, int skip, int limit) {
+		String conditions = "";
+		if (null != content) {
+			conditions += "where content like '%" + content + "%'";
+		}
+		conditions += " order by createTime desc";
+		return GET_JIUCUO_LIST + conditions + " limit " + skip + "," + limit;
+	}
+
+	public static String getListSql(String content) {
+		String conditions = "";
+		if (null != content) {
+			conditions += "where content like '%" + content + "%'";
+		}
+		conditions += " order by createTime desc";
+		return GET_JIUCUO_LIST + conditions;
+	}
+
+	public static String getCountSql(String content) {
+		String conditions = "";
+		if (null != content) {
+			conditions += "where content like '%" + content + "%'";
+		}
+		return GET_JIUCUO_COUNT + conditions;
+	}
+
+	public static String getUpdateJiuCuoSql(Correction instance) {
+		String sql = "update jiucuo set update_time = now(), status = '" + instance.getStatus() + "'";
+
+		sql += " where id = " + instance.getId().intValue();
+		return sql;
+	}
+
 }
