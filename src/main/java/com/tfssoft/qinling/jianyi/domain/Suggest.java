@@ -1,7 +1,6 @@
 package com.tfssoft.qinling.jianyi.domain;
 
 import java.io.Serializable;
-import java.util.Date;
 
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
@@ -24,7 +23,7 @@ public class Suggest implements Serializable {
 	private String phone;
 
 	@ApiModelProperty(hidden = true)
-	private Date createTime;
+	private String createTime;
 
 	@ApiModelProperty(hidden = true)
 	private String status;
@@ -64,11 +63,11 @@ public class Suggest implements Serializable {
 		this.phone = phone;
 	}
 
-	public Date getCreateTime() {
+	public String getCreateTime() {
 		return createTime;
 	}
 
-	public void setCreateTime(Date createTime) {
+	public void setCreateTime(String createTime) {
 		this.createTime = createTime;
 	}
 
