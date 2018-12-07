@@ -22,21 +22,21 @@ public class JianYiServiceImpl implements JianYiService {
 	}
 
 	@Override
-	public List<Suggest> getJianYiList(Integer skip, Integer limit, String content) {
+	public List<Suggest> getJianYiList(Integer skip, Integer limit, String content, String status) {
 		if (null == skip && null != limit) {
-			return jianYiRepository.getJianYiPageList(content, 0, limit.intValue());
+			return jianYiRepository.getJianYiPageList(content, 0, limit.intValue(), status);
 		} else if (null != skip && null == limit) {
-			return jianYiRepository.getJianYiPageList(content, skip.intValue(), 10);
+			return jianYiRepository.getJianYiPageList(content, skip.intValue(), 10, status);
 		} else if (null != skip && null != limit) {
-			return jianYiRepository.getJianYiPageList(content, skip.intValue(), limit.intValue());
+			return jianYiRepository.getJianYiPageList(content, skip.intValue(), limit.intValue(), status);
 		} else {
-			return jianYiRepository.getJianYiList(content);
+			return jianYiRepository.getJianYiList(content, status);
 		}
 	}
 
 	@Override
-	public long getJianYiCount(String content) {
-		return jianYiRepository.getJianYiCount(content);
+	public long getJianYiCount(String content, String status) {
+		return jianYiRepository.getJianYiCount(content, status);
 	}
 
 	@Override

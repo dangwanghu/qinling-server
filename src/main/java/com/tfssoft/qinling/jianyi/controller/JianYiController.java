@@ -44,10 +44,11 @@ public class JianYiController extends BaseController {
 	@RequestMapping(value = "/list", method = RequestMethod.GET)
 	public void getJianYiList(@RequestParam(value = "skip", required = false) Integer skip,
 			@RequestParam(value = "limit", required = false) Integer limit,
-			@RequestParam(value = "content", required = false) String content, HttpServletRequest request,
+			@RequestParam(value = "content", required = false) String content,
+			@RequestParam(value = "status", required = false) String status, HttpServletRequest request,
 			HttpServletResponse response) {
 		try {
-			List<Suggest> jianyiList = jianYiService.getJianYiList(skip, limit, content);
+			List<Suggest> jianyiList = jianYiService.getJianYiList(skip, limit, content, status);
 			writeJson(jianyiList, response);
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -58,9 +59,10 @@ public class JianYiController extends BaseController {
 	@ApiOperation(value = "获取建议总数", httpMethod = "GET")
 	@RequestMapping(value = "/total", method = RequestMethod.GET)
 	public void getJianYiCount(@RequestParam(value = "content", required = false) String content,
+			@RequestParam(value = "status", required = false) String status,
 			HttpServletRequest request, HttpServletResponse response) {
 		try {
-			long count = jianYiService.getJianYiCount(content);
+			long count = jianYiService.getJianYiCount(content, status);
 			writeJson(count, response);
 		} catch (Exception e) {
 			e.printStackTrace();
