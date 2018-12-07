@@ -12,7 +12,7 @@ public class TopicSql {
 	
 	public static final String INSRT_TOPIC_AUTH = "INSERT INTO topic_auth "
 			+ "(topic_type, location_desc, introduction, reason, x, y, create_time) " + "values "
-			+ "(?, ?, ?, ?)";
+			+ "(?, ?, ?, ?, ?, ?, ?)";
 	
 	public static Object[] getInsertAuthObject(TopicAuth instance) {
 		return new Object[] {
