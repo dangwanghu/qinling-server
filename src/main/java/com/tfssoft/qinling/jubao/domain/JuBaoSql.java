@@ -34,28 +34,55 @@ public class JuBaoSql {
 		};
 	}
 
-	public static String getPageListSql(String content, int skip, int limit) {
+	public static String getPageListSql(String content, int skip, int limit, String status) {
 		String conditions = "";
+		if (null != content || null != status) {
+			conditions += "where ";
+		}
 		if (null != content) {
-			conditions += "where content like '%" + content + "%'";
+			conditions += "content like '%" + content + "%'";
+		}
+		if (null != content && null != status) {
+			conditions += " and ";
+		}
+		if (null != status) {
+			conditions += "status = '" + status + "'";
 		}
 		conditions += " order by createTime desc";
 		return GET_JUBAO_LIST + conditions + " limit " + skip + "," + limit;
 	}
 
-	public static String getListSql(String content) {
+	public static String getListSql(String content, String status) {
 		String conditions = "";
+		if (null != content || null != status) {
+			conditions += "where ";
+		}
 		if (null != content) {
-			conditions += "where content like '%" + content + "%'";
+			conditions += "content like '%" + content + "%'";
+		}
+		if (null != content && null != status) {
+			conditions += " and ";
+		}
+		if (null != status) {
+			conditions += "status = '" + status + "'";
 		}
 		conditions += " order by createTime desc";
 		return GET_JUBAO_LIST + conditions;
 	}
 
-	public static String getCountSql(String content) {
+	public static String getCountSql(String content, String status) {
 		String conditions = "";
+		if (null != content || null != status) {
+			conditions += "where ";
+		}
 		if (null != content) {
-			conditions += "where content like '%" + content + "%'";
+			conditions += "content like '%" + content + "%'";
+		}
+		if (null != content && null != status) {
+			conditions += " and ";
+		}
+		if (null != status) {
+			conditions += "status = '" + status + "'";
 		}
 		return GET_JUBAO_COUNT + conditions;
 	}

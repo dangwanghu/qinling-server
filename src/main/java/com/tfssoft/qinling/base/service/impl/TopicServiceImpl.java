@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.tfssoft.qinling.base.domain.Topic;
+import com.tfssoft.qinling.base.domain.TopicAuth;
 import com.tfssoft.qinling.base.repository.TopicRepository;
 import com.tfssoft.qinling.base.service.TopicService;
 
@@ -19,6 +20,11 @@ public class TopicServiceImpl implements TopicService {
 	@Override
 	public List<Topic> getTopicList(String name) {
 		return topicRepository.getTopicList(name);
+	}
+
+	@Override
+	public void addTopicAuth(TopicAuth instance) {
+		topicRepository.addTopicAuth(instance);
 	}
 
 }

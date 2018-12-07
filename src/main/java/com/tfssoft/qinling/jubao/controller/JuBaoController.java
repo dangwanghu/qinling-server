@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.tfssoft.qinling.base.controller.BaseController;
+import com.tfssoft.qinling.base.domain.BaseVO;
 import com.tfssoft.qinling.jubao.domain.Report;
 import com.tfssoft.qinling.jubao.service.JuBaoService;
 
@@ -43,10 +44,11 @@ public class JuBaoController extends BaseController {
 	@RequestMapping(value = "/list", method = RequestMethod.GET)
 	public void getJuBaoList(@RequestParam(value = "skip", required = false) Integer skip,
 			@RequestParam(value = "limit", required = false) Integer limit,
+			@RequestParam(value = "status", required = false) String status,
 			@RequestParam(value = "content", required = false) String content, HttpServletRequest request,
 			HttpServletResponse response) {
 		try {
-			List<Report> jianyiList = juBaoService.getJuBaoList(skip, limit, content);
+			List<Report> jianyiList = juBaoService.getJuBaoList(skip, limit, content, status);
 			writeJson(jianyiList, response);
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -57,9 +59,10 @@ public class JuBaoController extends BaseController {
 	@ApiOperation(value = "获取举报总数", httpMethod = "GET")
 	@RequestMapping(value = "/total", method = RequestMethod.GET)
 	public void getJuBaoCount(@RequestParam(value = "content", required = false) String content,
+			@RequestParam(value = "status", required = false) String status,
 			HttpServletRequest request, HttpServletResponse response) {
 		try {
-			long count = juBaoService.getJuBaoCount(content);
+			long count = juBaoService.getJuBaoCount(content, status);
 			writeJson(count, response);
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -69,10 +72,10 @@ public class JuBaoController extends BaseController {
 
 	@ApiOperation(value = "标记举报已处理", httpMethod = "PUT")
 	@RequestMapping(value = "", method = RequestMethod.PUT)
-	public void putJuBao(@RequestParam(required = true) Integer id, HttpServletRequest request,
+	public void putJuBao(@RequestBody BaseVO instance, HttpServletRequest request,
 			HttpServletResponse response) {
 		try {
-			juBaoService.updateJuBaoToHandled(id.intValue());
+			juBaoService.updateJuBaoToHandled(instance.getId().intValue());
 			success("更新成功", response);
 		} catch (Exception e) {
 			e.printStackTrace();

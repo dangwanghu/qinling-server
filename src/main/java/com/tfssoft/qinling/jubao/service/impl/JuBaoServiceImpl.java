@@ -22,21 +22,21 @@ public class JuBaoServiceImpl implements JuBaoService {
 	}
 	
 	@Override
-	public List<Report> getJuBaoList(Integer skip, Integer limit, String content) {
+	public List<Report> getJuBaoList(Integer skip, Integer limit, String content, String status) {
 		if (null == skip && null != limit) {
-			return jubaoRepository.getJuBaoPageList(content, 0, limit.intValue());
+			return jubaoRepository.getJuBaoPageList(content, 0, limit.intValue(), status);
 		} else if (null != skip && null == limit) {
-			return jubaoRepository.getJuBaoPageList(content, skip.intValue(), 10);
+			return jubaoRepository.getJuBaoPageList(content, skip.intValue(), 10, status);
 		} else if (null != skip && null != limit) {
-			return jubaoRepository.getJuBaoPageList(content, skip.intValue(), limit.intValue());
+			return jubaoRepository.getJuBaoPageList(content, skip.intValue(), limit.intValue(), status);
 		} else {
-			return jubaoRepository.getJuBaoList(content);
+			return jubaoRepository.getJuBaoList(content, status);
 		}
 	}
 
 	@Override
-	public long getJuBaoCount(String content) {
-		return jubaoRepository.getJuBaoCount(content);
+	public long getJuBaoCount(String content, String status) {
+		return jubaoRepository.getJuBaoCount(content, status);
 	}
 
 	@Override
