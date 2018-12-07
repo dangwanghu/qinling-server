@@ -44,10 +44,11 @@ public class JiuCuoController extends BaseController {
 	@RequestMapping(value = "/list", method = RequestMethod.GET)
 	public void getJiuCuoList(@RequestParam(value = "skip", required = false) Integer skip,
 			@RequestParam(value = "limit", required = false) Integer limit,
-			@RequestParam(value = "content", required = false) String content, HttpServletRequest request,
+			@RequestParam(value = "content", required = false) String content,
+			@RequestParam(value = "status", required = false) String status, HttpServletRequest request,
 			HttpServletResponse response) {
 		try {
-			List<Correction> jianyiList = jiuCuoService.getJiuCuoList(skip, limit, content);
+			List<Correction> jianyiList = jiuCuoService.getJiuCuoList(skip, limit, content, status);
 			writeJson(jianyiList, response);
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -58,9 +59,10 @@ public class JiuCuoController extends BaseController {
 	@ApiOperation(value = "获取纠错总数", httpMethod = "GET")
 	@RequestMapping(value = "/total", method = RequestMethod.GET)
 	public void getJiuCuoCount(@RequestParam(value = "content", required = false) String content,
+			@RequestParam(value = "status", required = false) String status,
 			HttpServletRequest request, HttpServletResponse response) {
 		try {
-			long count = jiuCuoService.getJiuCuoCount(content);
+			long count = jiuCuoService.getJiuCuoCount(content, status);
 			writeJson(count, response);
 		} catch (Exception e) {
 			e.printStackTrace();

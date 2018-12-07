@@ -22,21 +22,21 @@ public class JiuCuoServiceImpl implements JiuCuoService {
 	}
 
 	@Override
-	public List<Correction> getJiuCuoList(Integer skip, Integer limit, String content) {
+	public List<Correction> getJiuCuoList(Integer skip, Integer limit, String content, String status) {
 		if (null == skip && null != limit) {
-			return jiuCuoRepository.getJiuCuoPageList(content, 0, limit.intValue());
+			return jiuCuoRepository.getJiuCuoPageList(content, 0, limit.intValue(), status);
 		} else if (null != skip && null == limit) {
-			return jiuCuoRepository.getJiuCuoPageList(content, skip.intValue(), 10);
+			return jiuCuoRepository.getJiuCuoPageList(content, skip.intValue(), 10, status);
 		} else if (null != skip && null != limit) {
-			return jiuCuoRepository.getJiuCuoPageList(content, skip.intValue(), limit.intValue());
+			return jiuCuoRepository.getJiuCuoPageList(content, skip.intValue(), limit.intValue(), status);
 		} else {
-			return jiuCuoRepository.getJiuCuoList(content);
+			return jiuCuoRepository.getJiuCuoList(content, status);
 		}
 	}
 
 	@Override
-	public long getJiuCuoCount(String content) {
-		return jiuCuoRepository.getJiuCuoCount(content);
+	public long getJiuCuoCount(String content, String status) {
+		return jiuCuoRepository.getJiuCuoCount(content, status);
 	}
 
 	@Override
