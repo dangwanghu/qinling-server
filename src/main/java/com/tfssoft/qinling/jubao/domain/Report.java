@@ -37,6 +37,12 @@ public class Report implements Serializable {
 	@ApiModelProperty(hidden = true)
 	private String comments;
 	
+	@ApiModelProperty(value = "纬度", required = true)
+	private Double xLat;
+
+	@ApiModelProperty(value = "经度", required = true)
+	private Double yLng;
+	
 	public Report() {
 	}
 
@@ -110,6 +116,22 @@ public class Report implements Serializable {
 
 	public void setComments(String comments) {
 		this.comments = comments;
+	}
+
+	public Double getxLat() {
+		return xLat;
+	}
+
+	public void setxLat(Double xLat) {
+		this.xLat = xLat;
+	}
+
+	public Double getyLng() {
+		return yLng;
+	}
+
+	public void setyLng(Double yLng) {
+		this.yLng = yLng;
 	}
 	
 }

@@ -6,8 +6,8 @@ import com.tfssoft.qinling.jubao.domain.Report;
 
 public class JuBaoSql {
 	public static final String INSRT_JUBAO = "INSERT INTO jubao "
-			+ "(attachments, content, submitter, phone, create_time) " + "values "
-			+ "(?, ?, ?, ?, ?)";
+			+ "(attachments, content, submitter, phone, create_time, x, y) " + "values "
+			+ "(?, ?, ?, ?, ?, ?, ?)";
 	
 	public static final String GET_JUBAO_LIST = 
 			"SElECT id, update_time AS updateTime, "
@@ -15,6 +15,8 @@ public class JuBaoSql {
 			+ "content, "
 			+ "submitter, "
 			+ "phone, "
+			+ "x AS xLat, "
+			+ "y AS yLng, "
 			+ "create_time AS createTime, comments, "
 			+ "(case status when 0 then '未处理' when 1 then '已处理' end) status"
 			+ " FROM jubao ";
@@ -30,7 +32,9 @@ public class JuBaoSql {
 				instance.getContent(),
 				instance.getSubmitter(),
 				instance.getPhone(),
-				new Date()
+				new Date(),
+				instance.getxLat(),
+				instance.getyLng()
 		};
 	}
 
