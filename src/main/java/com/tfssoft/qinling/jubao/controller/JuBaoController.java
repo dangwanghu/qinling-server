@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.tfssoft.qinling.base.controller.BaseController;
-import com.tfssoft.qinling.base.domain.BaseVO;
+import com.tfssoft.qinling.base.domain.CommentsVO;
 import com.tfssoft.qinling.jubao.domain.Report;
 import com.tfssoft.qinling.jubao.service.JuBaoService;
 
@@ -72,10 +72,10 @@ public class JuBaoController extends BaseController {
 
 	@ApiOperation(value = "标记举报已处理", httpMethod = "PUT")
 	@RequestMapping(value = "", method = RequestMethod.PUT)
-	public void putJuBao(@RequestBody BaseVO instance, HttpServletRequest request,
+	public void putJuBao(@RequestBody CommentsVO instance, HttpServletRequest request,
 			HttpServletResponse response) {
 		try {
-			juBaoService.updateJuBaoToHandled(instance.getId().intValue());
+			juBaoService.updateJuBaoToHandled(instance.getId().intValue(), instance.getComments());
 			success("更新成功", response);
 		} catch (Exception e) {
 			e.printStackTrace();

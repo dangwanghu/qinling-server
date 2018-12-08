@@ -12,7 +12,7 @@ public interface JuBaoService {
 
 	public long getJuBaoCount(String content, String status);
 
-	public void updateJuBaoToHandled(int id);
+	public void updateJuBaoToHandled(int id, String comments);
 
 	public void deleteJuBao(int id);
 

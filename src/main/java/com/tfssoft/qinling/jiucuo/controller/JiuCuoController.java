@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.tfssoft.qinling.base.controller.BaseController;
-import com.tfssoft.qinling.base.domain.BaseVO;
+import com.tfssoft.qinling.base.domain.CommentsVO;
 import com.tfssoft.qinling.jiucuo.domain.Correction;
 import com.tfssoft.qinling.jiucuo.service.JiuCuoService;
 
@@ -72,10 +72,10 @@ public class JiuCuoController extends BaseController {
 
 	@ApiOperation(value = "标记纠错已处理", httpMethod = "PUT")
 	@RequestMapping(value = "", method = RequestMethod.PUT)
-	public void putJiuCuo(@RequestBody BaseVO instance, HttpServletRequest request,
+	public void putJiuCuo(@RequestBody CommentsVO instance, HttpServletRequest request,
 			HttpServletResponse response) {
 		try {
-			jiuCuoService.updateJiuCuoToHandled(instance.getId().intValue());
+			jiuCuoService.updateJiuCuoToHandled(instance.getId().intValue(), instance.getComments());
 			success("更新成功", response);
 		} catch (Exception e) {
 			e.printStackTrace();

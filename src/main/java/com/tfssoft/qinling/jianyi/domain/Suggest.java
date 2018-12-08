@@ -31,6 +31,9 @@ public class Suggest implements Serializable {
 	@ApiModelProperty(hidden = true)
 	private String updateTime;
 	
+	@ApiModelProperty(hidden = true)
+	private String comments;
+	
 	public Suggest() {
 	}
 
@@ -88,6 +91,14 @@ public class Suggest implements Serializable {
 
 	public void setUpdateTime(String updateTime) {
 		this.updateTime = updateTime;
+	}
+
+	public String getComments() {
+		return comments;
+	}
+
+	public void setComments(String comments) {
+		this.comments = comments;
 	}
 	
 }

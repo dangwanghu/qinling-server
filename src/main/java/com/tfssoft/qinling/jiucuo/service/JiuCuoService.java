@@ -12,7 +12,7 @@ public interface JiuCuoService {
 
 	public long getJiuCuoCount(String content, String status);
 
-	public void updateJiuCuoToHandled(int id);
+	public void updateJiuCuoToHandled(int id, String comments);
 
 	public void deleteJiuCuo(int id);
 

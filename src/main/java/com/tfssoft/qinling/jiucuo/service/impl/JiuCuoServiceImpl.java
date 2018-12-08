@@ -40,10 +40,11 @@ public class JiuCuoServiceImpl implements JiuCuoService {
 	}
 
 	@Override
-	public void updateJiuCuoToHandled(int id) {
+	public void updateJiuCuoToHandled(int id, String comments) {
 		Correction instance = new Correction();
 		instance.setId(id);
 		instance.setStatus("1");
+		instance.setComments(comments);
 		jiuCuoRepository.updateJiuCuo(instance);
 	}
 

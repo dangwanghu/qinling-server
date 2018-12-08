@@ -12,7 +12,7 @@ public class JianYiSql {
 			+ "content, "
 			+ "submitter, "
 			+ "phone, "
-			+ "create_time AS createTime, "
+			+ "create_time AS createTime, comments, "
 			+ "(case status when 0 then '未处理' when 1 then '已处理' end) status"
 			+ " FROM jianyi ";
 	
@@ -86,6 +86,9 @@ public class JianYiSql {
 	public static String getUpdateJianYiSql(Suggest instance) {
 		String sql = "update jianyi set update_time = now(), status = '" + instance.getStatus() + "'";
 
+		if (null != instance.getComments()) {
+			sql += ", comments = '" + instance.getComments() + "'";
+		}
 		sql += " where id = " + instance.getId().intValue();
 		return sql;
 	}

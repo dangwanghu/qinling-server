@@ -40,10 +40,11 @@ public class JuBaoServiceImpl implements JuBaoService {
 	}
 
 	@Override
-	public void updateJuBaoToHandled(int id) {
+	public void updateJuBaoToHandled(int id, String comments) {
 		Report instance = new Report();
 		instance.setId(id);
 		instance.setStatus("1");
+		instance.setComments(comments);
 		jubaoRepository.updateJuBao(instance);
 	}
 

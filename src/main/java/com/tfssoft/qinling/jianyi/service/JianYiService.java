@@ -12,7 +12,7 @@ public interface JianYiService {
 
 	public long getJianYiCount(String content, String status);
 
-	public void updateJianYiToHandled(int id);
+	public void updateJianYiToHandled(int id, String comments);
 
 	public void deleteJianYi(int id);
 

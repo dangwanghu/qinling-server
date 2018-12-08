@@ -15,7 +15,7 @@ public class JuBaoSql {
 			+ "content, "
 			+ "submitter, "
 			+ "phone, "
-			+ "create_time AS createTime, "
+			+ "create_time AS createTime, comments, "
 			+ "(case status when 0 then '未处理' when 1 then '已处理' end) status"
 			+ " FROM jubao ";
 	
@@ -90,6 +90,9 @@ public class JuBaoSql {
 	public static String getUpdateJuBaoSql(Report instance) {
 		String sql = "update jubao set update_time = now(), status = '" + instance.getStatus() + "'";
 
+		if (null != instance.getComments()) {
+			sql += ", comments = '" + instance.getComments() + "'";
+		}
 		sql += " where id = " + instance.getId().intValue();
 		return sql;
 	}

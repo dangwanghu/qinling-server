@@ -39,6 +39,9 @@ public class Correction implements Serializable {
 	
 	@ApiModelProperty(hidden = true)
 	private String updateTime;
+	
+	@ApiModelProperty(hidden = true)
+	private String comments;
 
 	public Correction() {
 	}
@@ -121,6 +124,14 @@ public class Correction implements Serializable {
 
 	public void setUpdateTime(String updateTime) {
 		this.updateTime = updateTime;
+	}
+
+	public String getComments() {
+		return comments;
+	}
+
+	public void setComments(String comments) {
+		this.comments = comments;
 	}
 	
 }

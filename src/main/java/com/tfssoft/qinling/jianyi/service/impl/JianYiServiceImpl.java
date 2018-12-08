@@ -40,10 +40,11 @@ public class JianYiServiceImpl implements JianYiService {
 	}
 
 	@Override
-	public void updateJianYiToHandled(int id) {
+	public void updateJianYiToHandled(int id, String comments) {
 		Suggest instance = new Suggest();
 		instance.setId(id);
 		instance.setStatus("1");
+		instance.setComments(comments);
 		jianYiRepository.updateJianYi(instance);
 	}
 
