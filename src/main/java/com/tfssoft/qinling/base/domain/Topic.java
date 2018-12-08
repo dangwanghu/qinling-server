@@ -48,6 +48,9 @@ public class Topic implements Serializable {
 	
 	@ApiModelProperty(hidden = true)
 	private Integer type;
+	
+	@ApiModelProperty(hidden = true)
+	private String realBeautyUrl;
 
 	public Topic() {
 	}
@@ -163,6 +166,14 @@ public class Topic implements Serializable {
 
 	public void setType(Integer type) {
 		this.type = type;
+	}
+
+	public String getRealBeautyUrl() {
+		return realBeautyUrl;
+	}
+
+	public void setRealBeautyUrl(String realBeautyUrl) {
+		this.realBeautyUrl = realBeautyUrl;
 	}
 	
 }

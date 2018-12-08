@@ -12,7 +12,8 @@ public class YuKouSql {
 			+ "a.x AS xLat, "
 			+ "a.y AS yLng, "
 			+ "d.qxmc AS county, "
-			+ "e.xzmc AS town "
+			+ "e.xzmc AS town, "
+			+ "a.sjlj AS realBeautyUrl "
 			+ "FROM yukou a "
 			+ "left join dict_qvxian d on d.id = a.qx " 
 			+ "left join dict_xiangzhen e on e.id = a.xz ";

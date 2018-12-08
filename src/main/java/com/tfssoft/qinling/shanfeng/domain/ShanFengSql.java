@@ -11,7 +11,8 @@ public class ShanFengSql {
 			+ "a.sfqtsm AS otherComments, "
 			+ "a.x AS xLat, "
 			+ "a.y AS yLng, "
-			+ "d.qxmc AS county "
+			+ "d.qxmc AS county, " 
+			+ "a.sjlj AS realBeautyUrl "
 			+ "FROM shanfeng a "
 			+ "left join dict_qvxian d on d.id = a.qx";
 

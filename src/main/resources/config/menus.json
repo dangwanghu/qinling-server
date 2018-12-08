@@ -3,14 +3,17 @@
 	"children": [
 		{
 			"name": "峪口",
+			"code": "yk",
 			"url": "/yukou/list"
 		},
 		{
 			"name": "河流",
+			"code": "hl",
 			"url": "/unknown"
 		},
 		{
 			"name": "山峰",
+			"code": "sf",
 			"url": "/shanfeng/list"
 		}
 	] 
@@ -20,18 +23,22 @@
 	"children": [
 		{
 			"name": "寺庙",
+			"code": "sm",
 			"url": "/simiao/list"
 		},
 		{
 			"name": "景点",
+			"code": "jd",
 			"url": "/jingdian/list"
 		},
 		{
 			"name": "农家乐",
+			"code": "njl",
 			"url": "/unknown"
 		},
 		{
 			"name": "古遗迹",
+			"code": "gyj",
 			"url": "/unknown"
 		}
 	] 
