@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.tfssoft.qinling.base.controller.BaseController;
 import com.tfssoft.qinling.user.domain.BindingPhoneVO;
+import com.tfssoft.qinling.user.domain.NewPasswordVO;
 import com.tfssoft.qinling.user.domain.ResetPasswordVO;
 import com.tfssoft.qinling.user.domain.ThirdPartyBindingVO;
 import com.tfssoft.qinling.user.domain.User;
@@ -176,8 +177,7 @@ public class UserController extends BaseController {
 			error("查询失败！", response);
 		}
 	}
-	
-	
+
 	@ApiOperation(value = "用户添加收藏", httpMethod = "POST")
 	@RequestMapping(value = "/collect", method = RequestMethod.POST)
 	public void postUserCollect(@RequestBody UserActionPostVO uapVO, HttpServletRequest request,
@@ -190,7 +190,7 @@ public class UserController extends BaseController {
 			error("收藏失败！", response);
 		}
 	}
-	
+
 	@ApiOperation(value = "用户删除收藏", httpMethod = "DELETE")
 	@RequestMapping(value = "/collect", method = RequestMethod.DELETE)
 	public void deleteUserCollect(@RequestBody UserActionDeleteVO uadVO, HttpServletRequest request,
@@ -201,6 +201,23 @@ public class UserController extends BaseController {
 		} catch (Exception e) {
 			e.printStackTrace();
 			error("删除失败！", response);
+		}
+	}
+
+	@ApiOperation(value = "修改密码", httpMethod = "PuT")
+	@RequestMapping(value = "/change/password", method = RequestMethod.PUT)
+	public void putChangePassword(@RequestBody NewPasswordVO npVO, HttpServletRequest request,
+			HttpServletResponse response) {
+		try {
+			String errorMsg = userService.updatePassword(npVO.getUserId(), npVO.getOldPassword(), npVO.getPassword());
+			if (null != errorMsg) {
+				error(errorMsg, response);
+			} else {
+				success("修改成功", response);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+			error("修改失败！", response);
 		}
 	}
 

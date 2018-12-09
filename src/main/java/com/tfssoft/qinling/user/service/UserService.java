@@ -27,4 +27,6 @@ public interface UserService {
 
 	public void deleteUserCollect(String ids);
 
+	public String updatePassword(String userId, String oldPassword, String password);
+
 }

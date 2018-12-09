@@ -12,6 +12,7 @@ import com.tfssoft.qinling.user.domain.UserThirdPartyVO;
 import com.tfssoft.qinling.user.repository.UserActionRepository;
 import com.tfssoft.qinling.user.repository.UserRepository;
 import com.tfssoft.qinling.user.service.UserService;
+import com.tfssoft.qinling.util.EncryptionByMD5;
 
 @Service
 public class UserServiceImpl implements UserService {
@@ -145,5 +146,21 @@ public class UserServiceImpl implements UserService {
 	@Override
 	public void deleteUserCollect(String ids) {
 		userActionRepository.deleteUserCollect(ids);
+	}
+
+	@Override
+	public String updatePassword(String userId, String oldPassword, String password) {
+		// validate old password
+		User dbUser = userRepository.queryById(Integer.parseInt(userId));
+		if (!new String(EncryptionByMD5.getMD5(oldPassword.getBytes())).equals(dbUser.getPassword())) {
+			return "原密码错误";
+		}
+		
+		// update password
+		User user = new User();
+		user.setId(Integer.parseInt(userId));
+		user.setPassword(password);
+		userRepository.updateUser(user);
+		return null;
 	}
 }

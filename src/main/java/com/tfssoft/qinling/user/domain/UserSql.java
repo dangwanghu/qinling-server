@@ -4,7 +4,7 @@ import java.util.Date;
 
 public class UserSql {
 
-	public static final String GET_USER_BY_CONDITIONS = "SElECT id, " + "open_id AS openId, "
+	public static final String GET_USER_BY_CONDITIONS = "SElECT id, password, " + "open_id AS openId, "
 			+ "open_type AS openType, " + "nick_name AS nickName, " + "avatar AS avatar, " + "real_name AS realName, "
 			+ "sex AS sex, " + "phone AS phone, " + "province AS province, " + "city AS city, " + "street AS street, "
 			+ "token AS token " + "FROM user where status = 1 and ";
