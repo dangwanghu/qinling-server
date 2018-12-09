@@ -22,6 +22,7 @@ public class UserServiceImpl implements UserService {
 			instance.setToken(null);
 			userRepository.updateUser(instance);
 		}
+		instance.setOpenId(null);
 		return instance;
 	}
 
@@ -39,6 +40,7 @@ public class UserServiceImpl implements UserService {
 		if (null != dbUser) {
 			// update user
 			instance.setId(dbUser.getId());
+			instance.setOpenType(dbUser.getOpenType());
 			userRepository.updateUser(instance);
 		} else {
 			// add user
@@ -46,6 +48,9 @@ public class UserServiceImpl implements UserService {
 			instance.setOpenType(user.getOpenType());
 			instance.setUserPlatform("APP");
 			userRepository.addUser(instance);
+			User newUser = userRepository.queryByOpenIdAndType(user.getOpenId(), user.getOpenType());
+			instance.setId(newUser.getId());
+			instance.setOpenId(null);
 			// set token
 		}
 		return instance;
@@ -63,8 +68,8 @@ public class UserServiceImpl implements UserService {
 			userRepository.addUser(user);
 			
 			user = userRepository.queryByPhone(phone);
-		} 
-		
+		}
+		user.setOpenId(null);
 		return user;
 	}
 
@@ -94,5 +99,28 @@ public class UserServiceImpl implements UserService {
 		
 		user.setPassword(password);
 		userRepository.updateUser(user);
+	}
+
+	@Override
+	public User bindingThirdParty(Integer userId, String openId, String openType) throws Exception {
+		User dbUser = userRepository.queryById(userId.intValue());
+		
+		User instance = new User();
+		instance.setId(dbUser.getId());
+		if (null != dbUser.getOpenType()) {
+			if (dbUser.getOpenType().indexOf(openType) != -1) {
+				throw new Exception();
+			} else {
+				instance.setOpenId(dbUser.getOpenId() + "," + openId);
+				instance.setOpenType(dbUser.getOpenType() + "," + openType);
+			}
+		} else {
+			instance.setOpenId(openId);
+			instance.setOpenType(openType);
+		}
+		userRepository.updateUser(instance);
+		User newUser = userRepository.queryById(userId.intValue());
+		newUser.setOpenId(null);
+		return newUser;
 	}
 }

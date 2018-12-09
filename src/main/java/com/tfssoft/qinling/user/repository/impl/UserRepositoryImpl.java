@@ -36,4 +36,9 @@ public class UserRepositoryImpl extends AbstractRepository<User> implements User
 		return this.findOne(UserSql.getUserByPhoneSql(phone));
 	}
 
+	@Override
+	public User queryById(int id) {
+		return this.findOne(UserSql.getUserByIdSql(id));
+	}
+
 }

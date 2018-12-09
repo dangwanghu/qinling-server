@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import com.tfssoft.qinling.base.controller.BaseController;
 import com.tfssoft.qinling.user.domain.BindingPhoneVO;
 import com.tfssoft.qinling.user.domain.ResetPasswordVO;
+import com.tfssoft.qinling.user.domain.ThirdPartyBindingVO;
 import com.tfssoft.qinling.user.domain.User;
 import com.tfssoft.qinling.user.domain.UserPhoneVO;
 import com.tfssoft.qinling.user.domain.UserThirdPartyVO;
@@ -101,6 +102,19 @@ public class UserController extends BaseController {
 				}
 			}
 			cacheManager.del("phone_" + bPVo.getPhone());
+		} catch (Exception e) {
+			e.printStackTrace();
+			error("绑定失败！", response);
+		}
+	}
+	
+	@ApiOperation(value = "绑定第三方账号", httpMethod = "POST")
+	@RequestMapping(value = "/binding/thirdparty/account", method = RequestMethod.POST)
+	public void postThirdPartyAccount(@RequestBody ThirdPartyBindingVO tpbVO, HttpServletRequest request,
+			HttpServletResponse response) {
+		try {
+			User instance = userService.bindingThirdParty(tpbVO.getUserId(), tpbVO.getOpenId(), tpbVO.getOpenType());
+			writeJson(instance, response);
 		} catch (Exception e) {
 			e.printStackTrace();
 			error("绑定失败！", response);

@@ -12,5 +12,7 @@ public interface UserRepository {
 
 	public void addUser(User user);
 	
-	public User queryByPhone(String phone);	
+	public User queryByPhone(String phone);
+
+	public User queryById(int id);	
 }

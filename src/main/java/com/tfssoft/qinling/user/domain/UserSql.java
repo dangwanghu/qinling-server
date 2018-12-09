@@ -6,6 +6,8 @@ public class UserSql {
 
 	public static final String GET_USER_BY_CONDITIONS = 
 			"SElECT id, " 
+			+ "open_id AS openId, " 
+			+ "open_type AS openType, " 
 			+ "nick_name AS nickName, " 
 			+ "avatar AS avatar, " 
 			+ "real_name AS realName, " 
@@ -45,15 +47,26 @@ public class UserSql {
 		return GET_USER_BY_CONDITIONS 
 				+ "phone = '" + phone + "'";
 	}
+	
+	public static String getUserByIdSql(int id) {
+		return GET_USER_BY_CONDITIONS 
+				+ "id = '" + id + "'";
+	}
 
 	public static String getUserThirdPartyLoginSql(String openId, String openType) {
 		return GET_USER_BY_CONDITIONS 
-				+ "open_id = '" + openId + "'"
-				+ " and open_type = '" + openType + "'";
+				+ "open_id like '%" + openId + "%'"
+				+ " and open_type like '%" + openType + "%'";
 	}
 	
 	public static String getUpdateUserSql(User user) {
 		String sql = "update user set update_time = now()";
+		if (null != user.getOpenId()) {
+			sql += ", open_id = '" + user.getOpenId() + "'";
+		}
+		if (null != user.getOpenType()) {
+			sql += ", open_type = '" + user.getOpenType() + "'";
+		}
 		if (null != user.getNickName()) {
 			sql += ", nick_name = '" + user.getNickName() + "'";
 		}

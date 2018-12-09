@@ -15,4 +15,6 @@ public interface UserService {
 
 	public void resetPassword(String phone, String password) throws Exception;
 
+	public User bindingThirdParty(Integer userId, String openId, String openType) throws Exception;
+
 }
