@@ -40,5 +40,4 @@ public class UserRepositoryImpl extends AbstractRepository<User> implements User
 	public User queryById(int id) {
 		return this.findOne(UserSql.getUserByIdSql(id));
 	}
-
 }

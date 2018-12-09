@@ -1,10 +1,15 @@
 package com.tfssoft.qinling.user.service.impl;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.tfssoft.qinling.user.domain.User;
+import com.tfssoft.qinling.user.domain.UserAction;
+import com.tfssoft.qinling.user.domain.UserActionPostVO;
 import com.tfssoft.qinling.user.domain.UserThirdPartyVO;
+import com.tfssoft.qinling.user.repository.UserActionRepository;
 import com.tfssoft.qinling.user.repository.UserRepository;
 import com.tfssoft.qinling.user.service.UserService;
 
@@ -13,6 +18,9 @@ public class UserServiceImpl implements UserService {
 
 	@Autowired
 	private UserRepository userRepository;
+	
+	@Autowired
+	private UserActionRepository userActionRepository;
 
 	@Override
 	public User userLogin(String phone, String password) {
@@ -122,5 +130,20 @@ public class UserServiceImpl implements UserService {
 		User newUser = userRepository.queryById(userId.intValue());
 		newUser.setOpenId(null);
 		return newUser;
+	}
+
+	@Override
+	public List<UserAction> getUserCollectList(String userId) {
+		return userActionRepository.getUserCollectList(userId);
+	}
+
+	@Override
+	public void addUserCollect(UserActionPostVO action) {
+		userActionRepository.addUserCollect(action);
+	}
+
+	@Override
+	public void deleteUserCollect(String ids) {
+		userActionRepository.deleteUserCollect(ids);
 	}
 }

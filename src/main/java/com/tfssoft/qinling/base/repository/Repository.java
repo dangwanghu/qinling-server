@@ -18,4 +18,5 @@ public interface Repository<T extends Serializable> {
 	public List<T> findAll(String sql);
 
 	public int removeOne(String sql, int id);
+	
 }

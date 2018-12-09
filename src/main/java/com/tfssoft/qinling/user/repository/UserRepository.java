@@ -14,5 +14,5 @@ public interface UserRepository {
 	
 	public User queryByPhone(String phone);
 
-	public User queryById(int id);	
+	public User queryById(int id);
 }

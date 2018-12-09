@@ -1,5 +1,7 @@
 package com.tfssoft.qinling.user.controller;
 
+import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -8,12 +10,16 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.tfssoft.qinling.base.controller.BaseController;
 import com.tfssoft.qinling.user.domain.BindingPhoneVO;
 import com.tfssoft.qinling.user.domain.ResetPasswordVO;
 import com.tfssoft.qinling.user.domain.ThirdPartyBindingVO;
 import com.tfssoft.qinling.user.domain.User;
+import com.tfssoft.qinling.user.domain.UserAction;
+import com.tfssoft.qinling.user.domain.UserActionDeleteVO;
+import com.tfssoft.qinling.user.domain.UserActionPostVO;
 import com.tfssoft.qinling.user.domain.UserPhoneVO;
 import com.tfssoft.qinling.user.domain.UserThirdPartyVO;
 import com.tfssoft.qinling.user.domain.UserVO;
@@ -31,7 +37,7 @@ public class UserController extends BaseController {
 
 	@Autowired
 	private UserService userService;
-	
+
 	@Autowired
 	private CacheManager cacheManager;
 
@@ -107,7 +113,7 @@ public class UserController extends BaseController {
 			error("绑定失败！", response);
 		}
 	}
-	
+
 	@ApiOperation(value = "绑定第三方账号", httpMethod = "POST")
 	@RequestMapping(value = "/binding/thirdparty/account", method = RequestMethod.POST)
 	public void postThirdPartyAccount(@RequestBody ThirdPartyBindingVO tpbVO, HttpServletRequest request,
@@ -120,7 +126,7 @@ public class UserController extends BaseController {
 			error("绑定失败！", response);
 		}
 	}
-	
+
 	@ApiOperation(value = "重置密码", httpMethod = "POST")
 	@RequestMapping(value = "/reset/password", method = RequestMethod.POST)
 	public void postResetPassword(@RequestBody ResetPasswordVO rPVO, HttpServletRequest request,
@@ -141,21 +147,60 @@ public class UserController extends BaseController {
 		}
 	}
 
-
 	@ApiOperation(value = "发送手机验证码", httpMethod = "POST")
 	@RequestMapping(value = "/phone/code", method = RequestMethod.POST)
 	public void postPhoneCode(@RequestBody @ApiParam(value = "phone", required = true) String phone,
 			HttpServletRequest request, HttpServletResponse response) {
 		try {
-			String code = String.valueOf((int)((Math.random()*9+1)*1000));
+			String code = String.valueOf((int) ((Math.random() * 9 + 1) * 1000));
 			cacheManager.set("phone_" + phone, code, 300);
-			
+
 			// invoke thirdParty service to send the code
 
 			writeJson(code, response);
 		} catch (Exception e) {
 			e.printStackTrace();
 			error("发送失败！", response);
+		}
+	}
+
+	@ApiOperation(value = "用户收藏列表", httpMethod = "GET")
+	@RequestMapping(value = "/collect/list", method = RequestMethod.GET)
+	public void getUserCollectList(@RequestParam(value = "userId", required = true) String userId,
+			HttpServletRequest request, HttpServletResponse response) {
+		try {
+			List<UserAction> actions = userService.getUserCollectList(userId);
+			writeJson(actions, response);
+		} catch (Exception e) {
+			e.printStackTrace();
+			error("查询失败！", response);
+		}
+	}
+	
+	
+	@ApiOperation(value = "用户添加收藏", httpMethod = "POST")
+	@RequestMapping(value = "/collect", method = RequestMethod.POST)
+	public void postUserCollect(@RequestBody UserActionPostVO uapVO, HttpServletRequest request,
+			HttpServletResponse response) {
+		try {
+			userService.addUserCollect(uapVO);
+			success("收藏成功", response);
+		} catch (Exception e) {
+			e.printStackTrace();
+			error("收藏失败！", response);
+		}
+	}
+	
+	@ApiOperation(value = "用户删除收藏", httpMethod = "DELETE")
+	@RequestMapping(value = "/collect", method = RequestMethod.DELETE)
+	public void deleteUserCollect(@RequestBody UserActionDeleteVO uadVO, HttpServletRequest request,
+			HttpServletResponse response) {
+		try {
+			userService.deleteUserCollect(uadVO.getIds());
+			success("删除成功", response);
+		} catch (Exception e) {
+			e.printStackTrace();
+			error("删除失败！", response);
 		}
 	}
 
