@@ -51,6 +51,9 @@ public class Topic implements Serializable {
 	
 	@ApiModelProperty(hidden = true)
 	private String realBeautyUrl;
+	
+	@ApiModelProperty(hidden = true)
+	private String isCollected;
 
 	public Topic() {
 	}
@@ -174,6 +177,14 @@ public class Topic implements Serializable {
 
 	public void setRealBeautyUrl(String realBeautyUrl) {
 		this.realBeautyUrl = realBeautyUrl;
+	}
+
+	public String getIsCollected() {
+		return isCollected;
+	}
+
+	public void setIsCollected(String isCollected) {
+		this.isCollected = isCollected;
 	}
 	
 }

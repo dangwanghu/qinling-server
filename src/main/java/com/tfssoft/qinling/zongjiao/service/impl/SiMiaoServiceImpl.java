@@ -16,8 +16,8 @@ public class SiMiaoServiceImpl implements SiMiaoService {
 	@Autowired
 	private SiMiaoRepository siMiaoRepository;
 	
-	public List<Topic> getSiMiaoList() {
-		return siMiaoRepository.getSiMiaoList();
+	public List<Topic> getSiMiaoList(String userId) {
+		return siMiaoRepository.getSiMiaoList(userId);
 	}	
 
 }

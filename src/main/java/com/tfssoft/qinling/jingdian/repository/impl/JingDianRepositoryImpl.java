@@ -13,8 +13,8 @@ import com.tfssoft.qinling.jingdian.repository.JingDianRepository;
 public class JingDianRepositoryImpl extends AbstractRepository<Topic> implements JingDianRepository {
 
 	@Override
-	public List<Topic> getJingDianList() {
-		return this.findAll(JingDianSql.GET_JINGDIAN_LIST);
+	public List<Topic> getJingDianList(String userId) {
+		return this.findAll(JingDianSql.getJingDianListSql(userId));
 	}
 
 }

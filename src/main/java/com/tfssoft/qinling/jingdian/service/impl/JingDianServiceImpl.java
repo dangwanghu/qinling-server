@@ -16,8 +16,8 @@ public class JingDianServiceImpl implements JingDianService {
 	@Autowired
 	private JingDianRepository jingDianRepository;
 	
-	public List<Topic> getJingDianList() {
-		return jingDianRepository.getJingDianList();
+	public List<Topic> getJingDianList(String userId) {
+		return jingDianRepository.getJingDianList(userId);
 	}	
 
 }

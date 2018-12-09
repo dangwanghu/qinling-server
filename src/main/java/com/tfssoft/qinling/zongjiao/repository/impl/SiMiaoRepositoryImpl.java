@@ -13,8 +13,8 @@ import com.tfssoft.qinling.zongjiao.repository.SiMiaoRepository;
 public class SiMiaoRepositoryImpl extends AbstractRepository<Topic> implements SiMiaoRepository {
 
 	@Override
-	public List<Topic> getSiMiaoList() {
-		return this.findAll(SiMiaoSql.GET_SIMIAO_LIST);
+	public List<Topic> getSiMiaoList(String userId) {
+		return this.findAll(SiMiaoSql.getSiMiaoListSql(userId));
 	}
 
 }

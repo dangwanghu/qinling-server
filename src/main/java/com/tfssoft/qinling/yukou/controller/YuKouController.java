@@ -28,10 +28,11 @@ public class YuKouController extends BaseController {
 
 	@ApiOperation(value = "获取峪口列表", httpMethod = "GET")
 	@RequestMapping(value = "/list", method = RequestMethod.GET)
-	public void getYuKouList(@RequestParam(value = "xiangzhen", required = false) Integer xiangzhen,
-			HttpServletRequest request, HttpServletResponse response) {
+	public void getYuKouList(@RequestParam(value = "userId", required = false) String userId,
+			@RequestParam(value = "xiangzhen", required = false) Integer xiangzhen, HttpServletRequest request,
+			HttpServletResponse response) {
 		try {
-			List<Topic> yukouList = yuKouService.getYuKouList(xiangzhen);
+			List<Topic> yukouList = yuKouService.getYuKouList(xiangzhen, userId);
 			writeJson(yukouList, response);
 		} catch (Exception e) {
 			e.printStackTrace();

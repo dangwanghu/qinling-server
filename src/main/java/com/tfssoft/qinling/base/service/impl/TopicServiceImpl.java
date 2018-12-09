@@ -18,8 +18,8 @@ public class TopicServiceImpl implements TopicService {
 	private TopicRepository topicRepository;
 
 	@Override
-	public List<Topic> getTopicList(String name) {
-		return topicRepository.getTopicList(name);
+	public List<Topic> getTopicList(String name, String userId) {
+		return topicRepository.getTopicList(name, userId);
 	}
 
 	@Override

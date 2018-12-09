@@ -13,7 +13,7 @@ import com.tfssoft.qinling.yukou.repository.YuKouRepository;
 public class YuKouRepositoryImpl extends AbstractRepository<Topic> implements YuKouRepository {
 
 	@Override
-	public List<Topic> getYuKouList(Integer xiangzhen) {
-		return this.findAll(YuKouSql.getYuListSql(xiangzhen));
+	public List<Topic> getYuKouList(Integer xiangzhen, String userId) {
+		return this.findAll(YuKouSql.getYuKouListSql(xiangzhen, userId));
 	}
 }

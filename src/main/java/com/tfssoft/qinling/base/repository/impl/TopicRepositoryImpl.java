@@ -13,8 +13,8 @@ import com.tfssoft.qinling.base.repository.TopicRepository;
 public class TopicRepositoryImpl extends AbstractRepository<Topic> implements TopicRepository {
 
 	@Override
-	public List<Topic> getTopicList(String name) {
-		return this.findAll(TopicSql.getTopicListSql(name));
+	public List<Topic> getTopicList(String name, String userId) {
+		return this.findAll(TopicSql.getTopicListSql(name, userId));
 	}
 
 	@Override

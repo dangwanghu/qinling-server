@@ -16,8 +16,8 @@ public class YuKouServiceImpl implements YuKouService {
 	@Autowired
 	private YuKouRepository yuKouRepository;
 	
-	public List<Topic> getYuKouList(Integer xiangzhen) {
-		return yuKouRepository.getYuKouList(xiangzhen);
+	public List<Topic> getYuKouList(Integer xiangzhen, String userId) {
+		return yuKouRepository.getYuKouList(xiangzhen, userId);
 	}	
 
 }

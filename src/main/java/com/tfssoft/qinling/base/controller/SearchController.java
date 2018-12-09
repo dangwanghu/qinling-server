@@ -26,10 +26,10 @@ public class SearchController extends BaseController {
 
 	@ApiOperation(value = "专题搜索", httpMethod = "GET")
 	@RequestMapping(value = "/subject", method = RequestMethod.GET)
-	public void searchTopic(@RequestParam("keywords") String keywords, HttpServletRequest request,
-			HttpServletResponse response) {
+	public void searchTopic(@RequestParam(value = "userId", required = false) String userId,
+			@RequestParam("keywords") String keywords, HttpServletRequest request, HttpServletResponse response) {
 		try {
-			List<Topic> result = topicService.getTopicList(keywords);
+			List<Topic> result = topicService.getTopicList(keywords, userId);
 			writeJson(result, response);
 		} catch (Exception e) {
 			e.printStackTrace();

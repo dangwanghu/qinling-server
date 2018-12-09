@@ -6,6 +6,6 @@ import com.tfssoft.qinling.base.domain.Topic;
 
 public interface SiMiaoService {
 	
-	public List<Topic> getSiMiaoList();
+	public List<Topic> getSiMiaoList(String userId);
 
 }

@@ -6,6 +6,6 @@ import com.tfssoft.qinling.base.domain.Topic;
 
 public interface JingDianService {
 	
-	public List<Topic> getJingDianList();
+	public List<Topic> getJingDianList(String userId);
 
 }

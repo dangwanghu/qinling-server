@@ -16,8 +16,8 @@ public class ShanFengServiceImpl implements ShanFengService {
 	@Autowired
 	private ShanFengRepository shanFengRepository;
 	
-	public List<Topic> getShanFengList() {
-		return shanFengRepository.getShanFengList();
+	public List<Topic> getShanFengList(String userId) {
+		return shanFengRepository.getShanFengList(userId);
 	}	
 
 }

@@ -6,6 +6,6 @@ import com.tfssoft.qinling.base.domain.Topic;
 
 public interface ShanFengService {
 	
-	public List<Topic> getShanFengList();
+	public List<Topic> getShanFengList(String userId);
 
 }

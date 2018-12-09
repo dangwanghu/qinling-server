@@ -7,7 +7,7 @@ import com.tfssoft.qinling.base.domain.TopicAuth;
 
 public interface TopicService {
 	
-	public List<Topic> getTopicList(String name);
+	public List<Topic> getTopicList(String name, String userId);
 
 	public void addTopicAuth(TopicAuth instance);
 

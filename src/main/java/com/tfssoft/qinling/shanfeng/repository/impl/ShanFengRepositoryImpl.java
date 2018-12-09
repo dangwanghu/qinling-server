@@ -13,8 +13,8 @@ import com.tfssoft.qinling.shanfeng.repository.ShanFengRepository;
 public class ShanFengRepositoryImpl extends AbstractRepository<Topic> implements ShanFengRepository {
 
 	@Override
-	public List<Topic> getShanFengList() {
-		return this.findAll(ShanFengSql.GET_SHANFENG_LIST);
+	public List<Topic> getShanFengList(String userId) {
+		return this.findAll(ShanFengSql.getShanFengListSql(userId));
 	}
 
 }
