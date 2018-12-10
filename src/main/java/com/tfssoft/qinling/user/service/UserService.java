@@ -2,8 +2,8 @@ package com.tfssoft.qinling.user.service;
 
 import java.util.List;
 
+import com.tfssoft.qinling.user.domain.TopicCollectVO;
 import com.tfssoft.qinling.user.domain.User;
-import com.tfssoft.qinling.user.domain.UserAction;
 import com.tfssoft.qinling.user.domain.UserActionPostVO;
 import com.tfssoft.qinling.user.domain.UserThirdPartyVO;
 
@@ -21,7 +21,7 @@ public interface UserService {
 
 	public User bindingThirdParty(Integer userId, String openId, String openType) throws Exception;
 
-	public List<UserAction> getUserCollectList(String userId);
+	public List<TopicCollectVO> getUserCollectList(String userId);
 
 	public String addUserCollect(UserActionPostVO action);
 

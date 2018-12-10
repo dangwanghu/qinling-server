@@ -17,8 +17,8 @@ import com.tfssoft.qinling.user.domain.BindingPhoneVO;
 import com.tfssoft.qinling.user.domain.NewPasswordVO;
 import com.tfssoft.qinling.user.domain.ResetPasswordVO;
 import com.tfssoft.qinling.user.domain.ThirdPartyBindingVO;
+import com.tfssoft.qinling.user.domain.TopicCollectVO;
 import com.tfssoft.qinling.user.domain.User;
-import com.tfssoft.qinling.user.domain.UserAction;
 import com.tfssoft.qinling.user.domain.UserActionPostVO;
 import com.tfssoft.qinling.user.domain.UserPhoneVO;
 import com.tfssoft.qinling.user.domain.UserThirdPartyVO;
@@ -169,7 +169,7 @@ public class UserController extends BaseController {
 	public void getUserCollectList(@RequestParam(value = "userId", required = true) String userId,
 			HttpServletRequest request, HttpServletResponse response) {
 		try {
-			List<UserAction> actions = userService.getUserCollectList(userId);
+			List<TopicCollectVO> actions = userService.getUserCollectList(userId);
 			writeJson(actions, response);
 		} catch (Exception e) {
 			e.printStackTrace();

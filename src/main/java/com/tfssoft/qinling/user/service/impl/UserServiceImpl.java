@@ -6,6 +6,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.tfssoft.qinling.user.domain.TopicCollectVO;
 import com.tfssoft.qinling.user.domain.User;
 import com.tfssoft.qinling.user.domain.UserAction;
 import com.tfssoft.qinling.user.domain.UserActionPostVO;
@@ -134,8 +135,18 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
-	public List<UserAction> getUserCollectList(String userId) {
-		return userActionRepository.getUserCollectList(userId, null, null);
+	public List<TopicCollectVO> getUserCollectList(String userId) {
+		List<UserAction> list = userActionRepository.getUserCollectList(userId, null, null);
+		List<TopicCollectVO> result = new ArrayList<TopicCollectVO>();
+		for (UserAction action : list) {
+			TopicCollectVO instance = new TopicCollectVO();
+			instance.setId(action.getRelId());
+			instance.setType(action.getRelType());
+			instance.setName(action.getRelName());
+			instance.setLocationDescription(action.getAddress());
+			result.add(instance);
+		}
+		return result;
 	}
 
 	@Override
