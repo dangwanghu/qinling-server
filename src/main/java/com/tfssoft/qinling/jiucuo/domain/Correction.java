@@ -13,7 +13,7 @@ public class Correction implements Serializable {
 	@ApiModelProperty(hidden = true)
 	private Integer id;
 
-	@ApiModelProperty(value = "专题类别, CZ: 村庄, JD: 景点, SF: 山峰, YK: 峪口, ZJ: 宗教", required = true)
+	@ApiModelProperty(value = "专题类别, 6: 村庄, 5: 景点, 3: 山峰, 1: 峪口, 4: 宗教", required = true)
 	private String type;
 
 	@ApiModelProperty(value = "关联专题ID", required = true)

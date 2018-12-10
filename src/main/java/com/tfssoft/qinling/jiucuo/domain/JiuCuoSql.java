@@ -17,11 +17,11 @@ public class JiuCuoSql {
 				new Date()
 		};
 	}
-
+	
 	public static final String GET_JIUCUO_LIST = 
 			"SElECT id, update_time AS updateTime, "
-			+ "(case type when 'CZ' then '村庄' when 'JD' then '景点'"
-			+ " when 'SF' then '山峰' when 'YK' then '峪口' when 'ZJ' then '宗教' else '其它' end) type, "
+			+ "(case type when 6 then '村庄' when 5 then '景点'"
+			+ " when 3 then '山峰' when 1 then '峪口' when 4 then '宗教' else '其它' end) type, "
 			+ "rel_id AS relId,"
 			+ "content, "
 			+ "submitter, "

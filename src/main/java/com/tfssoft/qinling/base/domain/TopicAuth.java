@@ -16,7 +16,7 @@ public class TopicAuth implements Serializable {
 	@ApiModelProperty(value = "添加原因", required = true)
 	private String reason;
 	
-	@ApiModelProperty(value = "专题类别, JD: 景点, SF: 山峰, YK: 峪口, ZJ: 宗教", required = true)
+	@ApiModelProperty(value = "专题类别, 5: 景点, 3: 山峰, 1: 峪口, 4: 宗教", required = true)
 	private String topicType;
 
 	@ApiModelProperty(value = "位置描述", required = true)
@@ -30,6 +30,9 @@ public class TopicAuth implements Serializable {
 
 	@ApiModelProperty(value = "经度", required = true)
 	private Double yLng;
+	
+	@ApiModelProperty(value = "图片附件", required = false)
+	private String attachments;
 	
 	@ApiModelProperty(hidden = true)
 	private String status;
@@ -121,6 +124,14 @@ public class TopicAuth implements Serializable {
 
 	public void setUpdateTime(String updateTime) {
 		this.updateTime = updateTime;
+	}
+
+	public String getAttachments() {
+		return attachments;
+	}
+
+	public void setAttachments(String attachments) {
+		this.attachments = attachments;
 	}
 
 }
