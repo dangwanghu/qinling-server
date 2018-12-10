@@ -11,4 +11,6 @@ public interface TopicService {
 
 	public void addTopicAuth(TopicAuth instance);
 
+	public Topic getTopicDetail(String userId, String id, String type);
+
 }

@@ -10,4 +10,6 @@ public interface TopicRepository {
 	public List<Topic> getTopicList(String name, String userId);
 
 	public void addTopicAuth(TopicAuth instance);
+
+	public Topic getTopicDetail(String userId, String id, String type);
 }

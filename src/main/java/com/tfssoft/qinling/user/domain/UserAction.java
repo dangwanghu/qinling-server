@@ -16,14 +16,14 @@ public class UserAction implements Serializable {
 	@ApiModelProperty(value = "关联专题ID", required = true)
 	private Integer relId;
 
-	@ApiModelProperty(value = "关联专题类型: JD: 景点, SF: 山峰, YK: 峪口, ZJ: 宗教", required = true)
+	@ApiModelProperty(value = "关联专题类型: 5: 景点, 3: 山峰, 1: 峪口, 4: 宗教", required = true)
 	private String relType;
 	
 	@ApiModelProperty(hidden = true)
 	private String relName;
 	
 	@ApiModelProperty(hidden = true)
-	private String actionType;
+	private String address;
 	
 	@ApiModelProperty(hidden = true)
 	private String createTime;
@@ -55,20 +55,20 @@ public class UserAction implements Serializable {
 		this.relName = relName;
 	}
 
-	public String getActionType() {
-		return actionType;
-	}
-
-	public void setActionType(String actionType) {
-		this.actionType = actionType;
-	}
-
 	public String getCreateTime() {
 		return createTime;
 	}
 
 	public void setCreateTime(String createTime) {
 		this.createTime = createTime;
+	}
+
+	public String getAddress() {
+		return address;
+	}
+
+	public void setAddress(String address) {
+		this.address = address;
 	}
 
 	public Integer getId() {
@@ -78,6 +78,5 @@ public class UserAction implements Serializable {
 	public void setId(Integer id) {
 		this.id = id;
 	}
-
 	
 }

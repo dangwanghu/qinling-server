@@ -22,4 +22,9 @@ public class TopicRepositoryImpl extends AbstractRepository<Topic> implements To
 		this.insert(TopicSql.INSRT_TOPIC_AUTH, TopicSql.getInsertAuthObject(instance));
 	}
 
+	@Override
+	public Topic getTopicDetail(String userId, String id, String type) {
+		return this.findOne(TopicSql.getTopicDetailSql(id, type, userId));
+	}
+
 }

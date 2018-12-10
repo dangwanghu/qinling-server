@@ -7,7 +7,7 @@ import com.tfssoft.qinling.user.domain.UserActionPostVO;
 
 public interface UserActionRepository {
 
-	public List<UserAction> getUserCollectList(String userId);
+	public List<UserAction> getUserCollectList(String userId, String relId, String relType);
 
 	public void addUserCollect(UserActionPostVO action);
 

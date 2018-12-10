@@ -23,9 +23,9 @@ public interface UserService {
 
 	public List<UserAction> getUserCollectList(String userId);
 
-	public void addUserCollect(UserActionPostVO action);
+	public String addUserCollect(UserActionPostVO action);
 
-	public void deleteUserCollect(String ids);
+	public void deleteUserCollect(List<UserActionPostVO> actions);
 
 	public String updatePassword(String userId, String oldPassword, String password);
 

@@ -37,9 +37,10 @@ public class JingDianSql {
 			+ "e.xzmc AS town, "
 			+ "f.ykmc AS yuKou, "
 			+ "a.sjlj AS realBeautyUrl, "
+			+ "5 AS type, "
 		
 			+ "(select rel_id from user_action where rel_id = a.id "
-			+ "and rel_type = 'JD' and user_id = '" + userId + "' "
+			+ "and rel_type = '5' and user_id = '" + userId + "' "
 			+ "and action_type = 'SC') AS isCollected ";
 			
 		sql += "FROM jingdian a ";

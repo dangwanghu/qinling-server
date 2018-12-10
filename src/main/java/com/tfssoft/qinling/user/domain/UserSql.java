@@ -74,12 +74,21 @@ public class UserSql {
 		return sql;
 	}
 
-	public static String getUserCollectListSql(String userId) {
-		String sql = "select b.id, b.relId, b.relTypeName as relType, c.name AS relName from ";
-		sql += " (select a.id, a.rel_id AS relId, a.create_time As createTime, a.rel_type AS relTypeName,";
-		sql += "(case a.rel_type when 'ZJ' then 4 when 'JD' then 5 when 'YK' then 1 when 'SF' then 3 end) AS relType ";
-		sql += "from user_action a where a.user_id = '" + userId
-				+ "') b left join SEARCH_VIEW c on b.relId = c.id and b.relType = c.type";
+	public static String getUserCollectListSql(String userId, String relId, String relType) {
+		String sql = "select b.id, b.relId, b.rel_type as relType, c.name AS relName, ";
+		sql += "c.locationDescription AS address from ";
+		sql += " (select a.id, a.rel_id AS relId, a.create_time As createTime,";
+		sql += " a.rel_type from user_action a where a.user_id = '" + userId + "'";
+		
+		if (null != relId) {
+			sql += " and a.rel_id = '" + relId + "'";
+		}
+		
+		if (null != relType) {
+			sql += " and a.rel_type = '" + relType + "'";
+		}
+				
+		sql += ") b left join SEARCH_VIEW c on b.relId = c.id and b.rel_type = c.type";
 
 		return sql;
 	}

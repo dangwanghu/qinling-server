@@ -10,10 +10,9 @@ import com.tfssoft.qinling.base.domain.TopicAuth;
 import com.tfssoft.qinling.base.repository.TopicRepository;
 import com.tfssoft.qinling.base.service.TopicService;
 
-
 @Service
 public class TopicServiceImpl implements TopicService {
-	
+
 	@Autowired
 	private TopicRepository topicRepository;
 
@@ -25,6 +24,11 @@ public class TopicServiceImpl implements TopicService {
 	@Override
 	public void addTopicAuth(TopicAuth instance) {
 		topicRepository.addTopicAuth(instance);
+	}
+
+	@Override
+	public Topic getTopicDetail(String userId, String id, String type) {
+		return topicRepository.getTopicDetail(userId, id, type);
 	}
 
 }

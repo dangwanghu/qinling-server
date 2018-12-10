@@ -14,8 +14,8 @@ import com.tfssoft.qinling.user.repository.UserActionRepository;
 public class UserActionRepositoryImpl extends AbstractRepository<UserAction> implements UserActionRepository {
 
 	@Override
-	public List<UserAction> getUserCollectList(String userId) {
-		return this.findAll(UserSql.getUserCollectListSql(userId));
+	public List<UserAction> getUserCollectList(String userId, String relId, String relType) {
+		return this.findAll(UserSql.getUserCollectListSql(userId, relId, relType));
 	}
 
 	@Override
@@ -25,16 +25,7 @@ public class UserActionRepositoryImpl extends AbstractRepository<UserAction> imp
 
 	@Override
 	public void deleteUserCollect(String ids) {
-		String[] temps = ids.split(",");
-		String ins = "";
-		for (int i = 0; i < temps.length; i++) {
-			if (i != 0) {
-				ins += "," + temps[i];
-			} else {
-				ins += temps[i];
-			}
-		}
-		this.update(UserSql.getDeleteUserActionSql(ins));
+		this.update(UserSql.getDeleteUserActionSql(ids));
 	}
 
 }

@@ -19,7 +19,6 @@ import com.tfssoft.qinling.user.domain.ResetPasswordVO;
 import com.tfssoft.qinling.user.domain.ThirdPartyBindingVO;
 import com.tfssoft.qinling.user.domain.User;
 import com.tfssoft.qinling.user.domain.UserAction;
-import com.tfssoft.qinling.user.domain.UserActionDeleteVO;
 import com.tfssoft.qinling.user.domain.UserActionPostVO;
 import com.tfssoft.qinling.user.domain.UserPhoneVO;
 import com.tfssoft.qinling.user.domain.UserThirdPartyVO;
@@ -183,8 +182,12 @@ public class UserController extends BaseController {
 	public void postUserCollect(@RequestBody UserActionPostVO uapVO, HttpServletRequest request,
 			HttpServletResponse response) {
 		try {
-			userService.addUserCollect(uapVO);
-			success("收藏成功", response);
+			String errorMsg = userService.addUserCollect(uapVO);
+			if (null != errorMsg) {
+				error(errorMsg, response);
+			} else {
+				success("收藏成功", response);
+			}
 		} catch (Exception e) {
 			e.printStackTrace();
 			error("收藏失败！", response);
@@ -193,10 +196,10 @@ public class UserController extends BaseController {
 
 	@ApiOperation(value = "用户删除收藏", httpMethod = "DELETE")
 	@RequestMapping(value = "/collect", method = RequestMethod.DELETE)
-	public void deleteUserCollect(@RequestBody UserActionDeleteVO uadVO, HttpServletRequest request,
+	public void deleteUserCollect(@RequestBody List<UserActionPostVO> uapVOs, HttpServletRequest request,
 			HttpServletResponse response) {
 		try {
-			userService.deleteUserCollect(uadVO.getIds());
+			userService.deleteUserCollect(uapVOs);
 			success("删除成功", response);
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -204,7 +207,7 @@ public class UserController extends BaseController {
 		}
 	}
 
-	@ApiOperation(value = "修改密码", httpMethod = "PuT")
+	@ApiOperation(value = "修改密码", httpMethod = "PUT")
 	@RequestMapping(value = "/change/password", method = RequestMethod.PUT)
 	public void putChangePassword(@RequestBody NewPasswordVO npVO, HttpServletRequest request,
 			HttpServletResponse response) {

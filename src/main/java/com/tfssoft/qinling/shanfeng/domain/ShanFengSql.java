@@ -31,9 +31,10 @@ public class ShanFengSql {
 			+ "a.y AS yLng, "
 			+ "d.qxmc AS county, " 
 			+ "a.sjlj AS realBeautyUrl, "
+			+ "3 AS type, "
 		
 			+ "(select rel_id from user_action where rel_id = a.id "
-			+ "and rel_type = 'SF' and user_id = '" + userId + "' "
+			+ "and rel_type = '3' and user_id = '" + userId + "' "
 			+ "and action_type = 'SC') AS isCollected ";
 			
 		sql += "FROM shanfeng a ";

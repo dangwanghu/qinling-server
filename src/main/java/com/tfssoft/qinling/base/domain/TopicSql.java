@@ -11,11 +11,10 @@ public class TopicSql {
 			return GET_TOPIC_LIST + "'%" + name + "%'";
 		}
 		String sql = "";
-		sql += "select b.*,";
-		sql += " (select rel_id from user_action where rel_id = b.id and rel_type = b.typeName and user_id = '" + userId + "' and action_type = 'SC') AS isCollected ";
-		sql += "from (";
-		sql += "select a.*, (case type when 4 then 'ZJ' when 5 then 'JD' when 1 then 'YK' when 3 then 'SF' end) as typeName from SEARCH_VIEW a ";
-		sql += "where name like '%" + name + "%') b"; 
+		sql += "select a.*,";
+		sql += " (select rel_id from user_action where rel_id = a.id and rel_type = a.type and user_id = '" + userId + "' and action_type = 'SC') AS isCollected ";
+		sql += "from SEARCH_VIEW a ";
+		sql += "where name like '%" + name + "%'"; 
 		
 		return sql;
 	}
@@ -34,5 +33,20 @@ public class TopicSql {
 				instance.getyLng(),
 				new Date()
 		};
+	}
+
+	public static String getTopicDetailSql(String id, String type, String userId) {
+		String conditons = " where a.id = '" + id + "' and type = '" + type + "'";
+		if (null == userId) {
+			return "select a.* from SEARCH_VIEW a" + conditons;
+		}
+		
+		String sql = "";
+		sql += "select a.*,";
+		sql += " (select rel_id from user_action where rel_id = a.id and rel_type = a.type and user_id = '" + userId + "' and action_type = 'SC') AS isCollected ";
+		sql += "from SEARCH_VIEW a";
+		sql += conditons; 
+		
+		return sql;
 	}
 }

@@ -1,5 +1,6 @@
 package com.tfssoft.qinling.user.service.impl;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,7 +20,7 @@ public class UserServiceImpl implements UserService {
 
 	@Autowired
 	private UserRepository userRepository;
-	
+
 	@Autowired
 	private UserActionRepository userActionRepository;
 
@@ -38,7 +39,7 @@ public class UserServiceImpl implements UserService {
 	@Override
 	public User userThirdPartyLogin(UserThirdPartyVO user) {
 		User dbUser = userRepository.queryByOpenIdAndType(user.getOpenId(), user.getOpenType());
-		
+
 		User instance = new User();
 		instance.setAvatar(user.getAvatar());
 		instance.setNickName(user.getNickName());
@@ -64,7 +65,6 @@ public class UserServiceImpl implements UserService {
 		}
 		return instance;
 	}
-	
 
 	@Override
 	public User phoneUserLogin(String phone) {
@@ -75,7 +75,7 @@ public class UserServiceImpl implements UserService {
 			user.setPhone(phone);
 			user.setUserPlatform("APP");
 			userRepository.addUser(user);
-			
+
 			user = userRepository.queryByPhone(phone);
 		}
 		user.setOpenId(null);
@@ -89,7 +89,7 @@ public class UserServiceImpl implements UserService {
 		if (null != user) {
 			return "手机号已占用";
 		}
-		
+
 		// binding phone
 		user = new User();
 		user.setId(userId);
@@ -100,12 +100,12 @@ public class UserServiceImpl implements UserService {
 
 	@Override
 	public void resetPassword(String phone, String password) throws Exception {
-		
+
 		User user = userRepository.queryByPhone(phone);
 		if (null == user) {
 			throw new Exception();
 		}
-		
+
 		user.setPassword(password);
 		userRepository.updateUser(user);
 	}
@@ -113,7 +113,7 @@ public class UserServiceImpl implements UserService {
 	@Override
 	public User bindingThirdParty(Integer userId, String openId, String openType) throws Exception {
 		User dbUser = userRepository.queryById(userId.intValue());
-		
+
 		User instance = new User();
 		instance.setId(dbUser.getId());
 		if (null != dbUser.getOpenType()) {
@@ -135,17 +135,35 @@ public class UserServiceImpl implements UserService {
 
 	@Override
 	public List<UserAction> getUserCollectList(String userId) {
-		return userActionRepository.getUserCollectList(userId);
+		return userActionRepository.getUserCollectList(userId, null, null);
 	}
 
 	@Override
-	public void addUserCollect(UserActionPostVO action) {
+	public String addUserCollect(UserActionPostVO action) {
+		List<UserAction> list = userActionRepository.getUserCollectList(action.getUserId(),
+				String.valueOf(action.getRelId()), action.getRelType());
+
+		if (list.size() > 0) {
+			return "重复收藏";
+		}
 		userActionRepository.addUserCollect(action);
+		return null;
 	}
 
 	@Override
-	public void deleteUserCollect(String ids) {
-		userActionRepository.deleteUserCollect(ids);
+	public void deleteUserCollect(List<UserActionPostVO> actions) {
+		List<String> ids = new ArrayList<String>();
+
+		for (UserActionPostVO action : actions) {
+			List<UserAction> list = userActionRepository.getUserCollectList(action.getUserId(),
+					String.valueOf(action.getRelId()), action.getRelType());
+
+			if (list.size() > 0) {
+				ids.add(String.valueOf(list.get(0).getId()));
+			}
+		}
+
+		userActionRepository.deleteUserCollect(String.join(",", ids));
 	}
 
 	@Override
@@ -155,7 +173,7 @@ public class UserServiceImpl implements UserService {
 		if (!new String(EncryptionByMD5.getMD5(oldPassword.getBytes())).equals(dbUser.getPassword())) {
 			return "原密码错误";
 		}
-		
+
 		// update password
 		User user = new User();
 		user.setId(Integer.parseInt(userId));

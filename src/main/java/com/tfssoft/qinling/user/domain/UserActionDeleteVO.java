@@ -1,6 +1,7 @@
 package com.tfssoft.qinling.user.domain;
 
 import java.io.Serializable;
+import java.util.List;
 
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
@@ -10,18 +11,18 @@ public class UserActionDeleteVO implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 	
-	@ApiModelProperty(value = "唯一ID, 逗号隔开", required = true)
-	private String ids;
+	@ApiModelProperty(value = "收藏数组，见Model注释", required = true)
+	private List<UserActionPostVO> collections;
 
 	public UserActionDeleteVO() {
 	}
 
-	public String getIds() {
-		return ids;
+	public List<UserActionPostVO> getCollections() {
+		return collections;
 	}
 
-	public void setIds(String ids) {
-		this.ids = ids;
+	public void setCollections(List<UserActionPostVO> collections) {
+		this.collections = collections;
 	}
 	
 }
