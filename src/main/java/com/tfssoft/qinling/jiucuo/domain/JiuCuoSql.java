@@ -26,9 +26,10 @@ public class JiuCuoSql {
 			+ "content, "
 			+ "submitter, "
 			+ "phone, "
+			+ "(select name from search_view where type = a.type and id = a.rel_id) AS subjectName, "
 			+ "create_time AS createTime, comments, "
 			+ "(case status when 0 then '未处理' when 1 then '已处理' end) status"
-			+ " FROM jiucuo ";
+			+ " FROM jiucuo a";
 	
 	public static final String GET_JIUCUO_COUNT = "SElECT count(id) FROM jiucuo ";
 	

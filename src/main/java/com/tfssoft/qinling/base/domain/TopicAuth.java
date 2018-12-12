@@ -34,7 +34,7 @@ public class TopicAuth implements Serializable {
 	@ApiModelProperty(value = "图片附件", required = false)
 	private String attachments;
 	
-	@ApiModelProperty(hidden = true)
+	@ApiModelProperty(value = "0-未审核 1-已通过 2-未通过", hidden = true)
 	private String status;
 	
 	@ApiModelProperty(hidden = true)
@@ -42,6 +42,9 @@ public class TopicAuth implements Serializable {
 
 	@ApiModelProperty(hidden = true)
 	private String updateTime;
+	
+	@ApiModelProperty(hidden = true)
+	private String comments;
 
 	public TopicAuth() {
 	}
@@ -132,6 +135,14 @@ public class TopicAuth implements Serializable {
 
 	public void setAttachments(String attachments) {
 		this.attachments = attachments;
+	}
+
+	public String getComments() {
+		return comments;
+	}
+
+	public void setComments(String comments) {
+		this.comments = comments;
 	}
 
 }
