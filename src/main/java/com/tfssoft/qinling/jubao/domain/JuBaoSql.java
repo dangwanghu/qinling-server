@@ -100,5 +100,12 @@ public class JuBaoSql {
 		sql += " where id = " + instance.getId().intValue();
 		return sql;
 	}
+	
+	public static String getBatchUpdateJuBaoSql(String ids, String status) {
+		String sql = "update jubao set update_time = now(), status = '" + status + "'";
+
+		sql += " where id IN (" + ids + ")";
+		return sql;
+	}
 
 }

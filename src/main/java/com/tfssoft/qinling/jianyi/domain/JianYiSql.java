@@ -92,5 +92,12 @@ public class JianYiSql {
 		sql += " where id = " + instance.getId().intValue();
 		return sql;
 	}
+	
+	public static String getBatchUpdateJianYiSql(String ids, String status) {
+		String sql = "update jianyi set update_time = now(), status = '" + status + "'";
+
+		sql += " where id IN (" + ids + ")";
+		return sql;
+	}
 
 }

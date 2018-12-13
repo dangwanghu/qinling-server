@@ -17,4 +17,6 @@ public interface JiuCuoRepository {
 	public void updateJiuCuo(Correction instance);
 
 	public void deleteJiuCuo(int id);
+
+	public void updateJiuCuoBatch(String ids, String status);
 }

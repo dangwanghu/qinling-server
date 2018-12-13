@@ -98,5 +98,12 @@ public class JiuCuoSql {
 		sql += " where id = " + instance.getId().intValue();
 		return sql;
 	}
+	
+	public static String getBatchUpdateJiuCuoSql(String ids, String status) {
+		String sql = "update jiucuo set update_time = now(), status = '" + status + "'";
+
+		sql += " where id IN (" + ids + ")";
+		return sql;
+	}
 
 }

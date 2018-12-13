@@ -51,6 +51,11 @@ public class JiuCuoServiceImpl implements JiuCuoService {
 	@Override
 	public void deleteJiuCuo(int id) {
 		jiuCuoRepository.deleteJiuCuo(id);
+	}
+
+	@Override
+	public void deleteJiuCuoBatch(String ids) {
+		jiuCuoRepository.updateJiuCuoBatch(ids, "9");
 	}	
 
 }

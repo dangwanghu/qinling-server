@@ -16,4 +16,6 @@ public interface JianYiService {
 
 	public void deleteJianYi(int id);
 
+	public void deleteJianYiBatch(String ids);
+
 }

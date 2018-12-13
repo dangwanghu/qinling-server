@@ -41,4 +41,9 @@ public class JuBaoRepositoryImpl extends AbstractRepository<Report> implements J
 	public void deleteJuBao(int id) {
 		this.removeOne(JuBaoSql.DELETE_JUBAO, id);
 	}
+
+	@Override
+	public void updateJuBaoBatch(String ids, String status) {
+		this.update(JuBaoSql.getBatchUpdateJuBaoSql(ids, status));
+	}
 }

@@ -51,6 +51,11 @@ public class JianYiServiceImpl implements JianYiService {
 	@Override
 	public void deleteJianYi(int id) {
 		jianYiRepository.deleteJianYi(id);
+	}
+
+	@Override
+	public void deleteJianYiBatch(String ids) {
+		jianYiRepository.updateJianYiBatch(ids, "9");
 	}	
 
 }

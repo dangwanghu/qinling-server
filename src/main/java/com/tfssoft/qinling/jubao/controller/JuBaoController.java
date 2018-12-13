@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.tfssoft.qinling.base.controller.BaseController;
+import com.tfssoft.qinling.base.domain.BatchIds;
 import com.tfssoft.qinling.base.domain.CommentsVO;
 import com.tfssoft.qinling.jubao.domain.Report;
 import com.tfssoft.qinling.jubao.service.JuBaoService;
@@ -83,7 +84,7 @@ public class JuBaoController extends BaseController {
 		}
 	}
 
-	@ApiOperation(value = "删除举报", httpMethod = "DELETE")
+	@ApiOperation(value = "删除举报-管理员", httpMethod = "DELETE")
 	@RequestMapping(value = "", method = RequestMethod.DELETE)
 	public void deleteJuBao(@RequestParam(required = true) Integer id, HttpServletRequest request,
 			HttpServletResponse response) {
@@ -93,6 +94,19 @@ public class JuBaoController extends BaseController {
 		} catch (Exception e) {
 			e.printStackTrace();
 			error("删除出错！", response);
+		}
+	}
+	
+	@ApiOperation(value = "删除建议-用户", httpMethod = "DELETE")
+	@RequestMapping(value = "/only-for/user", method = RequestMethod.DELETE)
+	public void deleteJuBaoBatch(@RequestBody BatchIds batchIds, HttpServletRequest request,
+			HttpServletResponse response) {
+		try {
+			juBaoService.deleteJuBaoBatch(batchIds.getIds());
+			success("处理成功", response);
+		} catch (Exception e) {
+			e.printStackTrace();
+			error("处理出错！", response);
 		}
 	}
 

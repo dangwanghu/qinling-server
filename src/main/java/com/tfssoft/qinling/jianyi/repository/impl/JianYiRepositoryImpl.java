@@ -42,4 +42,9 @@ public class JianYiRepositoryImpl extends AbstractRepository<Suggest> implements
 		this.removeOne(JianYiSql.DELETE_JIANYI, id);
 	}
 
+	@Override
+	public void updateJianYiBatch(String ids, String status) {
+		this.update(JianYiSql.getBatchUpdateJianYiSql(ids, status));
+	}
+
 }

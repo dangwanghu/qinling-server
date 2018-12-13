@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.tfssoft.qinling.base.controller.BaseController;
+import com.tfssoft.qinling.base.domain.BatchIds;
 import com.tfssoft.qinling.base.domain.CommentsVO;
 import com.tfssoft.qinling.jianyi.domain.Suggest;
 import com.tfssoft.qinling.jianyi.service.JianYiService;
@@ -83,7 +84,7 @@ public class JianYiController extends BaseController {
 		}
 	}
 
-	@ApiOperation(value = "删除建议", httpMethod = "DELETE")
+	@ApiOperation(value = "删除建议-管理员", httpMethod = "DELETE")
 	@RequestMapping(value = "", method = RequestMethod.DELETE)
 	public void deleteJianYi(@RequestParam(required = true) Integer id, HttpServletRequest request,
 			HttpServletResponse response) {
@@ -93,6 +94,19 @@ public class JianYiController extends BaseController {
 		} catch (Exception e) {
 			e.printStackTrace();
 			error("删除出错！", response);
+		}
+	}
+	
+	@ApiOperation(value = "删除建议-用户", httpMethod = "DELETE")
+	@RequestMapping(value = "/only-for/user", method = RequestMethod.DELETE)
+	public void deleteJianYiBatch(@RequestBody BatchIds batchIds, HttpServletRequest request,
+			HttpServletResponse response) {
+		try {
+			jianYiService.deleteJianYiBatch(batchIds.getIds());
+			success("处理成功", response);
+		} catch (Exception e) {
+			e.printStackTrace();
+			error("处理出错！", response);
 		}
 	}
 

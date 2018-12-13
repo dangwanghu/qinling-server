@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.tfssoft.qinling.base.controller.BaseController;
+import com.tfssoft.qinling.base.domain.BatchIds;
 import com.tfssoft.qinling.base.domain.CommentsVO;
 import com.tfssoft.qinling.jiucuo.domain.Correction;
 import com.tfssoft.qinling.jiucuo.service.JiuCuoService;
@@ -83,7 +84,7 @@ public class JiuCuoController extends BaseController {
 		}
 	}
 
-	@ApiOperation(value = "删除纠错", httpMethod = "DELETE")
+	@ApiOperation(value = "删除纠错-管理员", httpMethod = "DELETE")
 	@RequestMapping(value = "", method = RequestMethod.DELETE)
 	public void deleteJiuCuo(@RequestParam(required = true) Integer id, HttpServletRequest request,
 			HttpServletResponse response) {
@@ -93,6 +94,19 @@ public class JiuCuoController extends BaseController {
 		} catch (Exception e) {
 			e.printStackTrace();
 			error("删除出错！", response);
+		}
+	}
+	
+	@ApiOperation(value = "删除建议-用户", httpMethod = "DELETE")
+	@RequestMapping(value = "/only-for/user", method = RequestMethod.DELETE)
+	public void deleteJiuCuoBatch(@RequestBody BatchIds batchIds, HttpServletRequest request,
+			HttpServletResponse response) {
+		try {
+			jiuCuoService.deleteJiuCuoBatch(batchIds.getIds());
+			success("处理成功", response);
+		} catch (Exception e) {
+			e.printStackTrace();
+			error("处理出错！", response);
 		}
 	}
 

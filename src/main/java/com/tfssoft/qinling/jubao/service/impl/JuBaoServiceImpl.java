@@ -51,6 +51,11 @@ public class JuBaoServiceImpl implements JuBaoService {
 	@Override
 	public void deleteJuBao(int id) {
 		jubaoRepository.deleteJuBao(id);
+	}
+
+	@Override
+	public void deleteJuBaoBatch(String ids) {
+		jubaoRepository.updateJuBaoBatch(ids, "9");
 	}	
 
 }

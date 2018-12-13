@@ -17,4 +17,6 @@ public interface JianYiRepository {
 	public void updateJianYi(Suggest instance);
 
 	public void deleteJianYi(int id);
+
+	public void updateJianYiBatch(String ids, String status);
 }

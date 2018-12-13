@@ -17,4 +17,6 @@ public interface JubaoRepository {
 	public void updateJuBao(Report instance);
 
 	public void deleteJuBao(int id);
+
+	public void updateJuBaoBatch(String ids, String status);
 }

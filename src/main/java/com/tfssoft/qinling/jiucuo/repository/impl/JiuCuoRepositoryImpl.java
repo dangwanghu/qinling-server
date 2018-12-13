@@ -42,4 +42,9 @@ public class JiuCuoRepositoryImpl extends AbstractRepository<Correction> impleme
 		this.removeOne(JiuCuoSql.DELETE_JIUCUO, id);
 	}
 
+	@Override
+	public void updateJiuCuoBatch(String ids, String status) {
+		this.update(JiuCuoSql.getBatchUpdateJiuCuoSql(ids, status));
+	}
+
 }

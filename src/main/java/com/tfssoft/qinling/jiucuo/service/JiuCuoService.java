@@ -16,4 +16,6 @@ public interface JiuCuoService {
 
 	public void deleteJiuCuo(int id);
 
+	public void deleteJiuCuoBatch(String ids);
+
 }
