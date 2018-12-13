@@ -5,11 +5,16 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.tfssoft.qinling.base.domain.AuthVO;
 import com.tfssoft.qinling.base.domain.Topic;
 import com.tfssoft.qinling.base.domain.TopicAuth;
 import com.tfssoft.qinling.base.repository.TopicAuthRepository;
 import com.tfssoft.qinling.base.repository.TopicRepository;
 import com.tfssoft.qinling.base.service.TopicService;
+import com.tfssoft.qinling.jingdian.repository.JingDianRepository;
+import com.tfssoft.qinling.shanfeng.repository.ShanFengRepository;
+import com.tfssoft.qinling.yukou.repository.YuKouRepository;
+import com.tfssoft.qinling.zongjiao.repository.SiMiaoRepository;
 
 @Service
 public class TopicServiceImpl implements TopicService {
@@ -19,6 +24,18 @@ public class TopicServiceImpl implements TopicService {
 
 	@Autowired
 	private TopicAuthRepository topicAuthRepository;
+	
+	@Autowired
+	private YuKouRepository yuKouRepository;
+	
+	@Autowired
+	private JingDianRepository jingDianRepository;
+	
+	@Autowired
+	private ShanFengRepository shanFengRepository;
+	
+	@Autowired
+	private SiMiaoRepository siMiaoRepository;
 
 	@Override
 	public List<Topic> getTopicList(String name, String userId) {
@@ -36,38 +53,66 @@ public class TopicServiceImpl implements TopicService {
 	}
 
 	@Override
-	public List<TopicAuth> getTopicAuthList(Integer skip, Integer limit, String name, String source) {
+	public List<TopicAuth> getTopicAuthList(Integer skip, Integer limit, String name, String source, String userId) {
 		String status = "0,1,2,9";
 		if (!"ADMIN".equals(source)) {
 			status = "0,1,2";
 		}
 		if (null == skip && null != limit) {
-			return topicAuthRepository.getTopicAuthPageList(name, 0, limit.intValue(), status);
+			return topicAuthRepository.getTopicAuthPageList(name, 0, limit.intValue(), status, userId);
 		} else if (null != skip && null == limit) {
-			return topicAuthRepository.getTopicAuthPageList(name, skip.intValue(), 10, status);
+			return topicAuthRepository.getTopicAuthPageList(name, skip.intValue(), 10, status, userId);
 		} else if (null != skip && null != limit) {
-			return topicAuthRepository.getTopicAuthPageList(name, skip.intValue(), limit.intValue(), status);
+			return topicAuthRepository.getTopicAuthPageList(name, skip.intValue(), limit.intValue(), status, userId);
 		} else {
-			return topicAuthRepository.getTopicAuthList(name, status);
+			return topicAuthRepository.getTopicAuthList(name, status, userId);
 		}
 	}
 
 	@Override
-	public long getTopicAuthCount(String name, String source) {
+	public long getTopicAuthCount(String name, String source, String userId) {
 		String status = "0,1,2,9";
 		if (!"ADMIN".equals(source)) {
 			status = "0,1,2";
 		}
-		return topicAuthRepository.getTopicAuthCount(name, status);
+		return topicAuthRepository.getTopicAuthCount(name, status, userId);
 	}
 
 	@Override
-	public void updateTopicAuth(Integer id, String status, String comments) {
+	public void updateTopicAuth(AuthVO authInstance) {
 		TopicAuth instance = new TopicAuth();
-		instance.setId(id);
-		instance.setStatus(status);
-		instance.setComments(comments);
+		instance.setId(authInstance.getId());
+		instance.setStatus(authInstance.getStatus());
+		instance.setComments(authInstance.getComments());
 		topicAuthRepository.updateTopicAuth(instance);
+
+		if ("1".equals(authInstance.getStatus())) {
+			TopicAuth dbInstance = topicAuthRepository.getTopicAuthById(authInstance.getId().intValue());
+			Topic topic = new Topic();
+			topic.setName(authInstance.getTopicName());
+			topic.setLocationDescription(dbInstance.getLocationDescription());
+			topic.setIntroduction(dbInstance.getIntroduction());
+			topic.setHistory(authInstance.getHistory());
+			topic.setNaturalFeatures(authInstance.getNaturalFeatures());
+			topic.setOtherComments(authInstance.getOtherComments());
+			topic.setxLat(authInstance.getxLat());
+			topic.setyLng(authInstance.getyLng());
+			topic.setTown(String.valueOf(authInstance.getTown()));
+			topic.setCounty(String.valueOf(authInstance.getCounty()));
+			topic.setYuKou(String.valueOf(authInstance.getYuKou()));
+			topic.setRealBeautyUrl(authInstance.getRealBeautyUrl());
+			
+			// 5: 景点, 3: 山峰, 1: 峪口, 4: 宗教
+			if ("1".equals(dbInstance.getType())) {
+				yuKouRepository.addYuKou(topic);
+			} else if ("3".equals(dbInstance.getType())) {
+				shanFengRepository.addShanFeng(topic);
+			} else if ("4".equals(dbInstance.getType())) {
+				siMiaoRepository.addSiMiao(topic);
+			} else if ("5".equals(dbInstance.getType())) {
+				jingDianRepository.addJingDian(topic);
+			}
+		}
 	}
 
 	@Override

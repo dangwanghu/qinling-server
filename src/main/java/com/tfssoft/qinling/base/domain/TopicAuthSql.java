@@ -4,7 +4,7 @@ import java.util.Date;
 
 public class TopicAuthSql {
 	public static final String GET_TOPIC_AUTH_LIST = "select id,"
-			+ "topic_type AS topicType, "
+			+ "topic_type AS type, "
 			+ "location_desc AS locationDescription, "
 			+ "introduction, "
 			+ "reason, "
@@ -18,8 +18,8 @@ public class TopicAuthSql {
 	public static final String GET_TOPIC_AUTH_COUNT = "select count(id) from topic_auth ";
 	
 	public static final String INSRT_TOPIC_AUTH = "INSERT INTO topic_auth "
-			+ "(topic_type, location_desc, introduction, reason, x, y, attachments, create_time) " + "values "
-			+ "(?, ?, ?, ?, ?, ?, ?, ?)";
+			+ "(topic_type, location_desc, introduction, reason, x, y, attachments, create_time, user_id) " + "values "
+			+ "(?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
 	
 	public static final String DELETE_TOPIC_AUTH = "DELETE from topic_auth ";
@@ -30,37 +30,47 @@ public class TopicAuthSql {
 	
 	public static Object[] getInsertObject(TopicAuth instance) {
 		return new Object[] {
-				instance.getTopicType(),
+				instance.getType(),
 				instance.getLocationDescription(),
 				instance.getIntroduction(),
 				instance.getReason(),
 				instance.getxLat(),
 				instance.getyLng(),
 				instance.getAttachments(),
-				new Date()
+				new Date(),
+				Integer.parseInt(instance.getUserId())
 		};
 	}
 	
-	public static String getListSql(String name, String status) {
+	public static String getListSql(String name, String status, String userId) {
 		String conditions = "where status IN (" + status + ") ";
 		if (null != name) {
-			conditions += "and location_desc like '%" + name + "%'";
+			conditions += " and location_desc like '%" + name + "%'";
+		}
+		if (null != userId) {
+			conditions += " and user_id = '" + userId + "'";
 		}
 		return GET_TOPIC_AUTH_LIST + conditions;
 	}
 
-	public static String getPageListSql(String name, int skip, int limit, String status) {
+	public static String getPageListSql(String name, int skip, int limit, String status, String userId) {
 		String conditions = "where status IN (" + status + ") ";
 		if (null != name) {
-			conditions += "and location_desc like '%" + name + "%'";
+			conditions += "and location_desc like '%" + name + "%' ";
+		}
+		if (null != userId) {
+			conditions += " and user_id = '" + userId + "'";
 		}
 		return GET_TOPIC_AUTH_LIST + conditions + " limit " + skip + "," + limit;
 	}
 
-	public static String getCountSql(String name, String status) {
+	public static String getCountSql(String name, String status, String userId) {
 		String conditions = "where status IN (" + status + ") ";
 		if (null != name) {
 			conditions += "and location_desc like '%" + name + "%'";
+		}
+		if (null != userId) {
+			conditions += " and user_id = '" + userId + "'";
 		}
 		return GET_TOPIC_AUTH_COUNT + conditions;
 	}
@@ -81,6 +91,10 @@ public class TopicAuthSql {
 
 		sql += " where id IN (" + ids + ")";
 		return sql;
+	}
+	
+	public static String getTopicAuthByIdSql(int id) {
+		return GET_TOPIC_AUTH_LIST + "where id = " + id;
 	}
 
 }

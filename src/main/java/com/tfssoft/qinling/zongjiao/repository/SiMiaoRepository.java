@@ -7,4 +7,6 @@ import com.tfssoft.qinling.base.domain.Topic;
 public interface SiMiaoRepository {
 
 	public List<Topic> getSiMiaoList(String userId);
+
+	public void addSiMiao(Topic instance);
 }

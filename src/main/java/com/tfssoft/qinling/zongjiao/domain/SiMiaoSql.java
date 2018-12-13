@@ -1,5 +1,7 @@
 package com.tfssoft.qinling.zongjiao.domain;
 
+import com.tfssoft.qinling.base.domain.Topic;
+
 public class SiMiaoSql {
 	public static final String GET_SIMIAO_LIST = 
 			"SElECT a.id, "
@@ -49,6 +51,27 @@ public class SiMiaoSql {
 		sql += "left join yukou f on f.id = a.yk ";
 	
 		return sql;
+	}
+	
+	public static final String INSERT_SIMIAO = "INSERT INTO zongjiao "
+			+ "(zjmc, wzms, zjjj, zjrwls, zjzrfm, zjqtsm, x, y, qx, xz, yk, sjlj) " + "values "
+			+ "(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+
+	public static Object[] getInsertObject(Topic instance) {
+		return new Object[] {
+				instance.getName(),
+				instance.getLocationDescription(),
+				instance.getIntroduction(),
+				instance.getHistory(),
+				instance.getNaturalFeatures(),
+				instance.getOtherComments(),
+				instance.getxLat(),
+				instance.getyLng(),
+				instance.getCounty(),
+				instance.getTown(),
+				instance.getYuKou(),
+				instance.getRealBeautyUrl()
+		};
 	}
 
 }

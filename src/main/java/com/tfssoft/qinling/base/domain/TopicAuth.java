@@ -1,6 +1,7 @@
 package com.tfssoft.qinling.base.domain;
 
 import java.io.Serializable;
+import java.util.Date;
 
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
@@ -17,7 +18,7 @@ public class TopicAuth implements Serializable {
 	private String reason;
 	
 	@ApiModelProperty(value = "专题类别, 5: 景点, 3: 山峰, 1: 峪口, 4: 宗教", required = true)
-	private String topicType;
+	private String type;
 
 	@ApiModelProperty(value = "位置描述", required = true)
 	private String locationDescription;
@@ -34,14 +35,17 @@ public class TopicAuth implements Serializable {
 	@ApiModelProperty(value = "图片附件", required = false)
 	private String attachments;
 	
+	@ApiModelProperty(value = "用户ID", required = true)
+	private String userId;
+	
 	@ApiModelProperty(value = "0-未审核 1-已通过 2-未通过", hidden = true)
 	private String status;
 	
 	@ApiModelProperty(hidden = true)
-	private String createTime;
+	private Date createTime;
 
 	@ApiModelProperty(hidden = true)
-	private String updateTime;
+	private Date updateTime;
 	
 	@ApiModelProperty(hidden = true)
 	private String comments;
@@ -65,12 +69,12 @@ public class TopicAuth implements Serializable {
 		this.reason = reason;
 	}
 
-	public String getTopicType() {
-		return topicType;
+	public String getType() {
+		return type;
 	}
 
-	public void setTopicType(String topicType) {
-		this.topicType = topicType;
+	public void setType(String type) {
+		this.type = type;
 	}
 
 	public String getLocationDescription() {
@@ -113,19 +117,19 @@ public class TopicAuth implements Serializable {
 		this.status = status;
 	}
 
-	public String getCreateTime() {
+	public Date getCreateTime() {
 		return createTime;
 	}
 
-	public void setCreateTime(String createTime) {
+	public void setCreateTime(Date createTime) {
 		this.createTime = createTime;
 	}
 
-	public String getUpdateTime() {
+	public Date getUpdateTime() {
 		return updateTime;
 	}
 
-	public void setUpdateTime(String updateTime) {
+	public void setUpdateTime(Date updateTime) {
 		this.updateTime = updateTime;
 	}
 
@@ -143,6 +147,14 @@ public class TopicAuth implements Serializable {
 
 	public void setComments(String comments) {
 		this.comments = comments;
+	}
+
+	public String getUserId() {
+		return userId;
+	}
+
+	public void setUserId(String userId) {
+		this.userId = userId;
 	}
 
 }

@@ -1,5 +1,7 @@
 package com.tfssoft.qinling.shanfeng.domain;
 
+import com.tfssoft.qinling.base.domain.Topic;
+
 public class ShanFengSql {
 	public static final String GET_SHANFENG_LIST = 
 			"SElECT a.id, "
@@ -41,6 +43,25 @@ public class ShanFengSql {
 		sql += "left join dict_qvxian d on d.id = a.qx";
 		
 		return sql;
+	}
+	
+	public static final String INSERT_SHANFENG = "INSERT INTO shanfeng "
+			+ "(sfmc, wzms, sfjj, sfrwls, sfzrfm, sfqtsm, x, y, qx, sjlj) " + "values "
+			+ "(?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+
+	public static Object[] getInsertObject(Topic instance) {
+		return new Object[] {
+				instance.getName(),
+				instance.getLocationDescription(),
+				instance.getIntroduction(),
+				instance.getHistory(),
+				instance.getNaturalFeatures(),
+				instance.getOtherComments(),
+				instance.getxLat(),
+				instance.getyLng(),
+				instance.getCounty(),
+				instance.getRealBeautyUrl()
+		};
 	}
 
 }

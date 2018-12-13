@@ -17,4 +17,9 @@ public class JingDianRepositoryImpl extends AbstractRepository<Topic> implements
 		return this.findAll(JingDianSql.getJingDianListSql(userId));
 	}
 
+	@Override
+	public void addJingDian(Topic instance) {
+		this.insert(JingDianSql.INSERT_JINGDIAN, JingDianSql.getInsertObject(instance));
+	}
+
 }

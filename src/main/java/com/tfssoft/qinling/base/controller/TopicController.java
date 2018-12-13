@@ -60,10 +60,11 @@ public class TopicController extends BaseController {
 	public void getTopicAuthList(@RequestParam(value = "skip", required = false) Integer skip,
 			@RequestParam(value = "limit", required = false) Integer limit,
 			@RequestParam(value = "locationDesc", required = false) String name,
+			@RequestParam(value = "userId", required = false) String userId,
 			@RequestParam(value = "source", required = true, defaultValue = "ADMIN") String source,
 			HttpServletRequest request, HttpServletResponse response) {
 		try {
-			List<TopicAuth> result = topicService.getTopicAuthList(skip, limit, name, source);
+			List<TopicAuth> result = topicService.getTopicAuthList(skip, limit, name, source, userId);
 			writeJson(result, response);
 			;
 		} catch (Exception e) {
@@ -75,10 +76,11 @@ public class TopicController extends BaseController {
 	@ApiOperation(value = "新增地点-总数", httpMethod = "GET")
 	@RequestMapping(value = "/total", method = RequestMethod.GET)
 	public void getTopicAuthCount(@RequestParam(value = "name", required = false) String name,
+			@RequestParam(value = "userId", required = false) String userId,
 			@RequestParam(value = "source", required = true, defaultValue = "ADMIN") String source,
 			HttpServletRequest request, HttpServletResponse response) {
 		try {
-			long count = topicService.getTopicAuthCount(name, source);
+			long count = topicService.getTopicAuthCount(name, source, userId);
 			writeJson(count, response);
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -88,7 +90,8 @@ public class TopicController extends BaseController {
 
 	@ApiOperation(value = "新增地点-用户删除", httpMethod = "DELETE")
 	@RequestMapping(value = "/only-for/user", method = RequestMethod.DELETE)
-	public void deleteTopicAuth(@RequestBody BatchIds batchIds, HttpServletRequest request, HttpServletResponse response) {
+	public void deleteTopicAuth(@RequestBody BatchIds batchIds, HttpServletRequest request,
+			HttpServletResponse response) {
 		try {
 			topicService.deleteTopicAuth(batchIds.getIds());
 			success("处理成功", response);
@@ -115,7 +118,7 @@ public class TopicController extends BaseController {
 	@RequestMapping(value = "auth", method = RequestMethod.PUT)
 	public void updateTopicAuth(@RequestBody AuthVO authVO, HttpServletRequest request, HttpServletResponse response) {
 		try {
-			topicService.updateTopicAuth(authVO.getId(), authVO.getStatus(), authVO.getComments());
+			topicService.updateTopicAuth(authVO);
 			success("处理成功", response);
 		} catch (Exception e) {
 			e.printStackTrace();

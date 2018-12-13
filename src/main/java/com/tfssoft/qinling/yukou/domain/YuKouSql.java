@@ -1,5 +1,7 @@
 package com.tfssoft.qinling.yukou.domain;
 
+import com.tfssoft.qinling.base.domain.Topic;
+
 public class YuKouSql {
 	public static final String GET_YUKOU_LIST = 
 			"SElECT a.id, "
@@ -50,6 +52,26 @@ public class YuKouSql {
 		sql += "left join dict_xiangzhen e on e.id = a.xz ";
 		
 		return sql + conditions;
+	}
+	
+	public static final String INSERT_YUKOU = "INSERT INTO yukou "
+			+ "(ykmc, wzms, ykjj, ykrwls, ykzrfm, ykqtsm, x, y, qx, xz, sjlj) " + "values "
+			+ "(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+
+	public static Object[] getInsertObject(Topic instance) {
+		return new Object[] {
+				instance.getName(),
+				instance.getLocationDescription(),
+				instance.getIntroduction(),
+				instance.getHistory(),
+				instance.getNaturalFeatures(),
+				instance.getOtherComments(),
+				instance.getxLat(),
+				instance.getyLng(),
+				instance.getCounty(),
+				instance.getTown(),
+				instance.getRealBeautyUrl()
+		};
 	}
 
 }

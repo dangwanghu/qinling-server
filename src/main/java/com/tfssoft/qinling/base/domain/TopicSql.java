@@ -1,7 +1,5 @@
 package com.tfssoft.qinling.base.domain;
 
-import java.util.Date;
-
 public class TopicSql {
 	public static final String GET_TOPIC_LIST = "select * from SEARCH_VIEW where "
 			+ "name like ";
@@ -17,23 +15,6 @@ public class TopicSql {
 		sql += "where name like '%" + name + "%'"; 
 		
 		return sql;
-	}
-	
-	public static final String INSRT_TOPIC_AUTH = "INSERT INTO topic_auth "
-			+ "(topic_type, location_desc, introduction, reason, x, y, attachments, create_time) " + "values "
-			+ "(?, ?, ?, ?, ?, ?, ?, ?)";
-	
-	public static Object[] getInsertAuthObject(TopicAuth instance) {
-		return new Object[] {
-				instance.getTopicType(),
-				instance.getLocationDescription(),
-				instance.getIntroduction(),
-				instance.getReason(),
-				instance.getxLat(),
-				instance.getyLng(),
-				instance.getAttachments(),
-				new Date()
-		};
 	}
 
 	public static String getTopicDetailSql(String id, String type, String userId) {

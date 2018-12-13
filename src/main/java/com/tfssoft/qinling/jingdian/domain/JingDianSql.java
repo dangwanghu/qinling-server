@@ -1,5 +1,7 @@
 package com.tfssoft.qinling.jingdian.domain;
 
+import com.tfssoft.qinling.base.domain.Topic;
+
 public class JingDianSql {
 	public static final String GET_JINGDIAN_LIST = 
 			"SElECT a.id, "
@@ -50,4 +52,24 @@ public class JingDianSql {
 		return sql;
 	}
 
+	public static final String INSERT_JINGDIAN = "INSERT INTO jingdian "
+			+ "(jdmc, wzms, jdjj, jdrwls, jdzrfm, jdqtsm, x, y, qx, xz, yk, sjlj) " + "values "
+			+ "(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+
+	public static Object[] getInsertObject(Topic instance) {
+		return new Object[] {
+				instance.getName(),
+				instance.getLocationDescription(),
+				instance.getIntroduction(),
+				instance.getHistory(),
+				instance.getNaturalFeatures(),
+				instance.getOtherComments(),
+				instance.getxLat(),
+				instance.getyLng(),
+				instance.getCounty(),
+				instance.getTown(),
+				instance.getYuKou(),
+				instance.getRealBeautyUrl()
+		};
+	}
 }
