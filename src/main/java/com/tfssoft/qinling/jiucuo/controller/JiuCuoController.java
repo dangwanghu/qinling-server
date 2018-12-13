@@ -21,7 +21,7 @@ import com.tfssoft.qinling.jiucuo.service.JiuCuoService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 
-@Api(tags = {"JiuCuo"}, description = "Api list")
+@Api(tags = { "JiuCuo" }, description = "Api list")
 @Controller
 @RequestMapping("/jiucuo")
 public class JiuCuoController extends BaseController {
@@ -31,7 +31,8 @@ public class JiuCuoController extends BaseController {
 
 	@ApiOperation(value = "发布纠错", httpMethod = "POST")
 	@RequestMapping(value = "", method = RequestMethod.POST)
-	public void postJiuCuo(@RequestBody Correction correction, HttpServletRequest request, HttpServletResponse response) {
+	public void postJiuCuo(@RequestBody Correction correction, HttpServletRequest request,
+			HttpServletResponse response) {
 		try {
 			jiuCuoService.addJiuCuo(correction);
 			success("保存成功", response);
@@ -40,16 +41,19 @@ public class JiuCuoController extends BaseController {
 			error("保存出错！", response);
 		}
 	}
-	
+
 	@ApiOperation(value = "获取纠错列表", httpMethod = "GET")
 	@RequestMapping(value = "/list", method = RequestMethod.GET)
 	public void getJiuCuoList(@RequestParam(value = "skip", required = false) Integer skip,
 			@RequestParam(value = "limit", required = false) Integer limit,
 			@RequestParam(value = "content", required = false) String content,
-			@RequestParam(value = "status", required = false) String status, HttpServletRequest request,
+			@RequestParam(value = "status", required = false) String status, 
+			@RequestParam(value = "userId", required = false) String userId,
+			@RequestParam(value = "source", required = true, defaultValue = "ADMIN") String source,
+			HttpServletRequest request,
 			HttpServletResponse response) {
 		try {
-			List<Correction> jianyiList = jiuCuoService.getJiuCuoList(skip, limit, content, status);
+			List<Correction> jianyiList = jiuCuoService.getJiuCuoList(skip, limit, content, status, source, userId);
 			writeJson(jianyiList, response);
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -61,9 +65,11 @@ public class JiuCuoController extends BaseController {
 	@RequestMapping(value = "/total", method = RequestMethod.GET)
 	public void getJiuCuoCount(@RequestParam(value = "content", required = false) String content,
 			@RequestParam(value = "status", required = false) String status,
+			@RequestParam(value = "userId", required = false) String userId,
+			@RequestParam(value = "source", required = true, defaultValue = "ADMIN") String source,
 			HttpServletRequest request, HttpServletResponse response) {
 		try {
-			long count = jiuCuoService.getJiuCuoCount(content, status);
+			long count = jiuCuoService.getJiuCuoCount(content, status, source, userId);
 			writeJson(count, response);
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -73,8 +79,7 @@ public class JiuCuoController extends BaseController {
 
 	@ApiOperation(value = "标记纠错已处理", httpMethod = "PUT")
 	@RequestMapping(value = "", method = RequestMethod.PUT)
-	public void putJiuCuo(@RequestBody CommentsVO instance, HttpServletRequest request,
-			HttpServletResponse response) {
+	public void putJiuCuo(@RequestBody CommentsVO instance, HttpServletRequest request, HttpServletResponse response) {
 		try {
 			jiuCuoService.updateJiuCuoToHandled(instance.getId().intValue(), instance.getComments());
 			success("更新成功", response);
@@ -96,7 +101,7 @@ public class JiuCuoController extends BaseController {
 			error("删除出错！", response);
 		}
 	}
-	
+
 	@ApiOperation(value = "删除建议-用户", httpMethod = "DELETE")
 	@RequestMapping(value = "/only-for/user", method = RequestMethod.DELETE)
 	public void deleteJiuCuoBatch(@RequestBody BatchIds batchIds, HttpServletRequest request,

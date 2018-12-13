@@ -6,8 +6,8 @@ import com.tfssoft.qinling.jubao.domain.Report;
 
 public class JuBaoSql {
 	public static final String INSRT_JUBAO = "INSERT INTO jubao "
-			+ "(attachments, content, submitter, phone, create_time, x, y) " + "values "
-			+ "(?, ?, ?, ?, ?, ?, ?)";
+			+ "(attachments, content, submitter, phone, create_time, x, y, user_id) " + "values "
+			+ "(?, ?, ?, ?, ?, ?, ?, ?)";
 	
 	public static final String GET_JUBAO_LIST = 
 			"SElECT id, update_time AS updateTime, "
@@ -34,60 +34,55 @@ public class JuBaoSql {
 				instance.getPhone(),
 				new Date(),
 				instance.getxLat(),
-				instance.getyLng()
+				instance.getyLng(),
+				Integer.parseInt(instance.getUserId())
 		};
 	}
 
-	public static String getPageListSql(String content, int skip, int limit, String status) {
-		String conditions = "";
-		if (null != content || null != status) {
-			conditions += "where ";
-		}
+	public static String getPageListSql(String content, int skip, int limit, String status, String statusIn, String userId) {
+		String conditions = " where status IN (" + statusIn + ") ";
 		if (null != content) {
-			conditions += "content like '%" + content + "%'";
-		}
-		if (null != content && null != status) {
-			conditions += " and ";
+			conditions += " and content like '%" + content + "%'";
 		}
 		if (null != status) {
-			conditions += "status = '" + status + "'";
+			conditions += " and status = '" + status + "'";
 		}
+		if (null != userId) {
+			conditions += " and user_id = '" + userId + "'";
+		}
+		
 		conditions += " order by createTime desc";
 		return GET_JUBAO_LIST + conditions + " limit " + skip + "," + limit;
 	}
 
-	public static String getListSql(String content, String status) {
-		String conditions = "";
-		if (null != content || null != status) {
-			conditions += "where ";
-		}
+	public static String getListSql(String content, String status, String statusIn, String userId) {
+		String conditions = " where status IN (" + statusIn + ") ";
 		if (null != content) {
-			conditions += "content like '%" + content + "%'";
-		}
-		if (null != content && null != status) {
-			conditions += " and ";
+			conditions += " and content like '%" + content + "%'";
 		}
 		if (null != status) {
-			conditions += "status = '" + status + "'";
+			conditions += " and status = '" + status + "'";
 		}
+		if (null != userId) {
+			conditions += " and user_id = '" + userId + "'";
+		}
+		
 		conditions += " order by createTime desc";
 		return GET_JUBAO_LIST + conditions;
 	}
 
-	public static String getCountSql(String content, String status) {
-		String conditions = "";
-		if (null != content || null != status) {
-			conditions += "where ";
-		}
+	public static String getCountSql(String content, String status, String statusIn, String userId) {
+		String conditions = " where status IN (" + statusIn + ") ";
 		if (null != content) {
-			conditions += "content like '%" + content + "%'";
-		}
-		if (null != content && null != status) {
-			conditions += " and ";
+			conditions += " and content like '%" + content + "%'";
 		}
 		if (null != status) {
-			conditions += "status = '" + status + "'";
+			conditions += " and status = '" + status + "'";
 		}
+		if (null != userId) {
+			conditions += " and user_id = '" + userId + "'";
+		}
+		
 		return GET_JUBAO_COUNT + conditions;
 	}
 

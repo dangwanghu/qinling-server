@@ -8,11 +8,11 @@ public interface JubaoRepository {
 
 	public void addJuBao(Report instance);
 
-	public List<Report> getJuBaoPageList(String content, int skip, int limit, String status);
+	public List<Report> getJuBaoPageList(String content, int skip, int limit, String status, String statusIn, String userId);
 
-	public List<Report> getJuBaoList(String content, String status);
+	public List<Report> getJuBaoList(String content, String status, String statusIn, String userId);
 
-	public long getJuBaoCount(String content, String status);
+	public long getJuBaoCount(String content, String status, String statusIn, String userId);
 
 	public void updateJuBao(Report instance);
 

@@ -4,8 +4,8 @@ import java.util.Date;
 
 public class JianYiSql {
 	public static final String INSRT_JIANYI = "INSERT INTO jianyi "
-			+ "(content, submitter, phone, create_time) " + "values "
-			+ "(?, ?, ?, ?)";
+			+ "(content, submitter, phone, create_time, user_id) " + "values "
+			+ "(?, ?, ?, ?, ?)";
 	
 	public static final String GET_JIANYI_LIST = 
 			"SElECT id, update_time AS updateTime, "
@@ -26,59 +26,51 @@ public class JianYiSql {
 				instance.getContent(),
 				instance.getSubmitter(),
 				instance.getPhone(),
-				new Date()
+				new Date(),
+				Integer.parseInt(instance.getUserId())
 		};
 	}
 	
-	public static String getPageListSql(String content, int skip, int limit, String status) {
-		String conditions = "";
-		if (null != content || null != status) {
-			conditions += "where ";
-		}
+	public static String getPageListSql(String content, int skip, int limit, String status, String statusIn, String userId) {
+		String conditions = " where status IN (" + statusIn + ") ";
 		if (null != content) {
-			conditions += "content like '%" + content + "%'";
-		}
-		if (null != content && null != status) {
-			conditions += " and ";
+			conditions += " and content like '%" + content + "%'";
 		}
 		if (null != status) {
-			conditions += "status = '" + status + "'";
+			conditions += " and status = '" + status + "'";
+		}
+		if (null != userId) {
+			conditions += " and user_id = '" + userId + "'";
 		}
 		conditions += " order by createTime desc";
 		return GET_JIANYI_LIST + conditions + " limit " + skip + "," + limit;
 	}
 
-	public static String getListSql(String content, String status) {
-		String conditions = "";
-		if (null != content || null != status) {
-			conditions += "where ";
-		}
+	public static String getListSql(String content, String status, String statusIn, String userId) {
+		String conditions = " where status IN (" + statusIn + ") ";
 		if (null != content) {
-			conditions += "content like '%" + content + "%'";
-		}
-		if (null != content && null != status) {
-			conditions += " and ";
+			conditions += "and content like '%" + content + "%'";
 		}
 		if (null != status) {
-			conditions += "status = '" + status + "'";
+			conditions += " and status = '" + status + "'";
+		}
+		if (null != userId) {
+			conditions += " and user_id = '" + userId + "'";
 		}
 		conditions += " order by createTime desc";
 		return GET_JIANYI_LIST + conditions;
 	}
 
-	public static String getCountSql(String content, String status) {
-		String conditions = "";
-		if (null != content || null != status) {
-			conditions += "where ";
-		}
+	public static String getCountSql(String content, String status, String statusIn, String userId) {
+		String conditions = " where status IN (" + statusIn + ") ";
 		if (null != content) {
-			conditions += "content like '%" + content + "%'";
-		}
-		if (null != content && null != status) {
-			conditions += " and ";
+			conditions += "and content like '%" + content + "%'";
 		}
 		if (null != status) {
-			conditions += "status = '" + status + "'";
+			conditions += " and status = '" + status + "'";
+		}
+		if (null != userId) {
+			conditions += " and user_id = '" + userId + "'";
 		}
 		return GET_JIANYI_COUNT + conditions;
 	}

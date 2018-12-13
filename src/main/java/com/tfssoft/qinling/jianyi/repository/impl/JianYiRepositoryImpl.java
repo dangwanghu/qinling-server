@@ -18,18 +18,18 @@ public class JianYiRepositoryImpl extends AbstractRepository<Suggest> implements
 	}
 
 	@Override
-	public List<Suggest> getJianYiPageList(String content, int skip, int limit, String status) {
-		return this.findAll(JianYiSql.getPageListSql(content, skip, limit, status));
+	public List<Suggest> getJianYiPageList(String content, int skip, int limit, String status, String statusIn, String userId) {
+		return this.findAll(JianYiSql.getPageListSql(content, skip, limit, status, statusIn, userId));
 	}
 
 	@Override
-	public List<Suggest> getJianYiList(String content, String status) {
-		return this.findAll(JianYiSql.getListSql(content, status));
+	public List<Suggest> getJianYiList(String content, String status, String statusIn, String userId) {
+		return this.findAll(JianYiSql.getListSql(content, status, statusIn, userId));
 	}
 
 	@Override
-	public long getJianYiCount(String content, String status) {
-		return this.findCount(JianYiSql.getCountSql(content, status));
+	public long getJianYiCount(String content, String status, String statusIn, String userId) {
+		return this.findCount(JianYiSql.getCountSql(content, status, statusIn, userId));
 	}
 
 	@Override

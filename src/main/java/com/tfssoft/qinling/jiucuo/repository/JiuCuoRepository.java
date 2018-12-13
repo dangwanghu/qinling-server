@@ -8,11 +8,11 @@ public interface JiuCuoRepository {
 
 	public void addJiuCuo(Correction instance);
 
-	public List<Correction> getJiuCuoPageList(String content, int skip, int limit, String status);
+	public List<Correction> getJiuCuoPageList(String content, int skip, int limit, String status, String statusIn, String userId);
 
-	public List<Correction> getJiuCuoList(String content, String status);
+	public List<Correction> getJiuCuoList(String content, String status, String statusIn, String userId);
 
-	public long getJiuCuoCount(String content, String status);
+	public long getJiuCuoCount(String content, String status, String statusIn, String userId);
 
 	public void updateJiuCuo(Correction instance);
 

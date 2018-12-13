@@ -8,9 +8,9 @@ public interface JianYiService {
 	
 	public void addJianYi(Suggest instance);
 
-	public List<Suggest> getJianYiList(Integer skip, Integer limit, String content, String status);
+	public List<Suggest> getJianYiList(Integer skip, Integer limit, String content, String status, String source, String userId);
 
-	public long getJianYiCount(String content, String status);
+	public long getJianYiCount(String content, String status, String source, String userId);
 
 	public void updateJianYiToHandled(int id, String comments);
 

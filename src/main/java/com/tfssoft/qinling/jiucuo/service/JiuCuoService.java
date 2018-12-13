@@ -8,9 +8,9 @@ public interface JiuCuoService {
 	
 	public void addJiuCuo(Correction instance);
 
-	public List<Correction> getJiuCuoList(Integer skip, Integer limit, String content, String status);
+	public List<Correction> getJiuCuoList(Integer skip, Integer limit, String content, String status, String source, String userId);
 
-	public long getJiuCuoCount(String content, String status);
+	public long getJiuCuoCount(String content, String status, String source, String userId);
 
 	public void updateJiuCuoToHandled(int id, String comments);
 

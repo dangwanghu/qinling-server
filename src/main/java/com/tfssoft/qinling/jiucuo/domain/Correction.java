@@ -42,6 +42,9 @@ public class Correction implements Serializable {
 	
 	@ApiModelProperty(hidden = true)
 	private String comments;
+	
+	@ApiModelProperty(value = "用户ID", required = true)
+	private String userId;
 
 	public Correction() {
 	}
@@ -132,6 +135,14 @@ public class Correction implements Serializable {
 
 	public void setComments(String comments) {
 		this.comments = comments;
+	}
+
+	public String getUserId() {
+		return userId;
+	}
+
+	public void setUserId(String userId) {
+		this.userId = userId;
 	}
 	
 }

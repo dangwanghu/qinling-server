@@ -22,21 +22,31 @@ public class JuBaoServiceImpl implements JuBaoService {
 	}
 	
 	@Override
-	public List<Report> getJuBaoList(Integer skip, Integer limit, String content, String status) {
+	public List<Report> getJuBaoList(Integer skip, Integer limit, String content, String status, String source,
+			String userId) {
+		String statusIn = "0,1,2,9";
+		if (!"ADMIN".equals(source)) {
+			statusIn = "0,1,2";
+		}
 		if (null == skip && null != limit) {
-			return jubaoRepository.getJuBaoPageList(content, 0, limit.intValue(), status);
+			return jubaoRepository.getJuBaoPageList(content, 0, limit.intValue(), status, statusIn, userId);
 		} else if (null != skip && null == limit) {
-			return jubaoRepository.getJuBaoPageList(content, skip.intValue(), 10, status);
+			return jubaoRepository.getJuBaoPageList(content, skip.intValue(), 10, status, statusIn, userId);
 		} else if (null != skip && null != limit) {
-			return jubaoRepository.getJuBaoPageList(content, skip.intValue(), limit.intValue(), status);
+			return jubaoRepository.getJuBaoPageList(content, skip.intValue(), limit.intValue(), status, statusIn, userId);
 		} else {
-			return jubaoRepository.getJuBaoList(content, status);
+			return jubaoRepository.getJuBaoList(content, status, statusIn, userId);
 		}
 	}
 
 	@Override
-	public long getJuBaoCount(String content, String status) {
-		return jubaoRepository.getJuBaoCount(content, status);
+	public long getJuBaoCount(String content, String status, String source,
+			String userId) {
+		String statusIn = "0,1,2,9";
+		if (!"ADMIN".equals(source)) {
+			statusIn = "0,1,2";
+		}
+		return jubaoRepository.getJuBaoCount(content, status, statusIn, userId);
 	}
 
 	@Override

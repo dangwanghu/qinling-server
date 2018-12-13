@@ -18,18 +18,18 @@ public class JiuCuoRepositoryImpl extends AbstractRepository<Correction> impleme
 	}
 
 	@Override
-	public List<Correction> getJiuCuoPageList(String content, int skip, int limit, String status) {
-		return this.findAll(JiuCuoSql.getPageListSql(content, skip, limit, status));
+	public List<Correction> getJiuCuoPageList(String content, int skip, int limit, String status, String statusIn, String userId) {
+		return this.findAll(JiuCuoSql.getPageListSql(content, skip, limit, status, statusIn, userId));
 	}
 
 	@Override
-	public List<Correction> getJiuCuoList(String content, String status) {
-		return this.findAll(JiuCuoSql.getListSql(content, status));
+	public List<Correction> getJiuCuoList(String content, String status, String statusIn, String userId) {
+		return this.findAll(JiuCuoSql.getListSql(content, status, statusIn, userId));
 	}
 
 	@Override
-	public long getJiuCuoCount(String content, String status) {
-		return this.findCount(JiuCuoSql.getCountSql(content, status));
+	public long getJiuCuoCount(String content, String status, String statusIn, String userId) {
+		return this.findCount(JiuCuoSql.getCountSql(content, status, statusIn, userId));
 	}
 
 	@Override

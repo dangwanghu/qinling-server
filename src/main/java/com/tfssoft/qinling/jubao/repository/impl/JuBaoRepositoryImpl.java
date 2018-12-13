@@ -18,18 +18,18 @@ public class JuBaoRepositoryImpl extends AbstractRepository<Report> implements J
 	}
 
 	@Override
-	public List<Report> getJuBaoPageList(String content, int skip, int limit, String status) {
-		return this.findAll(JuBaoSql.getPageListSql(content, skip, limit, status));
+	public List<Report> getJuBaoPageList(String content, int skip, int limit, String status, String statusIn, String userId) {
+		return this.findAll(JuBaoSql.getPageListSql(content, skip, limit, status, statusIn, userId));
 	}
 
 	@Override
-	public List<Report> getJuBaoList(String content, String status) {
-		return this.findAll(JuBaoSql.getListSql(content, status));
+	public List<Report> getJuBaoList(String content, String status, String statusIn, String userId) {
+		return this.findAll(JuBaoSql.getListSql(content, status, statusIn, userId));
 	}
 
 	@Override
-	public long getJuBaoCount(String content, String status) {
-		return this.findCount(JuBaoSql.getCountSql(content, status));
+	public long getJuBaoCount(String content, String status, String statusIn, String userId) {
+		return this.findCount(JuBaoSql.getCountSql(content, status, statusIn, userId));
 	}
 
 	@Override

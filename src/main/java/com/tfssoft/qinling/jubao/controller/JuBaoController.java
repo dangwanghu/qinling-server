@@ -21,7 +21,7 @@ import com.tfssoft.qinling.jubao.service.JuBaoService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 
-@Api(tags = {"JuBao"}, description = "Api list")
+@Api(tags = { "JuBao" }, description = "Api list")
 @Controller
 @RequestMapping("/jubao")
 public class JuBaoController extends BaseController {
@@ -40,16 +40,18 @@ public class JuBaoController extends BaseController {
 			error("保存出错！", response);
 		}
 	}
-	
+
 	@ApiOperation(value = "获取举报列表", httpMethod = "GET")
 	@RequestMapping(value = "/list", method = RequestMethod.GET)
 	public void getJuBaoList(@RequestParam(value = "skip", required = false) Integer skip,
 			@RequestParam(value = "limit", required = false) Integer limit,
 			@RequestParam(value = "status", required = false) String status,
-			@RequestParam(value = "content", required = false) String content, HttpServletRequest request,
-			HttpServletResponse response) {
+			@RequestParam(value = "content", required = false) String content,
+			@RequestParam(value = "userId", required = false) String userId,
+			@RequestParam(value = "source", required = true, defaultValue = "ADMIN") String source,
+			HttpServletRequest request, HttpServletResponse response) {
 		try {
-			List<Report> jianyiList = juBaoService.getJuBaoList(skip, limit, content, status);
+			List<Report> jianyiList = juBaoService.getJuBaoList(skip, limit, content, status, source, userId);
 			writeJson(jianyiList, response);
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -61,9 +63,11 @@ public class JuBaoController extends BaseController {
 	@RequestMapping(value = "/total", method = RequestMethod.GET)
 	public void getJuBaoCount(@RequestParam(value = "content", required = false) String content,
 			@RequestParam(value = "status", required = false) String status,
+			@RequestParam(value = "userId", required = false) String userId,
+			@RequestParam(value = "source", required = true, defaultValue = "ADMIN") String source,
 			HttpServletRequest request, HttpServletResponse response) {
 		try {
-			long count = juBaoService.getJuBaoCount(content, status);
+			long count = juBaoService.getJuBaoCount(content, status, source, userId);
 			writeJson(count, response);
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -73,8 +77,7 @@ public class JuBaoController extends BaseController {
 
 	@ApiOperation(value = "标记举报已处理", httpMethod = "PUT")
 	@RequestMapping(value = "", method = RequestMethod.PUT)
-	public void putJuBao(@RequestBody CommentsVO instance, HttpServletRequest request,
-			HttpServletResponse response) {
+	public void putJuBao(@RequestBody CommentsVO instance, HttpServletRequest request, HttpServletResponse response) {
 		try {
 			juBaoService.updateJuBaoToHandled(instance.getId().intValue(), instance.getComments());
 			success("更新成功", response);
@@ -96,7 +99,7 @@ public class JuBaoController extends BaseController {
 			error("删除出错！", response);
 		}
 	}
-	
+
 	@ApiOperation(value = "删除建议-用户", httpMethod = "DELETE")
 	@RequestMapping(value = "/only-for/user", method = RequestMethod.DELETE)
 	public void deleteJuBaoBatch(@RequestBody BatchIds batchIds, HttpServletRequest request,

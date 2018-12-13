@@ -43,6 +43,9 @@ public class Report implements Serializable {
 	@ApiModelProperty(value = "经度", required = true)
 	private Double yLng;
 	
+	@ApiModelProperty(value = "用户ID", required = true)
+	private String userId;
+	
 	public Report() {
 	}
 
@@ -132,6 +135,14 @@ public class Report implements Serializable {
 
 	public void setyLng(Double yLng) {
 		this.yLng = yLng;
+	}
+
+	public String getUserId() {
+		return userId;
+	}
+
+	public void setUserId(String userId) {
+		this.userId = userId;
 	}
 	
 }

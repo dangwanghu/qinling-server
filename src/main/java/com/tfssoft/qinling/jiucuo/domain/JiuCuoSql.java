@@ -4,8 +4,8 @@ import java.util.Date;
 
 public class JiuCuoSql {
 	public static final String INSRT_JIUCUO = "INSERT INTO jiucuo "
-			+ "(type, rel_id, content, submitter, phone, create_time) " + "values "
-			+ "(?, ?, ?, ?, ?, ?)";
+			+ "(type, rel_id, content, submitter, phone, create_time, user_id) " + "values "
+			+ "(?, ?, ?, ?, ?, ?, ?)";
 
 	public static Object[] getInsertObject(Correction instance) {
 		return new Object[] {
@@ -14,7 +14,8 @@ public class JiuCuoSql {
 				instance.getContent(),
 				instance.getSubmitter(),
 				instance.getPhone(),
-				new Date()
+				new Date(),
+				Integer.parseInt(instance.getUserId())
 		};
 	}
 	
@@ -36,56 +37,50 @@ public class JiuCuoSql {
 	public static final String DELETE_JIUCUO = "DELETE FROM jiucuo "
 			+ "where id = ?";
 	
-	public static String getPageListSql(String content, int skip, int limit, String status) {
-		String conditions = "";
-		if (null != content || null != status) {
-			conditions += "where ";
-		}
+	public static String getPageListSql(String content, int skip, int limit, String status, String statusIn, String userId) {
+		String conditions = " where status IN (" + statusIn + ") ";
 		if (null != content) {
-			conditions += "content like '%" + content + "%'";
-		}
-		if (null != content && null != status) {
-			conditions += " and ";
+			conditions += " and content like '%" + content + "%'";
 		}
 		if (null != status) {
-			conditions += "status = '" + status + "'";
+			conditions += " and status = '" + status + "'";
 		}
+		if (null != userId) {
+			conditions += " and user_id = '" + userId + "'";
+		}
+		
 		conditions += " order by createTime desc";
 		return GET_JIUCUO_LIST + conditions + " limit " + skip + "," + limit;
 	}
 
-	public static String getListSql(String content, String status) {
-		String conditions = "";
-		if (null != content || null != status) {
-			conditions += "where ";
-		}
+	public static String getListSql(String content, String status, String statusIn, String userId) {
+		String conditions = " where status IN (" + statusIn + ") ";
 		if (null != content) {
-			conditions += "content like '%" + content + "%'";
-		}
-		if (null != content && null != status) {
-			conditions += " and ";
+			conditions += " and content like '%" + content + "%'";
 		}
 		if (null != status) {
-			conditions += "status = '" + status + "'";
+			conditions += " and status = '" + status + "'";
 		}
+		if (null != userId) {
+			conditions += " and user_id = '" + userId + "'";
+		}
+		
 		conditions += " order by createTime desc";
 		return GET_JIUCUO_LIST + conditions;
 	}
 
-	public static String getCountSql(String content, String status) {
-		String conditions = "";
-		if (null != content || null != status) {
-			conditions += "where ";
-		}
+	public static String getCountSql(String content, String status, String statusIn, String userId) {
+		String conditions = " where status IN (" + statusIn + ") ";
 		if (null != content) {
-			conditions += "content like '%" + content + "%'";
-		}
-		if (null != content && null != status) {
-			conditions += " and ";
+			conditions += " and content like '%" + content + "%'";
 		}
 		if (null != status) {
-			conditions += "status = '" + status + "'";
+			conditions += " and status = '" + status + "'";
 		}
+		if (null != userId) {
+			conditions += " and user_id = '" + userId + "'";
+		}
+		
 		return GET_JIUCUO_COUNT + conditions;
 	}
 

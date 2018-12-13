@@ -9,10 +9,9 @@ import com.tfssoft.qinling.jianyi.domain.Suggest;
 import com.tfssoft.qinling.jianyi.repository.JianYiRepository;
 import com.tfssoft.qinling.jianyi.service.JianYiService;
 
-
 @Service
 public class JianYiServiceImpl implements JianYiService {
-	
+
 	@Autowired
 	private JianYiRepository jianYiRepository;
 
@@ -22,21 +21,30 @@ public class JianYiServiceImpl implements JianYiService {
 	}
 
 	@Override
-	public List<Suggest> getJianYiList(Integer skip, Integer limit, String content, String status) {
+	public List<Suggest> getJianYiList(Integer skip, Integer limit, String content, String status, String source,
+			String userId) {
+		String statusIn = "0,1,2,9";
+		if (!"ADMIN".equals(source)) {
+			statusIn = "0,1,2";
+		}
 		if (null == skip && null != limit) {
-			return jianYiRepository.getJianYiPageList(content, 0, limit.intValue(), status);
+			return jianYiRepository.getJianYiPageList(content, 0, limit.intValue(), status, statusIn, userId);
 		} else if (null != skip && null == limit) {
-			return jianYiRepository.getJianYiPageList(content, skip.intValue(), 10, status);
+			return jianYiRepository.getJianYiPageList(content, skip.intValue(), 10, status, statusIn, userId);
 		} else if (null != skip && null != limit) {
-			return jianYiRepository.getJianYiPageList(content, skip.intValue(), limit.intValue(), status);
+			return jianYiRepository.getJianYiPageList(content, skip.intValue(), limit.intValue(), status, statusIn, userId);
 		} else {
-			return jianYiRepository.getJianYiList(content, status);
+			return jianYiRepository.getJianYiList(content, status, statusIn, userId);
 		}
 	}
 
 	@Override
-	public long getJianYiCount(String content, String status) {
-		return jianYiRepository.getJianYiCount(content, status);
+	public long getJianYiCount(String content, String status, String source, String userId) {
+		String statusIn = "0,1,2,9";
+		if (!"ADMIN".equals(source)) {
+			statusIn = "0,1,2";
+		}
+		return jianYiRepository.getJianYiCount(content, status, statusIn, userId);
 	}
 
 	@Override
@@ -56,6 +64,6 @@ public class JianYiServiceImpl implements JianYiService {
 	@Override
 	public void deleteJianYiBatch(String ids) {
 		jianYiRepository.updateJianYiBatch(ids, "9");
-	}	
+	}
 
 }
