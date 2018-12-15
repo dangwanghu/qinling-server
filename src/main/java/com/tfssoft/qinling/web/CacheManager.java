@@ -15,6 +15,21 @@ public class CacheManager {
 	public void setRedisTemplate(RedisTemplate<String, Object> redisTemplate) {
 		this.redisTemplate = redisTemplate;
 	}
+	
+	/**
+	 * 获取key前缀所有key值
+	 * 
+	 * @param keyPrefix
+	 * @return
+	 */
+	public Set<String> keys(String keyPrefix) {
+		try {
+			return redisTemplate.keys(keyPrefix + "*");
+		} catch (Exception e) {
+			e.printStackTrace();
+			return null;
+		}
+	}
 
 	/**
 	 * 指定缓存失效时间

@@ -1,6 +1,7 @@
 package com.tfssoft.qinling.jubao.domain;
 
 import java.io.Serializable;
+import java.util.Date;
 
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
@@ -26,13 +27,13 @@ public class Report implements Serializable {
 	private String phone;
 
 	@ApiModelProperty(hidden = true)
-	private String createTime;
+	private Date createTime;
 
 	@ApiModelProperty(hidden = true)
 	private String status;
 	
 	@ApiModelProperty(hidden = true)
-	private String updateTime;
+	private Date updateTime;
 	
 	@ApiModelProperty(hidden = true)
 	private String comments;
@@ -42,6 +43,9 @@ public class Report implements Serializable {
 
 	@ApiModelProperty(value = "经度", required = true)
 	private Double yLng;
+	
+	@ApiModelProperty(value = "地址", required = false)
+	private String address;
 	
 	@ApiModelProperty(value = "用户ID", required = true)
 	private String userId;
@@ -81,11 +85,11 @@ public class Report implements Serializable {
 		this.phone = phone;
 	}
 
-	public String getCreateTime() {
+	public Date getCreateTime() {
 		return createTime;
 	}
 
-	public void setCreateTime(String createTime) {
+	public void setCreateTime(Date createTime) {
 		this.createTime = createTime;
 	}
 
@@ -105,11 +109,11 @@ public class Report implements Serializable {
 		this.attachments = attachments;
 	}
 
-	public String getUpdateTime() {
+	public Date getUpdateTime() {
 		return updateTime;
 	}
 
-	public void setUpdateTime(String updateTime) {
+	public void setUpdateTime(Date updateTime) {
 		this.updateTime = updateTime;
 	}
 
@@ -143,6 +147,14 @@ public class Report implements Serializable {
 
 	public void setUserId(String userId) {
 		this.userId = userId;
+	}
+
+	public String getAddress() {
+		return address;
+	}
+
+	public void setAddress(String address) {
+		this.address = address;
 	}
 	
 }

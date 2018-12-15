@@ -1,6 +1,7 @@
 package com.tfssoft.qinling.jiucuo.domain;
 
 import java.io.Serializable;
+import java.util.Date;
 
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
@@ -29,7 +30,7 @@ public class Correction implements Serializable {
 	private String phone;
 
 	@ApiModelProperty(hidden = true)
-	private String createTime;
+	private Date createTime;
 
 	@ApiModelProperty(hidden = true)
 	private String status;
@@ -38,7 +39,7 @@ public class Correction implements Serializable {
 	private String subjectName;
 	
 	@ApiModelProperty(hidden = true)
-	private String updateTime;
+	private Date updateTime;
 	
 	@ApiModelProperty(hidden = true)
 	private String comments;
@@ -97,11 +98,11 @@ public class Correction implements Serializable {
 		this.phone = phone;
 	}
 
-	public String getCreateTime() {
+	public Date getCreateTime() {
 		return createTime;
 	}
 
-	public void setCreateTime(String createTime) {
+	public void setCreateTime(Date createTime) {
 		this.createTime = createTime;
 	}
 
@@ -121,11 +122,11 @@ public class Correction implements Serializable {
 		this.subjectName = subjectName;
 	}
 
-	public String getUpdateTime() {
+	public Date getUpdateTime() {
 		return updateTime;
 	}
 
-	public void setUpdateTime(String updateTime) {
+	public void setUpdateTime(Date updateTime) {
 		this.updateTime = updateTime;
 	}
 
