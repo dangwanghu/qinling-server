@@ -114,6 +114,7 @@ public class GuiJiServiceImpl implements GuiJiService {
 						trailRepository.addGuiJiPointBatch(key.split("_")[1], trails);
 					}
 				}
+				cacheManager.del(key);
 			}
 		}
 	}
