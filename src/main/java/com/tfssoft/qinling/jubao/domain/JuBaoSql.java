@@ -6,11 +6,11 @@ import com.tfssoft.qinling.jubao.domain.Report;
 
 public class JuBaoSql {
 	public static final String INSRT_JUBAO = "INSERT INTO jubao "
-			+ "(attachments, address, content, submitter, phone, create_time, x, y, user_id) " + "values "
-			+ "(?, ?, ?, ?, ?, ?, ?, ?, ?)";
+			+ "(attachments, address, reason, content, submitter, phone, create_time, x, y, user_id) " + "values "
+			+ "(?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 	
 	public static final String GET_JUBAO_LIST = 
-			"SElECT id, update_time AS updateTime, address, "
+			"SElECT id, update_time AS updateTime, address, reason, "
 			+ "attachments, "
 			+ "content, "
 			+ "submitter, "
@@ -30,6 +30,7 @@ public class JuBaoSql {
 		return new Object[] {
 				instance.getAttachments(),
 				instance.getAddress(),
+				instance.getReason(),
 				instance.getContent(),
 				instance.getSubmitter(),
 				instance.getPhone(),

@@ -47,6 +47,9 @@ public class Report implements Serializable {
 	@ApiModelProperty(value = "地址", required = false)
 	private String address;
 	
+	@ApiModelProperty(value = "原因", required = false)
+	private String reason;
+	
 	@ApiModelProperty(value = "用户ID", required = true)
 	private String userId;
 	
@@ -155,6 +158,14 @@ public class Report implements Serializable {
 
 	public void setAddress(String address) {
 		this.address = address;
+	}
+
+	public String getReason() {
+		return reason;
+	}
+
+	public void setReason(String reason) {
+		this.reason = reason;
 	}
 	
 }
