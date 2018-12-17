@@ -42,35 +42,44 @@ public class TopicAuthSql {
 		};
 	}
 	
-	public static String getListSql(String name, String status, String userId) {
-		String conditions = "where status IN (" + status + ") ";
+	public static String getListSql(String name, String statusIn, String userId, String status) {
+		String conditions = "where status IN (" + statusIn + ") ";
 		if (null != name) {
 			conditions += " and location_desc like '%" + name + "%'";
 		}
 		if (null != userId) {
 			conditions += " and user_id = '" + userId + "'";
 		}
+		if (null != status) {
+			conditions += " and status = '" + status + "'";
+		}
 		return GET_TOPIC_AUTH_LIST + conditions;
 	}
 
-	public static String getPageListSql(String name, int skip, int limit, String status, String userId) {
-		String conditions = "where status IN (" + status + ") ";
+	public static String getPageListSql(String name, int skip, int limit, String statusIn, String userId, String status) {
+		String conditions = "where status IN (" + statusIn + ") ";
 		if (null != name) {
 			conditions += "and location_desc like '%" + name + "%' ";
 		}
 		if (null != userId) {
 			conditions += " and user_id = '" + userId + "'";
 		}
+		if (null != status) {
+			conditions += " and status = '" + status + "'";
+		}
 		return GET_TOPIC_AUTH_LIST + conditions + " limit " + skip + "," + limit;
 	}
 
-	public static String getCountSql(String name, String status, String userId) {
-		String conditions = "where status IN (" + status + ") ";
+	public static String getCountSql(String name, String statusIn, String userId, String status) {
+		String conditions = "where status IN (" + statusIn + ") ";
 		if (null != name) {
 			conditions += "and location_desc like '%" + name + "%'";
 		}
 		if (null != userId) {
 			conditions += " and user_id = '" + userId + "'";
+		}
+		if (null != status) {
+			conditions += " and status = '" + status + "'";
 		}
 		return GET_TOPIC_AUTH_COUNT + conditions;
 	}

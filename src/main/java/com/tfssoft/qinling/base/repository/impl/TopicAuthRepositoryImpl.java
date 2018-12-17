@@ -17,18 +17,18 @@ public class TopicAuthRepositoryImpl extends AbstractRepository<TopicAuth> imple
 	}
 
 	@Override
-	public List<TopicAuth> getTopicAuthList(String name, String status, String userId) {
-		return this.findAll(TopicAuthSql.getListSql(name, status, userId));
+	public List<TopicAuth> getTopicAuthList(String name, String statusIn, String userId, String status) {
+		return this.findAll(TopicAuthSql.getListSql(name, statusIn, userId, status));
 	}
 
 	@Override
-	public List<TopicAuth> getTopicAuthPageList(String name, int skip, int limit, String status, String userId) {
-		return this.findAll(TopicAuthSql.getPageListSql(name, skip, limit, status, userId));
+	public List<TopicAuth> getTopicAuthPageList(String name, int skip, int limit, String statusIn, String userId, String status) {
+		return this.findAll(TopicAuthSql.getPageListSql(name, skip, limit, statusIn, userId, status));
 	}
 
 	@Override
-	public long getTopicAuthCount(String name, String status, String userId) {
-		return this.findCount(TopicAuthSql.getCountSql(name, status, userId));
+	public long getTopicAuthCount(String name, String statusIn, String userId, String status) {
+		return this.findCount(TopicAuthSql.getCountSql(name, statusIn, userId, status));
 	}
 
 	@Override

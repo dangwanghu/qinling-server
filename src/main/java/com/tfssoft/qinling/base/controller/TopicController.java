@@ -60,11 +60,12 @@ public class TopicController extends BaseController {
 	public void getTopicAuthList(@RequestParam(value = "skip", required = false) Integer skip,
 			@RequestParam(value = "limit", required = false) Integer limit,
 			@RequestParam(value = "locationDesc", required = false) String name,
+			@RequestParam(value = "status", required = false) String status,
 			@RequestParam(value = "userId", required = false) String userId,
 			@RequestParam(value = "source", required = true, defaultValue = "ADMIN") String source,
 			HttpServletRequest request, HttpServletResponse response) {
 		try {
-			List<TopicAuth> result = topicService.getTopicAuthList(skip, limit, name, source, userId);
+			List<TopicAuth> result = topicService.getTopicAuthList(skip, limit, name, source, userId, status);
 			writeJson(result, response);
 			;
 		} catch (Exception e) {
@@ -75,12 +76,14 @@ public class TopicController extends BaseController {
 
 	@ApiOperation(value = "新增地点-总数", httpMethod = "GET")
 	@RequestMapping(value = "/total", method = RequestMethod.GET)
-	public void getTopicAuthCount(@RequestParam(value = "name", required = false) String name,
+	public void getTopicAuthCount(
+			@RequestParam(value = "locationDesc", required = false) String name,
 			@RequestParam(value = "userId", required = false) String userId,
+			@RequestParam(value = "status", required = false) String status,
 			@RequestParam(value = "source", required = true, defaultValue = "ADMIN") String source,
 			HttpServletRequest request, HttpServletResponse response) {
 		try {
-			long count = topicService.getTopicAuthCount(name, source, userId);
+			long count = topicService.getTopicAuthCount(name, source, userId, status);
 			writeJson(count, response);
 		} catch (Exception e) {
 			e.printStackTrace();

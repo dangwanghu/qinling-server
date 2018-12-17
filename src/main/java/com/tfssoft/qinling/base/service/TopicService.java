@@ -14,9 +14,9 @@ public interface TopicService {
 
 	public Topic getTopicDetail(String userId, String id, String type);
 
-	public List<TopicAuth> getTopicAuthList(Integer skip, Integer limit, String name, String source, String userId);
+	public List<TopicAuth> getTopicAuthList(Integer skip, Integer limit, String name, String source, String userId, String status);
 
-	public long getTopicAuthCount(String name, String source, String userId);
+	public long getTopicAuthCount(String name, String source, String userId, String status);
 
 	public void updateTopicAuth(AuthVO authInstance);
 

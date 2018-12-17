@@ -24,16 +24,16 @@ public class TopicServiceImpl implements TopicService {
 
 	@Autowired
 	private TopicAuthRepository topicAuthRepository;
-	
+
 	@Autowired
 	private YuKouRepository yuKouRepository;
-	
+
 	@Autowired
 	private JingDianRepository jingDianRepository;
-	
+
 	@Autowired
 	private ShanFengRepository shanFengRepository;
-	
+
 	@Autowired
 	private SiMiaoRepository siMiaoRepository;
 
@@ -53,29 +53,30 @@ public class TopicServiceImpl implements TopicService {
 	}
 
 	@Override
-	public List<TopicAuth> getTopicAuthList(Integer skip, Integer limit, String name, String source, String userId) {
-		String status = "0,1,2,9";
+	public List<TopicAuth> getTopicAuthList(Integer skip, Integer limit, String name, String source, String userId,
+			String status) {
+		String statusIn = "0,1,2,9";
 		if (!"ADMIN".equals(source)) {
-			status = "0,1,2";
+			statusIn = "0,1,2";
 		}
 		if (null == skip && null != limit) {
-			return topicAuthRepository.getTopicAuthPageList(name, 0, limit.intValue(), status, userId);
+			return topicAuthRepository.getTopicAuthPageList(name, 0, limit.intValue(), statusIn, userId, status);
 		} else if (null != skip && null == limit) {
-			return topicAuthRepository.getTopicAuthPageList(name, skip.intValue(), 10, status, userId);
+			return topicAuthRepository.getTopicAuthPageList(name, skip.intValue(), 10, statusIn, userId, status);
 		} else if (null != skip && null != limit) {
-			return topicAuthRepository.getTopicAuthPageList(name, skip.intValue(), limit.intValue(), status, userId);
+			return topicAuthRepository.getTopicAuthPageList(name, skip.intValue(), limit.intValue(), statusIn, userId, status);
 		} else {
-			return topicAuthRepository.getTopicAuthList(name, status, userId);
+			return topicAuthRepository.getTopicAuthList(name, statusIn, userId, status);
 		}
 	}
 
 	@Override
-	public long getTopicAuthCount(String name, String source, String userId) {
-		String status = "0,1,2,9";
+	public long getTopicAuthCount(String name, String source, String userId, String status) {
+		String statusIn = "0,1,2,9";
 		if (!"ADMIN".equals(source)) {
-			status = "0,1,2";
+			statusIn = "0,1,2";
 		}
-		return topicAuthRepository.getTopicAuthCount(name, status, userId);
+		return topicAuthRepository.getTopicAuthCount(name, statusIn, userId, status);
 	}
 
 	@Override
@@ -101,7 +102,7 @@ public class TopicServiceImpl implements TopicService {
 			topic.setCounty(String.valueOf(authInstance.getCounty()));
 			topic.setYuKou(String.valueOf(authInstance.getYuKou()));
 			topic.setRealBeautyUrl(authInstance.getRealBeautyUrl());
-			
+
 			// 5: 景点, 3: 山峰, 1: 峪口, 4: 宗教
 			if ("1".equals(dbInstance.getType())) {
 				yuKouRepository.addYuKou(topic);

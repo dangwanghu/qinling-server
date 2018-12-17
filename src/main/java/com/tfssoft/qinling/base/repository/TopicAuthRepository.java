@@ -8,11 +8,11 @@ public interface TopicAuthRepository {
 	
 	public void addTopicAuth(TopicAuth instance);
 
-	public List<TopicAuth> getTopicAuthList(String name, String status, String userId);
+	public List<TopicAuth> getTopicAuthList(String name, String statusIn, String userId, String status);
 
-	public List<TopicAuth> getTopicAuthPageList(String name, int skip, int limit, String status, String userId);
+	public List<TopicAuth> getTopicAuthPageList(String name, int skip, int limit, String statusIn, String userId, String status);
 
-	public long getTopicAuthCount(String name, String status, String userId);
+	public long getTopicAuthCount(String name, String statusIn, String userId, String status);
 
 	public void deleteTopicAuthAdmin(String ids);
 
