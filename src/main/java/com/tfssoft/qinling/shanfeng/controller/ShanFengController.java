@@ -29,23 +29,28 @@ public class ShanFengController extends BaseController {
 
 	@ApiOperation(value = "获取山峰列表", httpMethod = "GET")
 	@RequestMapping(value = "/list", method = RequestMethod.GET)
-	public void getShanFengList(@RequestParam(value = "userId", required = false) String userId,
-			HttpServletRequest request, HttpServletResponse response) {
+	public void getShanFengList(
+			@RequestParam(value = "name", required = false) String name,
+			@RequestParam(value = "userId", required = false) String userId,
+			@RequestParam(value = "skip", required = false) Integer skip,
+			@RequestParam(value = "limit", required = false) Integer limit, HttpServletRequest request,
+			HttpServletResponse response) {
 		try {
-			List<Topic> shanfengList = shanFengService.getShanFengList(userId);
-			writeJson(shanfengList, response);
+			List<Topic> ShanFengList = shanFengService.getShanFengList(skip, limit, name, userId);
+			writeJson(ShanFengList, response);
 		} catch (Exception e) {
 			e.printStackTrace();
 			error("查询出错！", response);
 		}
 	}
-	
-	@ApiOperation(value = "获取村庄总数", httpMethod = "GET")
+
+	@ApiOperation(value = "获取山峰总数", httpMethod = "GET")
 	@RequestMapping(value = "/total", method = RequestMethod.GET)
-	public void getCunZhuangCount(@RequestParam(value = "name", required = false) String name, HttpServletRequest request,
-			HttpServletResponse response) {
+	public void getShanFengCount(
+			@RequestParam(value = "name", required = false) String name,
+			HttpServletRequest request, HttpServletResponse response) {
 		try {
-			long count = cunZhuangService.getCunZhuangCount(name);
+			long count = shanFengService.getShanFengCount(name);
 			writeJson(count, response);
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -53,40 +58,42 @@ public class ShanFengController extends BaseController {
 		}
 	}
 
-	@ApiOperation(value = "新增村庄", httpMethod = "POST")
+	@ApiOperation(value = "新增山峰", httpMethod = "POST")
 	@RequestMapping(value = "", method = RequestMethod.POST)
-	public void postCunZhuang(@RequestBody Topic topic, HttpServletRequest request, HttpServletResponse response) {
+	public void postShanFeng(@RequestBody Topic topic, HttpServletRequest request, HttpServletResponse response) {
 		try {
-			cunZhuangService.addCunZhuang(topic);
+			shanFengService.addShanFeng(topic);
 			success("保存成功", response);
 		} catch (Exception e) {
 			e.printStackTrace();
 			error("保存出错！", response);
 		}
 	}
-	
-	@ApiOperation(value = "修改村庄", httpMethod = "PUT")
+
+	@ApiOperation(value = "修改山峰", httpMethod = "PUT")
 	@RequestMapping(value = "", method = RequestMethod.PUT)
-	public void putCunZhuang(@RequestBody Topic topic, HttpServletRequest request, HttpServletResponse response) {
+	public void putShanFeng(@RequestBody Topic topic, HttpServletRequest request, HttpServletResponse response) {
 		try {
-			cunZhuangService.updateCunZhuang(topic);
+			shanFengService.updateShanFeng(topic);
 			success("更新成功", response);
 		} catch (Exception e) {
 			e.printStackTrace();
 			error("更新出错！", response);
 		}
 	}
-	
-	@ApiOperation(value = "删除村庄", httpMethod = "DELETE")
+
+	@ApiOperation(value = "删除山峰", httpMethod = "DELETE")
 	@RequestMapping(value = "", method = RequestMethod.DELETE)
-	public void deleteCunZhuang(@RequestParam(required = true) Integer id, HttpServletRequest request, HttpServletResponse response) {
+	public void deleteShanFeng(@RequestParam(required = true) Integer id, HttpServletRequest request,
+			HttpServletResponse response) {
 		try {
-			cunZhuangService.deleteCunZhuang(id.intValue());
+			shanFengService.deleteShanFeng(id.intValue());
 			success("删除成功", response);
 		} catch (Exception e) {
 			e.printStackTrace();
 			error("删除出错！", response);
 		}
 	}
+
 
 }

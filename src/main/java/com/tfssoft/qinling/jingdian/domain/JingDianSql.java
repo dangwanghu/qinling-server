@@ -129,6 +129,7 @@ public class JingDianSql {
 		sql += ", wzms = '" + instance.getLocationDescription() + "'";
 		sql += ", jdjj = '" + instance.getIntroduction() + "'";
 		sql += ", jdrwls = '" + instance.getHistory() + "'";
+		sql += ", jdzrfm = '" + instance.getNaturalFeatures() + "'";
 		sql += ", jdqtsm = '" + instance.getOtherComments() + "'";
 		sql += ", x = '" + instance.getxLat() + "'";
 		sql += ", y = '" + instance.getyLng() + "'";

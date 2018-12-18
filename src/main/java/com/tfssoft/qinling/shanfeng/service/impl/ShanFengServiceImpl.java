@@ -16,8 +16,37 @@ public class ShanFengServiceImpl implements ShanFengService {
 	@Autowired
 	private ShanFengRepository shanFengRepository;
 	
-	public List<Topic> getShanFengList(String userId) {
-		return shanFengRepository.getShanFengList(userId);
+	@Override
+	public List<Topic> getShanFengList(Integer skip, Integer limit, String name, String userId) {
+		if (null == skip && null != limit) {
+			return shanFengRepository.getShanFengPageList(name, 0, limit.intValue(), userId);
+		} else if (null != skip && null == limit) {
+			return shanFengRepository.getShanFengPageList(name, skip.intValue(), 10, userId);
+		} else if (null != skip && null != limit) {
+			return shanFengRepository.getShanFengPageList(name, skip.intValue(), limit.intValue(), userId);
+		} else {
+			return shanFengRepository.getShanFengList(name, userId);
+		}
+	}
+
+	@Override
+	public long getShanFengCount(String name) {
+		return shanFengRepository.getShanFengCount(name);
+	}
+
+	@Override
+	public void addShanFeng(Topic instance) {
+		shanFengRepository.addShanFeng(instance);
+	}
+
+	@Override
+	public void updateShanFeng(Topic instance) {
+		shanFengRepository.updateShanFeng(instance);
+	}
+
+	@Override
+	public void deleteShanFeng(int id) {
+		shanFengRepository.deleteShanFeng(id);
 	}	
 
 }
