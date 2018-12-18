@@ -1,6 +1,7 @@
 package com.tfssoft.qinling.guiji.domain;
 
 import java.io.Serializable;
+import java.util.Date;
 import java.util.List;
 
 public class Track implements Serializable {
@@ -8,12 +9,13 @@ public class Track implements Serializable {
 	private static final long serialVersionUID = 1L;
 	
 	private String id;
+	private String userId;
 	private String title;
 	private String description;
-	private String startDate;
-	private String endDate;
+	private Date startDate;
+	private Date endDate;
 	private List<Trail> points;
-	private String pointIds;
+	private String attachments;
 
 	public Track() {
 	}
@@ -42,19 +44,19 @@ public class Track implements Serializable {
 		this.description = description;
 	}
 
-	public String getStartDate() {
+	public Date getStartDate() {
 		return startDate;
 	}
 
-	public void setStartDate(String startDate) {
+	public void setStartDate(Date startDate) {
 		this.startDate = startDate;
 	}
 
-	public String getEndDate() {
+	public Date getEndDate() {
 		return endDate;
 	}
 
-	public void setEndDate(String endDate) {
+	public void setEndDate(Date endDate) {
 		this.endDate = endDate;
 	}
 
@@ -66,12 +68,20 @@ public class Track implements Serializable {
 		this.points = points;
 	}
 
-	public String getPointIds() {
-		return pointIds;
+	public String getUserId() {
+		return userId;
 	}
 
-	public void setPointIds(String pointIds) {
-		this.pointIds = pointIds;
+	public void setUserId(String userId) {
+		this.userId = userId;
+	}
+	
+	public String getAttachments() {
+		return attachments;
+	}
+
+	public void setAttachments(String attachments) {
+		this.attachments = attachments;
 	}
 
 }

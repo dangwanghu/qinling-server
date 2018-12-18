@@ -7,7 +7,7 @@ import com.tfssoft.qinling.guiji.domain.TrackVO;
 
 public interface TrackRepository {
 
-	public List<Track> getGuiJiList(String userId, String startDate, String endDate);
+	public List<Track> getGuiJiList(String userId);
 
 	public Track getGuiJiDetail(int id);
 

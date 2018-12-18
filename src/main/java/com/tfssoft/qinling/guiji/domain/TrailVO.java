@@ -1,6 +1,7 @@
 package com.tfssoft.qinling.guiji.domain;
 
 import java.io.Serializable;
+import java.util.Date;
 
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
@@ -21,6 +22,9 @@ public class TrailVO implements Serializable {
 
 	@ApiModelProperty(value = "高程", required = false)
 	private String zHeg;
+	
+	@ApiModelProperty(value = "时间", required = false)
+	private Date time;
 
 	public TrailVO() {
 	}
@@ -55,6 +59,14 @@ public class TrailVO implements Serializable {
 
 	public void setzHeg(String zHeg) {
 		this.zHeg = zHeg;
+	}
+
+	public Date getTime() {
+		return time;
+	}
+
+	public void setTime(Date time) {
+		this.time = time;
 	}
 	
 }

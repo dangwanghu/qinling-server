@@ -1,6 +1,7 @@
 package com.tfssoft.qinling.guiji.domain;
 
 import java.io.Serializable;
+import java.util.Date;
 
 public class Trail implements Serializable {
 
@@ -10,7 +11,7 @@ public class Trail implements Serializable {
 	private String xLat;
 	private String yLng;
 	private String zHeg;
-	private String time;
+	private Date time;
 
 	public Trail() {
 	}
@@ -47,11 +48,11 @@ public class Trail implements Serializable {
 		this.zHeg = zHeg;
 	}
 
-	public String getTime() {
+	public Date getTime() {
 		return time;
 	}
 
-	public void setTime(String time) {
+	public void setTime(Date time) {
 		this.time = time;
 	}
 

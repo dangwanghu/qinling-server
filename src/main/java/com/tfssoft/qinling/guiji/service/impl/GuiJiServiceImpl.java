@@ -1,6 +1,5 @@
 package com.tfssoft.qinling.guiji.service.impl;
 
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -20,13 +19,12 @@ import com.tfssoft.qinling.guiji.repository.TrailRepository;
 import com.tfssoft.qinling.guiji.service.GuiJiService;
 import com.tfssoft.qinling.web.CacheManager;
 
-
 @Service
 public class GuiJiServiceImpl implements GuiJiService {
-	
+
 	@Autowired
 	private TrackRepository trackRepository;
-	
+
 	@Autowired
 	private TrailRepository trailRepository;
 
@@ -34,60 +32,59 @@ public class GuiJiServiceImpl implements GuiJiService {
 	private CacheManager cacheManager;
 
 	@Override
-	public void addGuiJiPoint(TrailVO trail) {
+	public void addGuiJiPoint(List<TrailVO> vos) {
 		// trailRepository.addGuiJiPoint(trail);
-		Object points = cacheManager.get("guiji_" + trail.getUserId());
-		
+		Object points = cacheManager.get("guiji_" + vos.get(0).getUserId());
+
 		TrailRedis newRecord = null;
 		if (null != points) {
 			newRecord = (TrailRedis) points;
 		} else {
 			newRecord = new TrailRedis();
 		}
-		
+
 		List<Trail> trails = newRecord.getVals();
 		if (null == trails) {
 			trails = new ArrayList<Trail>();
 		}
-		Trail intance = new Trail();
-		intance.setxLat(trail.getxLat());
-		intance.setyLng(trail.getyLng());
-		intance.setzHeg(trail.getzHeg());
 		
-		SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-		intance.setTime(format.format(new Date()));
-		format = null;
-		trails.add(intance);
+		for (TrailVO trail : vos) {
+			Trail intance = new Trail();
+			intance.setxLat(trail.getxLat());
+			intance.setyLng(trail.getyLng());
+			intance.setzHeg(trail.getzHeg());
+			intance.setTime(trail.getTime());
+			trails.add(intance);
+		}
 		
 		newRecord.setVals(trails);
-		
-		cacheManager.set("guiji_" + trail.getUserId(), newRecord, 150);
 
+		cacheManager.set("guiji_" + vos.get(0).getUserId(), newRecord, 150);
 	}
 
 	@Override
 	public List<Trail> getGuiJiPointListCurrentWeek(String userId) {
 		return trailRepository.getGuiJiPointListCurrentWeek(userId);
 	}
-	
 
 	@Override
-	public List<Trail> getGuiJiPointList(String userId, String startDate, String endDate) {
+	public List<Trail> getGuiJiPointList(String userId, Date startDate, Date endDate) {
 		return trailRepository.getGuiJiPointList(userId, startDate, endDate);
 	}
 
 	@Override
-	public List<Track> getGuiJiList(String userId, String startDate, String endDate) {
-		return trackRepository.getGuiJiList(userId, startDate, endDate);
+	public List<Track> getGuiJiList(String userId) {
+		return trackRepository.getGuiJiList(userId);
 	}
-	
+
 	@Override
 	public Track getGuiJiDetail(Integer id) {
 		Track instance = trackRepository.getGuiJiDetail(id.intValue());
-		
-		List<Trail> points = trailRepository.getGuiJiPointByIds(instance.getPointIds());
+
+		List<Trail> points = trailRepository.getGuiJiPointList(instance.getUserId(), instance.getStartDate(),
+				instance.getEndDate());
 		instance.setPoints(points);
-		
+
 		return instance;
 	}
 
@@ -100,7 +97,7 @@ public class GuiJiServiceImpl implements GuiJiService {
 	public void deleteGuiJiBatch(String ids) {
 		trackRepository.deleteGuiJiBatch(ids);
 	}
-	
+
 	@Scheduled(cron = "10 * * * * ?")
 	public void job() {
 		Set<String> keys = cacheManager.keys("guiji_");
@@ -118,5 +115,5 @@ public class GuiJiServiceImpl implements GuiJiService {
 			}
 		}
 	}
-	
+
 }

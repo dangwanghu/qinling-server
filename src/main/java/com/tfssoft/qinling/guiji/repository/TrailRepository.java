@@ -1,5 +1,6 @@
 package com.tfssoft.qinling.guiji.repository;
 
+import java.util.Date;
 import java.util.List;
 
 import com.tfssoft.qinling.guiji.domain.Trail;
@@ -13,8 +14,7 @@ public interface TrailRepository {
 
 	public List<Trail> getGuiJiPointListCurrentWeek(String userId);
 	
-	public List<Trail> getGuiJiPointList(String userId, String startDate, String endDate);
+	public List<Trail> getGuiJiPointList(String userId, Date startDate, Date endDate);
 
-	public List<Trail> getGuiJiPointByIds(String ids);
-	
+	public List<Trail> getGuiJiPointByIds(String ids);	
 }

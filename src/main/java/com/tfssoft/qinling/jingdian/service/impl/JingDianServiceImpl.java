@@ -16,8 +16,36 @@ public class JingDianServiceImpl implements JingDianService {
 	@Autowired
 	private JingDianRepository jingDianRepository;
 	
-	public List<Topic> getJingDianList(String userId) {
-		return jingDianRepository.getJingDianList(userId);
+	public List<Topic> getJingDianList(Integer skip, Integer limit, String name, String userId) {
+		if (null == skip && null != limit) {
+			return jingDianRepository.getJingDianPageList(name, 0, limit.intValue(), userId);
+		} else if (null != skip && null == limit) {
+			return jingDianRepository.getJingDianPageList(name, skip.intValue(), 10, userId);
+		} else if (null != skip && null != limit) {
+			return jingDianRepository.getJingDianPageList(name, skip.intValue(), limit.intValue(), userId);
+		} else {
+			return jingDianRepository.getJingDianList(name, userId);
+		}
+	}
+
+	@Override
+	public long getJingDianCount(String name) {
+		return jingDianRepository.getJingDianCount(name);
+	}
+
+	@Override
+	public void addJingDian(Topic instance) {
+		jingDianRepository.addJingDian(instance);
+	}
+
+	@Override
+	public void updateJingDian(Topic instance) {
+		jingDianRepository.updateJingDian(instance);
+	}
+
+	@Override
+	public void deleteJingDian(int id) {
+		jingDianRepository.deleteJingDian(id);
 	}	
 
 }

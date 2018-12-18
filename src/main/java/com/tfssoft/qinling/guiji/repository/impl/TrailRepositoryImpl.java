@@ -1,5 +1,6 @@
 package com.tfssoft.qinling.guiji.repository.impl;
 
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.stereotype.Repository;
@@ -34,7 +35,7 @@ public class TrailRepositoryImpl extends AbstractRepository<Trail> implements Tr
 	}
 
 	@Override
-	public List<Trail> getGuiJiPointList(String userId, String startDate, String endDate) {
+	public List<Trail> getGuiJiPointList(String userId, Date startDate, Date endDate) {
 		return this.findAll(TrailSql.getListSql(userId, startDate, endDate));
 	}
 	

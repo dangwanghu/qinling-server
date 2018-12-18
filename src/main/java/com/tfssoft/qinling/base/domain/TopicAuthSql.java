@@ -67,6 +67,7 @@ public class TopicAuthSql {
 		if (null != status) {
 			conditions += " and status = '" + status + "'";
 		}
+		conditions += " order by create_time desc";
 		return GET_TOPIC_AUTH_LIST + conditions + " limit " + skip + "," + limit;
 	}
 

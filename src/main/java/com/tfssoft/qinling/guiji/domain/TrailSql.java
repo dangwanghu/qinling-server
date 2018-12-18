@@ -34,7 +34,7 @@ public class TrailSql {
 	}
 
 	public static String getListCurrentWeekSql(String userId) {
-		String conditions = " where DATE_FORMAT(date_sub(curdate(), interval 7 day),\"%Y-%m-%d\") < DATE_FORMAT(create_time,\"%Y-%m-%d\")";
+		String conditions = " where date_sub(curdate(), interval 7 day) < create_time ";
 		if (null != userId) {
 			conditions += " and user_id = '" + userId + "'";
 		}
@@ -42,14 +42,9 @@ public class TrailSql {
 		return GET_TRAIL_LIST + conditions;
 	}
 	
-	public static String getListSql(String userId, String startDate, String endDate) {
+	public static String getListSql(String userId, Date startDate, Date endDate) {
 		String conditions = " where user_id = '" + userId + "'";
-		if (null != startDate) {
-			conditions += " and DATE_FORMAT(create_time,\"%Y-%m-%d\") >= '" + startDate + "'";
-		}
-		if (null != endDate) {
-			conditions += " and DATE_FORMAT(create_time,\"%Y-%m-%d\") <= '" + endDate + "'";
-		}
+		conditions += " and unix_timestamp(create_time) * 1000 BETWEEN " + startDate.getTime() + " AND " + endDate.getTime() + "";
 		conditions += " order by create_time desc";
 		return GET_TRAIL_LIST + conditions;
 	}

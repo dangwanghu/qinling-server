@@ -1,5 +1,6 @@
 package com.tfssoft.qinling.guiji.controller;
 
+import java.util.Date;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -33,9 +34,9 @@ public class GuiJiController extends BaseController {
 
 	@ApiOperation(value = "发送位置点", httpMethod = "POST")
 	@RequestMapping(value = "/location/point", method = RequestMethod.POST)
-	public void postGuiJiPoint(@RequestBody TrailVO trail, HttpServletRequest request, HttpServletResponse response) {
+	public void postGuiJiPoint(@RequestBody List<TrailVO> trails, HttpServletRequest request, HttpServletResponse response) {
 		try {
-			guiJiService.addGuiJiPoint(trail);
+			guiJiService.addGuiJiPoint(trails);
 			success("保存成功", response);
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -43,7 +44,7 @@ public class GuiJiController extends BaseController {
 		}
 	}
 
-	@ApiOperation(value = "查询我的轨迹-当前（目前只查当天）", httpMethod = "GET")
+	@ApiOperation(value = "查询我的轨迹（目前只查最近 一周）", httpMethod = "GET")
 	@RequestMapping(value = "/current", method = RequestMethod.GET)
 	public void getGuiJiPointListCurrentWeek(@RequestParam(value = "userId", required = true) String userId,
 			HttpServletRequest request, HttpServletResponse response) {
@@ -59,11 +60,11 @@ public class GuiJiController extends BaseController {
 	@ApiOperation(value = "搜索轨迹", httpMethod = "GET")
 	@RequestMapping(value = "/search/location/points", method = RequestMethod.GET)
 	public void getGuiJiPointList(@RequestParam(value = "userId", required = true) String userId,
-			@RequestParam(value = "startDate", required = true) String startDate,
-			@RequestParam(value = "endDate", required = true) String endDate, HttpServletRequest request,
+			@RequestParam(value = "startDate", required = true) Long startDate,
+			@RequestParam(value = "endDate", required = true) Long endDate, HttpServletRequest request,
 			HttpServletResponse response) {
 		try {
-			List<Trail> trails = guiJiService.getGuiJiPointList(userId, startDate, endDate);
+			List<Trail> trails = guiJiService.getGuiJiPointList(userId, new Date(startDate), new Date(endDate));
 			writeJson(trails, response);
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -71,14 +72,12 @@ public class GuiJiController extends BaseController {
 		}
 	}
 
-	@ApiOperation(value = "轨迹记录", httpMethod = "GET")
+	@ApiOperation(value = "我的游记", httpMethod = "GET")
 	@RequestMapping(value = "/list", method = RequestMethod.GET)
-	public void getGuiJiList(@RequestParam(value = "userId", required = true) String userId,
-			@RequestParam(value = "startDate", required = false) String startDate,
-			@RequestParam(value = "endDate", required = false) String endDate, HttpServletRequest request,
+	public void getGuiJiList(@RequestParam(value = "userId", required = true) String userId, HttpServletRequest request,
 			HttpServletResponse response) {
 		try {
-			List<Track> tracks = guiJiService.getGuiJiList(userId, startDate, endDate);
+			List<Track> tracks = guiJiService.getGuiJiList(userId);
 			writeJson(tracks, response);
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -86,7 +85,7 @@ public class GuiJiController extends BaseController {
 		}
 	}
 
-	@ApiOperation(value = "查询一条轨迹详细信息", httpMethod = "GET")
+	@ApiOperation(value = "查询一条游记详细信息", httpMethod = "GET")
 	@RequestMapping(value = "/detail", method = RequestMethod.GET)
 	public void getGuiJiDetail(@RequestParam(value = "id", required = true) Integer id, HttpServletRequest request,
 			HttpServletResponse response) {
@@ -99,7 +98,7 @@ public class GuiJiController extends BaseController {
 		}
 	}
 
-	@ApiOperation(value = "保存轨迹记录", httpMethod = "POST")
+	@ApiOperation(value = "保存游记", httpMethod = "POST")
 	@RequestMapping(value = "", method = RequestMethod.POST)
 	public void postGuiJi(@RequestBody TrackVO track, HttpServletRequest request, HttpServletResponse response) {
 		try {
@@ -111,7 +110,7 @@ public class GuiJiController extends BaseController {
 		}
 	}
 
-	@ApiOperation(value = "删除轨迹记录", httpMethod = "DELETE")
+	@ApiOperation(value = "删除游记", httpMethod = "DELETE")
 	@RequestMapping(value = "", method = RequestMethod.DELETE)
 	public void deleteGuiJi(@RequestBody BatchIds ids, HttpServletRequest request, HttpServletResponse response) {
 		try {

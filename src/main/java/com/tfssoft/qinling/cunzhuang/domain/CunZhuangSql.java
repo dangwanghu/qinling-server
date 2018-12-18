@@ -70,6 +70,7 @@ public class CunZhuangSql {
 		sql += ", qx = '" + instance.getCounty() + "'";
 		sql += ", xz = '" + instance.getTown() + "'";
 		sql += ", yk = '" + instance.getYuKou() + "'";
+		sql += ", sjlj = '" + instance.getRealBeautyUrl() + "'";
 
 		sql += " where id = " + instance.getId().intValue();
 		return sql;

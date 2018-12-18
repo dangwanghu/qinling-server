@@ -14,8 +14,8 @@ import com.tfssoft.qinling.guiji.repository.TrackRepository;
 public class TrackRepositoryImpl extends AbstractRepository<Track> implements TrackRepository {
 
 	@Override
-	public List<Track> getGuiJiList(String userId, String startDate, String endDate) {
-		return this.findAll(TrackSql.getListSql(userId, startDate, endDate));
+	public List<Track> getGuiJiList(String userId) {
+		return this.findAll(TrackSql.getListSql(userId));
 	}
 
 	@Override
