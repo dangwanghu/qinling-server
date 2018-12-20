@@ -53,7 +53,7 @@ public class ShanFengSql {
 			+ "(sfmc, wzms, sfjj, sfrwls, sfzrfm, sfqtsm, x, y, qx, sjlj) " + "values "
 			+ "(?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 	
-	private static final String GET_SHANFENG_COUNT = "select count(id) from shanfeng ";
+	public static final String GET_SHANFENG_COUNT = "select count(id) from shanfeng ";
 	
 	public static final String DELETE_SHANFENG = "DELETE FROM shanfeng "
 			+ "where id = ?";
@@ -79,7 +79,7 @@ public class ShanFengSql {
 			conditions += " where sfmc like '%" + name + "%'";
 		}
 		if (null == userId) {
-			return GET_SHANFENG_LIST + conditions;
+			return GET_SHANFENG_LIST + conditions + " limit " + skip + "," + limit;
 		}
 		String sql = "SElECT a.id, "
 			+ "a.sfmc AS name, "

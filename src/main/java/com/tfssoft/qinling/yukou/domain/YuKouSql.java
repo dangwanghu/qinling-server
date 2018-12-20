@@ -61,7 +61,7 @@ public class YuKouSql {
 			+ "(ykmc, wzms, ykjj, ykrwls, ykzrfm, ykqtsm, x, y, qx, xz, sjlj) " + "values "
 			+ "(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 	
-	private static final String GET_YUKOU_COUNT = "select count(id) FROM yukou ";
+	public static final String GET_YUKOU_COUNT = "select count(id) FROM yukou ";
 
 	public static final String DELETE_YUKOU = "DELETE FROM yukou "
 			+ "where id = ?";
@@ -92,7 +92,7 @@ public class YuKouSql {
 		}
 		
 		if (null == userId) {
-			return GET_YUKOU_LIST + conditions;
+			return GET_YUKOU_LIST + conditions + " limit " + skip + "," + limit;
 		}
 		String sql = "SElECT a.id, "
 			+ "a.ykmc AS name, "

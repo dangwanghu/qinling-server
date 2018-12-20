@@ -115,7 +115,7 @@ public class GuiJiController extends BaseController {
 	public void putGuiJi(@RequestBody TrackVO track, HttpServletRequest request, HttpServletResponse response) {
 		try {
 			guiJiService.updateGuiJi(track);
-			success("保存成功", response);
+			success("更新成功", response);
 		} catch (Exception e) {
 			e.printStackTrace();
 			error("更新出错！", response);

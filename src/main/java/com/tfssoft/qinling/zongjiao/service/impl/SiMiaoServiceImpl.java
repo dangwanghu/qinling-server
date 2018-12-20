@@ -16,8 +16,36 @@ public class SiMiaoServiceImpl implements SiMiaoService {
 	@Autowired
 	private SiMiaoRepository siMiaoRepository;
 	
-	public List<Topic> getSiMiaoList(String userId) {
-		return siMiaoRepository.getSiMiaoList(userId);
+	public List<Topic> getSiMiaoList(String name, String userId, Integer skip, Integer limit) {
+		if (null == skip && null != limit) {
+			return siMiaoRepository.getSiMiaoPageList(name, userId, 0, limit.intValue());
+		} else if (null != skip && null == limit) {
+			return siMiaoRepository.getSiMiaoPageList(name, userId, skip.intValue(), 10);
+		} else if (null != skip && null != limit) {
+			return siMiaoRepository.getSiMiaoPageList(name, userId, skip.intValue(), limit.intValue());
+		} else {
+			return siMiaoRepository.getSiMiaoList(name, userId);
+		}
+	}
+
+	@Override
+	public long getSiMiaoCount(String name) {
+		return siMiaoRepository.getSiMiaoCount(name);
+	}
+
+	@Override
+	public void addSiMiao(Topic instance) {
+		siMiaoRepository.addSiMiao(instance);
+	}
+
+	@Override
+	public void updateSiMiao(Topic instance) {
+		siMiaoRepository.updateSiMiao(instance);
+	}
+
+	@Override
+	public void deleteSiMiao(int id) {
+		siMiaoRepository.deleteSiMiao(id);
 	}	
 
 }
