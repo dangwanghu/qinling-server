@@ -32,5 +32,10 @@ public class TrackRepositoryImpl extends AbstractRepository<Track> implements Tr
 	public void deleteGuiJiBatch(String ids) {
 		this.update(TrackSql.getDeleteTrackSql(ids));
 	}
+
+	@Override
+	public void updateGuiJi(TrackVO track) {
+		this.update(TrackSql.getUpdateGuiJiSql(track));
+	}
 	
 }

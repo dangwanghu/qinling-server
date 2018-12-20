@@ -122,7 +122,7 @@ public class ShanFengSql {
 		sql += ", x = '" + instance.getxLat() + "'";
 		sql += ", y = '" + instance.getyLng() + "'";
 		sql += ", qx = '" + instance.getCounty() + "'";
-		sql += ", sjlj = '" + instance.getRealBeautyUrl() + "'";
+		sql += ", sjlj = " + (instance.getRealBeautyUrl() == null ? null : ("'" + instance.getRealBeautyUrl()  + "'"));
 
 		sql += " where id = " + instance.getId().intValue();
 		return sql;

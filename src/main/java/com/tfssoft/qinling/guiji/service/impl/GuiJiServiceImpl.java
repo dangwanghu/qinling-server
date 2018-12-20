@@ -116,4 +116,9 @@ public class GuiJiServiceImpl implements GuiJiService {
 		}
 	}
 
+	@Override
+	public void updateGuiJi(TrackVO track) {
+		trackRepository.updateGuiJi(track);
+	}
+
 }

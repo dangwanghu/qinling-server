@@ -24,4 +24,6 @@ public interface GuiJiService {
 
 	public void deleteGuiJiBatch(String ids);
 
+	public void updateGuiJi(TrackVO track);
+
 }

@@ -41,4 +41,17 @@ public class TrackSql {
 		return GET_TRACK_LIST + " where id = " + id;
 	}
 
+	public static String getUpdateGuiJiSql(TrackVO instance) {
+		String sql = "update user_track set ";
+
+		sql += "title = '" + instance.getTitle() + "'";
+		sql += ", description = '" + instance.getDescription() + "'";
+		sql += ", start_date = from_unixtime(" + instance.getStartDate().getTime() + " / 1000)";
+		sql += ", end_date = from_unixtime(" + instance.getEndDate().getTime() + " / 1000)";
+		sql += ", attachments = '" + instance.getAttachments() + "'";
+
+		sql += " where id = " + instance.getId().intValue();
+		return sql;
+	}
+
 }

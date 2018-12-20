@@ -10,6 +10,9 @@ import io.swagger.annotations.ApiModelProperty;
 public class TrackVO implements Serializable {
 
 	private static final long serialVersionUID = 1L;
+	
+	@ApiModelProperty(value = "ID", required = false)
+	private Integer id;
 
 	@ApiModelProperty(value = "轨迹标题", required = true)
 	private String title;
@@ -78,6 +81,14 @@ public class TrackVO implements Serializable {
 
 	public void setAttachments(String attachments) {
 		this.attachments = attachments;
+	}
+
+	public Integer getId() {
+		return id;
+	}
+
+	public void setId(Integer id) {
+		this.id = id;
 	}
 	
 }

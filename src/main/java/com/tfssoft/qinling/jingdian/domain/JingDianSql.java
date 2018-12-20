@@ -136,7 +136,7 @@ public class JingDianSql {
 		sql += ", qx = '" + instance.getCounty() + "'";
 		sql += ", xz = '" + instance.getTown() + "'";
 		sql += ", yk = '" + instance.getYuKou() + "'";
-		sql += ", sjlj = '" + instance.getRealBeautyUrl() + "'";
+		sql += ", sjlj = " + (instance.getRealBeautyUrl() == null ? null : ("'" + instance.getRealBeautyUrl()  + "'"));
 
 		sql += " where id = " + instance.getId().intValue();
 		return sql;

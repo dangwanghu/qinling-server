@@ -109,6 +109,19 @@ public class GuiJiController extends BaseController {
 			error("更新出错！", response);
 		}
 	}
+	
+	@ApiOperation(value = "修改游记", httpMethod = "PUT")
+	@RequestMapping(value = "", method = RequestMethod.PUT)
+	public void putGuiJi(@RequestBody TrackVO track, HttpServletRequest request, HttpServletResponse response) {
+		try {
+			guiJiService.updateGuiJi(track);
+			success("保存成功", response);
+		} catch (Exception e) {
+			e.printStackTrace();
+			error("更新出错！", response);
+		}
+	}
+
 
 	@ApiOperation(value = "删除游记", httpMethod = "DELETE")
 	@RequestMapping(value = "", method = RequestMethod.DELETE)
