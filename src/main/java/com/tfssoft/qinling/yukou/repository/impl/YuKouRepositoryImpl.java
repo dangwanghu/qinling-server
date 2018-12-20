@@ -14,12 +14,32 @@ import com.tfssoft.qinling.yukou.repository.YuKouRepository;
 public class YuKouRepositoryImpl extends AbstractRepository<Topic> implements YuKouRepository {
 
 	@Override
-	public List<Topic> getYuKouList(Integer xiangzhen, String userId) {
-		return this.findAll(YuKouSql.getYuKouListSql(xiangzhen, userId));
+	public List<Topic> getYuKouList(Integer xiangzhen, String name, String userId) {
+		return this.findAll(YuKouSql.getYuKouListSql(xiangzhen, name, userId));
 	}
 
 	@Override
 	public void addYuKou(Topic instance) {
 		this.insert(YuKouSql.INSERT_YUKOU, JingDianSql.getInsertObject(instance));
+	}
+
+	@Override
+	public List<Topic> getYuKouPageList(Integer xiangzhen, String name, String userId, int skip, int limit) {
+		return this.findAll(YuKouSql.getYuKouPageList(xiangzhen, name, userId, skip, limit));
+	}
+
+	@Override
+	public long getYuKouCount(Integer xiangzhen, String name) {
+		return this.findCount(YuKouSql.getCountSql(xiangzhen, name));
+	}
+
+	@Override
+	public void updateYuKou(Topic instance) {
+		this.update(YuKouSql.getUpdateSql(instance));
+	}
+
+	@Override
+	public void deleteYuKou(int id) {
+		this.removeOne(YuKouSql.DELETE_YUKOU, id);
 	}
 }
