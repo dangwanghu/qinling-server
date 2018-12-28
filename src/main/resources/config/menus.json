@@ -37,8 +37,23 @@
 			"url": "/unknown"
 		},
 		{
-			"name": "古遗迹",
-			"code": "gyj",
+			"name": "酒店",
+			"code": "jd",
+			"url": "/unknown"
+		},
+		{
+			"name": "饭馆",
+			"code": "fg",
+			"url": "/unknown"
+		},
+		{
+			"name": "民宿",
+			"code": "ms",
+			"url": "/unknown"
+		},
+		{
+			"name": "公厕",
+			"code": "gc",
 			"url": "/unknown"
 		}
 	] 

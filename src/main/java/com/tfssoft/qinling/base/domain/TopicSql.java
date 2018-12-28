@@ -4,6 +4,13 @@ public class TopicSql {
 	public static final String GET_TOPIC_LIST = "select * from SEARCH_VIEW where "
 			+ "name like ";
 	
+	public static final String GET_TOPIC_TYPE_LIST = "select id, name,"
+			+ " `desc` AS description, code,"
+			+ " display_url AS url,"
+			+ " display_order AS `order`"
+			+ " from topic_type where"
+			+ " status = 1 order by display_order asc ";
+	
 	public static String getTopicListSql(String name, String userId) {
 		if (null == userId) {
 			return GET_TOPIC_LIST + "'%" + name + "%'";

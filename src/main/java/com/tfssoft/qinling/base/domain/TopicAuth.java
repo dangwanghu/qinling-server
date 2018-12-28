@@ -38,6 +38,9 @@ public class TopicAuth implements Serializable {
 	@ApiModelProperty(value = "用户ID", required = true)
 	private String userId;
 	
+	@ApiModelProperty(hidden = true)
+	private String userName;
+	
 	@ApiModelProperty(value = "0-未审核 1-已通过 2-未通过", hidden = true)
 	private String status;
 	
@@ -155,6 +158,14 @@ public class TopicAuth implements Serializable {
 
 	public void setUserId(String userId) {
 		this.userId = userId;
+	}
+
+	public String getUserName() {
+		return userName;
+	}
+
+	public void setUserName(String userName) {
+		this.userName = userName;
 	}
 
 }

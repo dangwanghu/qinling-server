@@ -3,7 +3,8 @@ package com.tfssoft.qinling.base.domain;
 import java.util.Date;
 
 public class TopicAuthSql {
-	public static final String GET_TOPIC_AUTH_LIST = "select id,"
+	public static final String GET_TOPIC_AUTH_LIST = "select id, user_id AS userId," 
+			+ "comments, (select nick_name from user where id = user_id) userName,"
 			+ "topic_type AS type, "
 			+ "location_desc AS locationDescription, "
 			+ "introduction, "
@@ -42,7 +43,7 @@ public class TopicAuthSql {
 		};
 	}
 	
-	public static String getListSql(String name, String statusIn, String userId, String status) {
+	public static String getListSql(String name, String statusIn, String userId, String status, Integer type) {
 		String conditions = "where status IN (" + statusIn + ") ";
 		if (null != name) {
 			conditions += " and location_desc like '%" + name + "%'";
@@ -53,10 +54,13 @@ public class TopicAuthSql {
 		if (null != status) {
 			conditions += " and status = '" + status + "'";
 		}
+		if (null != type) {
+			conditions += " and topic_type = " + type.intValue() + "";
+		}
 		return GET_TOPIC_AUTH_LIST + conditions;
 	}
 
-	public static String getPageListSql(String name, int skip, int limit, String statusIn, String userId, String status) {
+	public static String getPageListSql(String name, int skip, int limit, String statusIn, String userId, String status, Integer type) {
 		String conditions = "where status IN (" + statusIn + ") ";
 		if (null != name) {
 			conditions += "and location_desc like '%" + name + "%' ";
@@ -67,11 +71,14 @@ public class TopicAuthSql {
 		if (null != status) {
 			conditions += " and status = '" + status + "'";
 		}
+		if (null != type) {
+			conditions += " and topic_type = " + type.intValue() + "";
+		}
 		conditions += " order by create_time desc";
 		return GET_TOPIC_AUTH_LIST + conditions + " limit " + skip + "," + limit;
 	}
 
-	public static String getCountSql(String name, String statusIn, String userId, String status) {
+	public static String getCountSql(String name, String statusIn, String userId, String status, Integer type) {
 		String conditions = "where status IN (" + statusIn + ") ";
 		if (null != name) {
 			conditions += "and location_desc like '%" + name + "%'";
@@ -81,6 +88,9 @@ public class TopicAuthSql {
 		}
 		if (null != status) {
 			conditions += " and status = '" + status + "'";
+		}
+		if (null != type) {
+			conditions += " and topic_type = " + type.intValue() + "";
 		}
 		return GET_TOPIC_AUTH_COUNT + conditions;
 	}

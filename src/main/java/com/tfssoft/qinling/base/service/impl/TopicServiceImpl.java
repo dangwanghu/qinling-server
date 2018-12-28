@@ -8,8 +8,10 @@ import org.springframework.stereotype.Service;
 import com.tfssoft.qinling.base.domain.AuthVO;
 import com.tfssoft.qinling.base.domain.Topic;
 import com.tfssoft.qinling.base.domain.TopicAuth;
+import com.tfssoft.qinling.base.domain.TopicType;
 import com.tfssoft.qinling.base.repository.TopicAuthRepository;
 import com.tfssoft.qinling.base.repository.TopicRepository;
+import com.tfssoft.qinling.base.repository.TopicTypeRepository;
 import com.tfssoft.qinling.base.service.TopicService;
 import com.tfssoft.qinling.jingdian.repository.JingDianRepository;
 import com.tfssoft.qinling.shanfeng.repository.ShanFengRepository;
@@ -21,6 +23,9 @@ public class TopicServiceImpl implements TopicService {
 
 	@Autowired
 	private TopicRepository topicRepository;
+	
+	@Autowired
+	private TopicTypeRepository topicTypeRepository;
 
 	@Autowired
 	private TopicAuthRepository topicAuthRepository;
@@ -54,29 +59,29 @@ public class TopicServiceImpl implements TopicService {
 
 	@Override
 	public List<TopicAuth> getTopicAuthList(Integer skip, Integer limit, String name, String source, String userId,
-			String status) {
+			String status, Integer type) {
 		String statusIn = "0,1,2,9";
 		if (!"ADMIN".equals(source)) {
 			statusIn = "0,1,2";
 		}
 		if (null == skip && null != limit) {
-			return topicAuthRepository.getTopicAuthPageList(name, 0, limit.intValue(), statusIn, userId, status);
+			return topicAuthRepository.getTopicAuthPageList(name, 0, limit.intValue(), statusIn, userId, status, type);
 		} else if (null != skip && null == limit) {
-			return topicAuthRepository.getTopicAuthPageList(name, skip.intValue(), 10, statusIn, userId, status);
+			return topicAuthRepository.getTopicAuthPageList(name, skip.intValue(), 10, statusIn, userId, status, type);
 		} else if (null != skip && null != limit) {
-			return topicAuthRepository.getTopicAuthPageList(name, skip.intValue(), limit.intValue(), statusIn, userId, status);
+			return topicAuthRepository.getTopicAuthPageList(name, skip.intValue(), limit.intValue(), statusIn, userId, status, type);
 		} else {
-			return topicAuthRepository.getTopicAuthList(name, statusIn, userId, status);
+			return topicAuthRepository.getTopicAuthList(name, statusIn, userId, status, type);
 		}
 	}
 
 	@Override
-	public long getTopicAuthCount(String name, String source, String userId, String status) {
+	public long getTopicAuthCount(String name, String source, String userId, String status, Integer type) {
 		String statusIn = "0,1,2,9";
 		if (!"ADMIN".equals(source)) {
 			statusIn = "0,1,2";
 		}
-		return topicAuthRepository.getTopicAuthCount(name, statusIn, userId, status);
+		return topicAuthRepository.getTopicAuthCount(name, statusIn, userId, status, type);
 	}
 
 	@Override
@@ -124,6 +129,11 @@ public class TopicServiceImpl implements TopicService {
 	@Override
 	public void deleteTopicAuth(String ids) {
 		topicAuthRepository.batchUpdateTopicAuth(ids, "9");
+	}
+
+	@Override
+	public List<TopicType> getTopicTypeList() {
+		return topicTypeRepository.getTopicTypeList();
 	}
 
 }

@@ -16,6 +16,7 @@ import com.tfssoft.qinling.base.domain.AuthVO;
 import com.tfssoft.qinling.base.domain.BatchIds;
 import com.tfssoft.qinling.base.domain.Topic;
 import com.tfssoft.qinling.base.domain.TopicAuth;
+import com.tfssoft.qinling.base.domain.TopicType;
 import com.tfssoft.qinling.base.service.TopicService;
 
 import io.swagger.annotations.Api;
@@ -61,11 +62,12 @@ public class TopicController extends BaseController {
 			@RequestParam(value = "limit", required = false) Integer limit,
 			@RequestParam(value = "locationDesc", required = false) String name,
 			@RequestParam(value = "status", required = false) String status,
+			@RequestParam(value = "type", required = false) Integer type,
 			@RequestParam(value = "userId", required = false) String userId,
 			@RequestParam(value = "source", required = true, defaultValue = "ADMIN") String source,
 			HttpServletRequest request, HttpServletResponse response) {
 		try {
-			List<TopicAuth> result = topicService.getTopicAuthList(skip, limit, name, source, userId, status);
+			List<TopicAuth> result = topicService.getTopicAuthList(skip, limit, name, source, userId, status, type);
 			writeJson(result, response);
 			;
 		} catch (Exception e) {
@@ -80,10 +82,11 @@ public class TopicController extends BaseController {
 			@RequestParam(value = "locationDesc", required = false) String name,
 			@RequestParam(value = "userId", required = false) String userId,
 			@RequestParam(value = "status", required = false) String status,
+			@RequestParam(value = "type", required = false) Integer type,
 			@RequestParam(value = "source", required = true, defaultValue = "ADMIN") String source,
 			HttpServletRequest request, HttpServletResponse response) {
 		try {
-			long count = topicService.getTopicAuthCount(name, source, userId, status);
+			long count = topicService.getTopicAuthCount(name, source, userId, status, type);
 			writeJson(count, response);
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -126,6 +129,19 @@ public class TopicController extends BaseController {
 		} catch (Exception e) {
 			e.printStackTrace();
 			error("处理出错！", response);
+		}
+	}
+	
+	@ApiOperation(value = "查询专题类型", httpMethod = "GET")
+	@RequestMapping(value = "/type/list", method = RequestMethod.GET)
+	public void getTopicTypeList(
+			HttpServletRequest request, HttpServletResponse response) {
+		try {
+			List<TopicType> result = topicService.getTopicTypeList();
+			writeJson(result, response);
+		} catch (Exception e) {
+			e.printStackTrace();
+			error("查询出错！", response);
 		}
 	}
 
