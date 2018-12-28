@@ -20,6 +20,7 @@ public class JsonReader {
                 scanner.close();
             }
         }
-        return buffer.toString();
+        String jsonStr = buffer.toString();
+        return jsonStr.substring(1);
 	}
 }

@@ -5,19 +5,19 @@
 			"name": "峪口",
 			"code": "yk",
 			"url": "/yukou/list",
-			"type": 1
+			"type": "1"
 		},
 		{
 			"name": "河流",
 			"code": "hl",
 			"url": "/unknown",
-			"type": 2
+			"type": "2"
 		},
 		{
 			"name": "山峰",
 			"code": "sf",
 			"url": "/shanfeng/list",
-			"type": 3
+			"type": "3"
 		}
 	] 
 },
@@ -28,43 +28,43 @@
 			"name": "寺庙",
 			"code": "sm",
 			"url": "/simiao/list",
-			"type": 4
+			"type": "4"
 		},
 		{
 			"name": "景点",
 			"code": "jd",
 			"url": "/jingdian/list",
-			"type": 5
+			"type": "5"
 		},
 		{
 			"name": "农家乐",
 			"code": "njl",
 			"url": "/unknown",
-			"type": 6
+			"type": "6"
 		},
 		{
 			"name": "酒店",
 			"code": "jd",
 			"url": "/unknown",
-			"type": 7
+			"type": "7"
 		},
 		{
 			"name": "饭馆",
 			"code": "fg",
 			"url": "/unknown",
-			"type": 8
+			"type": "8"
 		},
 		{
 			"name": "民宿",
 			"code": "ms",
 			"url": "/unknown",
-			"type": 9
+			"type": "9"
 		},
 		{
 			"name": "公厕",
 			"code": "gc",
 			"url": "/unknown",
-			"type": 10
+			"type": "10"
 		}
 	] 
 }]
