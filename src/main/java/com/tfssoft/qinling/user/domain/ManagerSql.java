@@ -2,6 +2,8 @@ package com.tfssoft.qinling.user.domain;
 
 import java.util.Date;
 
+import com.tfssoft.qinling.util.EncryptionByMD5;
+
 public class ManagerSql {
 	public static final String GET_MANAGER_LIST = 
 			"SElECT a.id, a.email, a.real_name AS realName, a.sex, a.phone, a.status, " 
@@ -22,7 +24,7 @@ public class ManagerSql {
 		return new Object[] {
 				instance.getRole(),
 				instance.getEmail(),
-				instance.getPassword(),
+				new String(EncryptionByMD5.getMD5(instance.getPassword().getBytes())),
 				instance.getPhone(),
 				instance.getSex(),
 				instance.getRealName(),
@@ -62,9 +64,15 @@ public class ManagerSql {
 		sql += ", sex = '" + instance.getSex() + "'";
 		sql += ", phone = '" + instance.getPhone() + "'";
 		sql += ", password = MD5('" + instance.getPassword() + "')";
+		sql += ", update_time = now()";
 		
 		sql += " where id = " + instance.getId().intValue();
 		return sql;
 	}
+	
+	public static String getManagerLoginSql(String email, String password) {
+		return GET_MANAGER_LIST + " where email = '" + email + "'" + " and password = MD5('" + password + "')";
+	}
+
 
 }

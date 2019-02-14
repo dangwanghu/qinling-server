@@ -18,5 +18,7 @@ public interface ManagerRepository {
 	public void updateManager(ManagerPostVO instance);
 
 	public void deleteManager(int id);
+
+	public Manager queryByEmailAndPassword(String email, String password);
 	
 }

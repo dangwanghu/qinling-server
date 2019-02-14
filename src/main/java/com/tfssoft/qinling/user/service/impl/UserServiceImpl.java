@@ -8,12 +8,15 @@ import org.springframework.stereotype.Service;
 
 import com.tfssoft.qinling.user.domain.Manager;
 import com.tfssoft.qinling.user.domain.ManagerPostVO;
+import com.tfssoft.qinling.user.domain.Role;
+import com.tfssoft.qinling.user.domain.RolePostVO;
 import com.tfssoft.qinling.user.domain.TopicCollectVO;
 import com.tfssoft.qinling.user.domain.User;
 import com.tfssoft.qinling.user.domain.UserAction;
 import com.tfssoft.qinling.user.domain.UserActionPostVO;
 import com.tfssoft.qinling.user.domain.UserThirdPartyVO;
 import com.tfssoft.qinling.user.repository.ManagerRepository;
+import com.tfssoft.qinling.user.repository.RoleRepository;
 import com.tfssoft.qinling.user.repository.UserActionRepository;
 import com.tfssoft.qinling.user.repository.UserRepository;
 import com.tfssoft.qinling.user.service.UserService;
@@ -30,6 +33,9 @@ public class UserServiceImpl implements UserService {
 
 	@Autowired
 	private UserActionRepository userActionRepository;
+	
+	@Autowired
+	private RoleRepository roleRepository;
 
 	@Override
 	public User userLogin(String phone, String password) {
@@ -230,5 +236,49 @@ public class UserServiceImpl implements UserService {
 	@Override
 	public void deleteManager(int id) {
 		managerRepository.deleteManager(id);
+	}
+
+	@Override
+	public List<Role> getRoleList(Integer skip, Integer limit, String name) {
+		if (null == skip && null != limit) {
+			return roleRepository.getRolePageList(name, 0, limit.intValue());
+		} else if (null != skip && null == limit) {
+			return roleRepository.getRolePageList(name, skip.intValue(), 10);
+		} else if (null != skip && null != limit) {
+			return roleRepository.getRolePageList(name, skip.intValue(), limit.intValue());
+		} else {
+			return roleRepository.getRoleList(name);
+		}
+	}
+
+	@Override
+	public long getRoleCount(String name) {
+		return roleRepository.getRoleCount(name);
+	}
+
+	@Override
+	public void addRole(RolePostVO instance) {
+		roleRepository.addRole(instance);
+	}
+
+	@Override
+	public void updateRole(RolePostVO instance) {
+		roleRepository.updateRole(instance);
+	}
+
+	@Override
+	public void deleteRole(int id) {
+		roleRepository.deleteRole(id);
+	}
+
+	@Override
+	public Manager managerLogin(String email, String password) {
+		Manager instance = managerRepository.queryByEmailAndPassword(email, password);
+		if (null != instance) {
+			// set token
+			instance.setToken(null);
+			// TODO: update manager
+		}
+		return instance;
 	}
 }

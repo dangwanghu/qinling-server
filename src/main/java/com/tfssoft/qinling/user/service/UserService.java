@@ -4,6 +4,8 @@ import java.util.List;
 
 import com.tfssoft.qinling.user.domain.Manager;
 import com.tfssoft.qinling.user.domain.ManagerPostVO;
+import com.tfssoft.qinling.user.domain.Role;
+import com.tfssoft.qinling.user.domain.RolePostVO;
 import com.tfssoft.qinling.user.domain.TopicCollectVO;
 import com.tfssoft.qinling.user.domain.User;
 import com.tfssoft.qinling.user.domain.UserActionPostVO;
@@ -40,5 +42,17 @@ public interface UserService {
 	public void updateManager(ManagerPostVO instance);
 
 	public void deleteManager(int id);
+
+	public List<Role> getRoleList(Integer skip, Integer limit, String name);
+
+	public long getRoleCount(String name);
+
+	public void addRole(RolePostVO instance);
+
+	public void updateRole(RolePostVO instance);
+
+	public void deleteRole(int id);
+
+	public Manager managerLogin(String email, String password);
 
 }

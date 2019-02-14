@@ -15,9 +15,12 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.tfssoft.qinling.base.controller.BaseController;
 import com.tfssoft.qinling.user.domain.BindingPhoneVO;
 import com.tfssoft.qinling.user.domain.Manager;
+import com.tfssoft.qinling.user.domain.ManagerLoginVO;
 import com.tfssoft.qinling.user.domain.ManagerPostVO;
 import com.tfssoft.qinling.user.domain.NewPasswordVO;
 import com.tfssoft.qinling.user.domain.ResetPasswordVO;
+import com.tfssoft.qinling.user.domain.Role;
+import com.tfssoft.qinling.user.domain.RolePostVO;
 import com.tfssoft.qinling.user.domain.ThirdPartyBindingVO;
 import com.tfssoft.qinling.user.domain.TopicCollectVO;
 import com.tfssoft.qinling.user.domain.User;
@@ -287,6 +290,86 @@ public class UserController extends BaseController {
 		} catch (Exception e) {
 			e.printStackTrace();
 			error("删除出错！", response);
+		}
+	}
+	
+	@ApiOperation(value = "获取角色列表", httpMethod = "GET")
+	@RequestMapping(value = "/role/list", method = RequestMethod.GET)
+	public void getRoleList(@RequestParam(value = "skip", required = false) Integer skip,
+			@RequestParam(value = "limit", required = false) Integer limit,
+			@RequestParam(value = "name", required = false) String name, HttpServletRequest request,
+			HttpServletResponse response) {
+		try {
+			List<Role> list = userService.getRoleList(skip, limit, name);
+			writeJson(list, response);
+		} catch (Exception e) {
+			e.printStackTrace();
+			error("查询失败！", response);
+		}
+	}
+
+	@ApiOperation(value = "获取角色总数", httpMethod = "GET")
+	@RequestMapping(value = "/role/count", method = RequestMethod.GET)
+	public void getRoleCount(@RequestParam(value = "name", required = false) String name, HttpServletRequest request,
+			HttpServletResponse response) {
+		try {
+			long count = userService.getRoleCount(name);
+			writeJson(count, response);
+		} catch (Exception e) {
+			e.printStackTrace();
+			error("查询失败！", response);
+		}
+	}
+	
+	@ApiOperation(value = "新增角色", httpMethod = "POST")
+	@RequestMapping(value = "/role", method = RequestMethod.POST)
+	public void postRole(@RequestBody RolePostVO instance, HttpServletRequest request, HttpServletResponse response) {
+		try {
+			userService.addRole(instance);
+			success("保存成功", response);
+		} catch (Exception e) {
+			e.printStackTrace();
+			error("保存出错！", response);
+		}
+	}
+	
+	@ApiOperation(value = "修改角色", httpMethod = "PUT")
+	@RequestMapping(value = "/role", method = RequestMethod.PUT)
+	public void putRole(@RequestBody RolePostVO instance, HttpServletRequest request, HttpServletResponse response) {
+		try {
+			userService.updateRole(instance);
+			success("更新成功", response);
+		} catch (Exception e) {
+			e.printStackTrace();
+			error("更新出错！", response);
+		}
+	}
+	
+	@ApiOperation(value = "删除角色", httpMethod = "DELETE")
+	@RequestMapping(value = "/role", method = RequestMethod.DELETE)
+	public void deleteRole(@RequestParam(required = true) Integer id, HttpServletRequest request, HttpServletResponse response) {
+		try {
+			userService.deleteRole(id.intValue());
+			success("删除成功", response);
+		} catch (Exception e) {
+			e.printStackTrace();
+			error("删除出错！", response);
+		}
+	}
+	
+	@ApiOperation(value = "操作员登录", httpMethod = "POST")
+	@RequestMapping(value = "/manager/login", method = RequestMethod.POST)
+	public void postManagerLogin(@RequestBody ManagerLoginVO user, HttpServletRequest request, HttpServletResponse response) {
+		try {
+			Manager instance = userService.managerLogin(user.getEmail(), user.getPassword());
+			if (null != instance) {
+				writeJson(instance, response);
+			} else {
+				error("邮箱或密码错误", response);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+			error("登录失败！", response);
 		}
 	}
 }

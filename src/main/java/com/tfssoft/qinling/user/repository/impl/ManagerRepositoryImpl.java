@@ -43,4 +43,9 @@ public class ManagerRepositoryImpl extends AbstractRepository<Manager> implement
 		this.removeOne(ManagerSql.DELETE_MANAGER, id);
 	}
 
+	@Override
+	public Manager queryByEmailAndPassword(String email, String password) {
+		return this.findOne(ManagerSql.getManagerLoginSql(email, password));
+	}
+
 }
