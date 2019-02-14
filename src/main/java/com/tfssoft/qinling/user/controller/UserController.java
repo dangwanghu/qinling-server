@@ -14,6 +14,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.tfssoft.qinling.base.controller.BaseController;
 import com.tfssoft.qinling.user.domain.BindingPhoneVO;
+import com.tfssoft.qinling.user.domain.Manager;
+import com.tfssoft.qinling.user.domain.ManagerPostVO;
 import com.tfssoft.qinling.user.domain.NewPasswordVO;
 import com.tfssoft.qinling.user.domain.ResetPasswordVO;
 import com.tfssoft.qinling.user.domain.ThirdPartyBindingVO;
@@ -223,5 +225,68 @@ public class UserController extends BaseController {
 			error("修改失败！", response);
 		}
 	}
+	
+	@ApiOperation(value = "获取操作员列表", httpMethod = "GET")
+	@RequestMapping(value = "/manager/list", method = RequestMethod.GET)
+	public void getManagerList(@RequestParam(value = "skip", required = false) Integer skip,
+			@RequestParam(value = "limit", required = false) Integer limit,
+			@RequestParam(value = "name", required = false) String name, HttpServletRequest request,
+			HttpServletResponse response) {
+		try {
+			List<Manager> list = userService.getManagerList(skip, limit, name);
+			writeJson(list, response);
+		} catch (Exception e) {
+			e.printStackTrace();
+			error("查询失败！", response);
+		}
+	}
 
+	@ApiOperation(value = "获取操作员总数", httpMethod = "GET")
+	@RequestMapping(value = "/manager/count", method = RequestMethod.GET)
+	public void getManagerCount(@RequestParam(value = "name", required = false) String name, HttpServletRequest request,
+			HttpServletResponse response) {
+		try {
+			long count = userService.getManagerCount(name);
+			writeJson(count, response);
+		} catch (Exception e) {
+			e.printStackTrace();
+			error("查询失败！", response);
+		}
+	}
+	
+	@ApiOperation(value = "新增操作员", httpMethod = "POST")
+	@RequestMapping(value = "/manager", method = RequestMethod.POST)
+	public void postManager(@RequestBody ManagerPostVO instance, HttpServletRequest request, HttpServletResponse response) {
+		try {
+			userService.addManager(instance);
+			success("保存成功", response);
+		} catch (Exception e) {
+			e.printStackTrace();
+			error("保存出错！", response);
+		}
+	}
+	
+	@ApiOperation(value = "修改操作员", httpMethod = "PUT")
+	@RequestMapping(value = "/manager", method = RequestMethod.PUT)
+	public void putManager(@RequestBody ManagerPostVO instance, HttpServletRequest request, HttpServletResponse response) {
+		try {
+			userService.updateManager(instance);
+			success("更新成功", response);
+		} catch (Exception e) {
+			e.printStackTrace();
+			error("更新出错！", response);
+		}
+	}
+	
+	@ApiOperation(value = "删除操作员", httpMethod = "DELETE")
+	@RequestMapping(value = "/manager", method = RequestMethod.DELETE)
+	public void deleteManager(@RequestParam(required = true) Integer id, HttpServletRequest request, HttpServletResponse response) {
+		try {
+			userService.deleteManager(id.intValue());
+			success("删除成功", response);
+		} catch (Exception e) {
+			e.printStackTrace();
+			error("删除出错！", response);
+		}
+	}
 }

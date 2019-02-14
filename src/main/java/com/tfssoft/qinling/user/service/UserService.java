@@ -2,6 +2,8 @@ package com.tfssoft.qinling.user.service;
 
 import java.util.List;
 
+import com.tfssoft.qinling.user.domain.Manager;
+import com.tfssoft.qinling.user.domain.ManagerPostVO;
 import com.tfssoft.qinling.user.domain.TopicCollectVO;
 import com.tfssoft.qinling.user.domain.User;
 import com.tfssoft.qinling.user.domain.UserActionPostVO;
@@ -28,5 +30,15 @@ public interface UserService {
 	public void deleteUserCollect(List<UserActionPostVO> actions);
 
 	public String updatePassword(String userId, String oldPassword, String password);
+
+	public List<Manager> getManagerList(Integer skip, Integer limit, String name);
+
+	public long getManagerCount(String name);
+
+	public void addManager(ManagerPostVO instance);
+
+	public void updateManager(ManagerPostVO instance);
+
+	public void deleteManager(int id);
 
 }

@@ -6,11 +6,14 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.tfssoft.qinling.user.domain.Manager;
+import com.tfssoft.qinling.user.domain.ManagerPostVO;
 import com.tfssoft.qinling.user.domain.TopicCollectVO;
 import com.tfssoft.qinling.user.domain.User;
 import com.tfssoft.qinling.user.domain.UserAction;
 import com.tfssoft.qinling.user.domain.UserActionPostVO;
 import com.tfssoft.qinling.user.domain.UserThirdPartyVO;
+import com.tfssoft.qinling.user.repository.ManagerRepository;
 import com.tfssoft.qinling.user.repository.UserActionRepository;
 import com.tfssoft.qinling.user.repository.UserRepository;
 import com.tfssoft.qinling.user.service.UserService;
@@ -21,6 +24,9 @@ public class UserServiceImpl implements UserService {
 
 	@Autowired
 	private UserRepository userRepository;
+	
+	@Autowired
+	private ManagerRepository managerRepository;
 
 	@Autowired
 	private UserActionRepository userActionRepository;
@@ -191,5 +197,38 @@ public class UserServiceImpl implements UserService {
 		user.setPassword(password);
 		userRepository.updateUser(user);
 		return null;
+	}
+
+	@Override
+	public List<Manager> getManagerList(Integer skip, Integer limit, String name) {
+		if (null == skip && null != limit) {
+			return managerRepository.getManagerPageList(name, 0, limit.intValue());
+		} else if (null != skip && null == limit) {
+			return managerRepository.getManagerPageList(name, skip.intValue(), 10);
+		} else if (null != skip && null != limit) {
+			return managerRepository.getManagerPageList(name, skip.intValue(), limit.intValue());
+		} else {
+			return managerRepository.getManagerList(name);
+		}
+	}
+
+	@Override
+	public long getManagerCount(String name) {
+		return managerRepository.getManagerCount(name);
+	}
+
+	@Override
+	public void addManager(ManagerPostVO instance) {
+		managerRepository.addManager(instance);
+	}
+
+	@Override
+	public void updateManager(ManagerPostVO instance) {
+		managerRepository.updateManager(instance);
+	}
+
+	@Override
+	public void deleteManager(int id) {
+		managerRepository.deleteManager(id);
 	}
 }
