@@ -31,6 +31,9 @@ public class ManagerPostVO implements Serializable {
 	@ApiModelProperty(value = "手机号", required = false)
 	private String phone;
 	
+	@ApiModelProperty(value = "状态", required = false)
+	private String status;
+	
 	public ManagerPostVO() {
 	}
 
@@ -89,4 +92,13 @@ public class ManagerPostVO implements Serializable {
 	public void setId(Integer id) {
 		this.id = id;
 	}
+
+	public String getStatus() {
+		return status;
+	}
+
+	public void setStatus(String status) {
+		this.status = status;
+	}
+
 }

@@ -6,7 +6,7 @@ import com.tfssoft.qinling.util.EncryptionByMD5;
 
 public class ManagerSql {
 	public static final String GET_MANAGER_LIST = 
-			"SElECT a.id, a.email, a.real_name AS realName, a.sex, a.phone, a.status, " 
+			"SElECT a.id, a.email, a.real_name AS realName, a.role, a.sex, a.phone, a.status, " 
 			+ "d.name AS roleName, d.scope AS roleScope, " + "a.create_time AS createTime, " + "a.update_time AS updateTime " 
 			+ "FROM manager a "
 			+ "left join role d on d.id = a.role ";
@@ -63,7 +63,7 @@ public class ManagerSql {
 		sql += ", real_name = '" + instance.getRealName() + "'";
 		sql += ", sex = '" + instance.getSex() + "'";
 		sql += ", phone = '" + instance.getPhone() + "'";
-		sql += ", password = MD5('" + instance.getPassword() + "')";
+		sql += ", status = '" + instance.getStatus() + "'";
 		sql += ", update_time = now()";
 		
 		sql += " where id = " + instance.getId().intValue();

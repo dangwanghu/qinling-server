@@ -245,7 +245,7 @@ public class UserController extends BaseController {
 	}
 
 	@ApiOperation(value = "获取操作员总数", httpMethod = "GET")
-	@RequestMapping(value = "/manager/count", method = RequestMethod.GET)
+	@RequestMapping(value = "/manager/total", method = RequestMethod.GET)
 	public void getManagerCount(@RequestParam(value = "name", required = false) String name, HttpServletRequest request,
 			HttpServletResponse response) {
 		try {
@@ -309,7 +309,7 @@ public class UserController extends BaseController {
 	}
 
 	@ApiOperation(value = "获取角色总数", httpMethod = "GET")
-	@RequestMapping(value = "/role/count", method = RequestMethod.GET)
+	@RequestMapping(value = "/role/total", method = RequestMethod.GET)
 	public void getRoleCount(@RequestParam(value = "name", required = false) String name, HttpServletRequest request,
 			HttpServletResponse response) {
 		try {
