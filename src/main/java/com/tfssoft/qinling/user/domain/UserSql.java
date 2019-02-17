@@ -8,6 +8,13 @@ public class UserSql {
 			+ "open_type AS openType, " + "nick_name AS nickName, " + "avatar AS avatar, " + "real_name AS realName, "
 			+ "sex AS sex, " + "phone AS phone, " + "province AS province, " + "city AS city, " + "street AS street, "
 			+ "token AS token " + "FROM user where status = 1 and ";
+	
+	public static final String GET_USERS = "SElECT id, password, " + "open_id AS openId, status, create_time AS createTime, "
+			+ "open_type AS openType, " + "nick_name AS nickName, " + "avatar AS avatar, " + "real_name AS realName, "
+			+ "sex AS sex, " + "phone AS phone, " + "province AS province, " + "city AS city, " + "street AS street, "
+			+ "token AS token " + "FROM user where 1 = 1 ";
+	
+	public static final String GET_USER_COUNT = "SElECT count(*) FROM user where 1 = 1 ";
 
 	public static final String INSRT_USER = "INSERT INTO user "
 			+ "(open_id, open_type, user_platform, nick_name, phone, avatar, sex, status, create_time) " + "values "
@@ -90,6 +97,36 @@ public class UserSql {
 				
 		sql += ") b left join SEARCH_VIEW c on b.relId = c.id and b.rel_type = c.type";
 
+		return sql;
+	}
+
+	public static String getListSql(String name) {
+		String sql = "";
+		if (null != name) {
+			sql += "and (nick_name like '%" + name + "%' or real_name = '%" + name + "%')";
+		}
+		return GET_USERS + sql;
+	}
+
+	public static String getPageListSql(String name, int skip, int limit) {
+		String sql = "";
+		if (null != name) {
+			sql += "and (nick_name like '%" + name + "%' or real_name = '%" + name + "%')";
+		}
+		return GET_USERS + sql + " limit " + skip + "," + limit;
+	}
+
+	public static String getCountSql(String name) {
+		String sql = "";
+		if (null != name) {
+			sql += "and (nick_name like '%" + name + "%' or real_name = '%" + name + "%')";
+		}
+		return GET_USER_COUNT + sql;
+	}
+
+	public static String getUpdateUserSql(int id, String status) {
+		String sql = "update user set status = '" + status + "', update_time = now()";
+		sql += " where id = " + id;
 		return sql;
 	}
 }

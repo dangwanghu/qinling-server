@@ -1,5 +1,7 @@
 package com.tfssoft.qinling.user.repository.impl;
 
+import java.util.List;
+
 import org.springframework.stereotype.Repository;
 
 import com.tfssoft.qinling.base.repository.impl.AbstractRepository;
@@ -40,4 +42,25 @@ public class UserRepositoryImpl extends AbstractRepository<User> implements User
 	public User queryById(int id) {
 		return this.findOne(UserSql.getUserByIdSql(id));
 	}
+
+	@Override
+	public List<User> getUserPageList(String name, int skip, int limit) {
+		return this.findAll(UserSql.getPageListSql(name, skip, limit));
+	}
+
+	@Override
+	public List<User> getUserList(String name) {
+		return this.findAll(UserSql.getListSql(name));
+	}
+
+	@Override
+	public long getUserCount(String name) {
+		return this.findCount(UserSql.getCountSql(name));
+	}
+
+	@Override
+	public void updateUserStatus(int id, String status) {
+		this.update(UserSql.getUpdateUserSql(id, status));
+	}
+
 }

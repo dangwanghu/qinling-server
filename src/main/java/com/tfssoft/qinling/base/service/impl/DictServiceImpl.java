@@ -46,6 +46,7 @@ public class DictServiceImpl implements DictService {
 			ResourceTree node = new ResourceTree();
 			node.setId(resource.getId());
 			node.setLabel(resource.getName());
+			node.setCode(resource.getCode());
 			List<ResourceTree> childs = new ArrayList<ResourceTree>();
 			
 			for (Resource resourceLVL1 : childLevel1Nodes) {
@@ -53,6 +54,7 @@ public class DictServiceImpl implements DictService {
 					ResourceTree nodeLVL1 = new ResourceTree();
 					nodeLVL1.setId(resourceLVL1.getId());
 					nodeLVL1.setLabel(resourceLVL1.getName());
+					nodeLVL1.setCode(resourceLVL1.getCode());
 					childs.add(nodeLVL1);
 				}
 			}
@@ -80,6 +82,7 @@ public class DictServiceImpl implements DictService {
 						ResourceTree nodeLVL2 = new ResourceTree();
 						nodeLVL2.setId(resourceLVL2.getId());
 						nodeLVL2.setLabel(resourceLVL2.getName());
+						nodeLVL2.setCode(resourceLVL2.getCode());
 						nodeLVL2.setIsLeaf(true);
 						childs.add(nodeLVL2);
 					}

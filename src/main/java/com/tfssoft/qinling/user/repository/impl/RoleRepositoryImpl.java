@@ -45,7 +45,7 @@ public class RoleRepositoryImpl extends AbstractRepository<Role> implements Role
 
 	@Override
 	public void updateRole(RolePostVO instance) {
-		this.update(RoleSql.getUpdateRoleSql(instance));
+		this.updatePrepared(RoleSql.getUpdateRoleSql(instance), RoleSql.getUpdatePreparedObject(instance));
 	}
 
 	@Override

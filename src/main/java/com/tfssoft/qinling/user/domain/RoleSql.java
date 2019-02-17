@@ -26,6 +26,12 @@ public class RoleSql {
 				new Date()
 		};
 	}
+	
+	public static Object[] getUpdatePreparedObject(RolePostVO instance) {
+		return new Object[] {
+				instance.getScope()
+		};
+	}
 
 	public static String getPageListSql(String name, int skip, int limit) {
 		String conditions = "";
@@ -50,12 +56,11 @@ public class RoleSql {
 		}
 		return GET_ROLE_COUNT + conditions;
 	}
-
+	
 	public static String getUpdateRoleSql(RolePostVO instance) {
 		String sql = "update role set name = '" + instance.getName() + "'";
 		sql += ", status = '" + instance.getStatus() + "'";
-		sql += ", scope = '" + instance.getScope() + "'";
-		sql += ", update_time = now()";
+		sql += ", scope = ?, update_time = now()";
 		
 		sql += " where id = " + instance.getId().intValue();
 		return sql;

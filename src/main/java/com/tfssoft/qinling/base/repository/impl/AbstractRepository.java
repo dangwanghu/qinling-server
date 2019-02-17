@@ -31,6 +31,11 @@ public abstract class AbstractRepository<T extends Serializable> implements Repo
 	public int update(String sql) {
 		return jdbcTemplate.update(sql);
 	}
+	
+	@Override
+	public int updatePrepared(String sql, Object... args) {
+		return jdbcTemplate.update(sql, args);
+	}
 
 	@Override
 	public T findOne(String sql) {

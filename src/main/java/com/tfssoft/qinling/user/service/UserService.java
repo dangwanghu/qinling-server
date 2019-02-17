@@ -55,4 +55,10 @@ public interface UserService {
 
 	public Manager managerLogin(String email, String password);
 
+	public List<User> getUserList(Integer skip, Integer limit, String name);
+
+	public long getUserCount(String name);
+
+	public void updateUserStatus(int id, String status);
+
 }

@@ -281,4 +281,27 @@ public class UserServiceImpl implements UserService {
 		}
 		return instance;
 	}
+
+	@Override
+	public List<User> getUserList(Integer skip, Integer limit, String name) {
+		if (null == skip && null != limit) {
+			return userRepository.getUserPageList(name, 0, limit.intValue());
+		} else if (null != skip && null == limit) {
+			return userRepository.getUserPageList(name, skip.intValue(), 10);
+		} else if (null != skip && null != limit) {
+			return userRepository.getUserPageList(name, skip.intValue(), limit.intValue());
+		} else {
+			return userRepository.getUserList(name);
+		}
+	}
+
+	@Override
+	public long getUserCount(String name) {
+		return userRepository.getUserCount(name);
+	}
+
+	@Override
+	public void updateUserStatus(int id, String status) {
+		userRepository.updateUserStatus(id, status);
+	}
 }

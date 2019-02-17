@@ -26,6 +26,7 @@ import com.tfssoft.qinling.user.domain.TopicCollectVO;
 import com.tfssoft.qinling.user.domain.User;
 import com.tfssoft.qinling.user.domain.UserActionPostVO;
 import com.tfssoft.qinling.user.domain.UserPhoneVO;
+import com.tfssoft.qinling.user.domain.UserPutVO;
 import com.tfssoft.qinling.user.domain.UserThirdPartyVO;
 import com.tfssoft.qinling.user.domain.UserVO;
 import com.tfssoft.qinling.user.service.UserService;
@@ -372,4 +373,47 @@ public class UserController extends BaseController {
 			error("登录失败！", response);
 		}
 	}
+	
+	@ApiOperation(value = "获取用户列表", httpMethod = "GET")
+	@RequestMapping(value = "/list", method = RequestMethod.GET)
+	public void getUserList(@RequestParam(value = "skip", required = false) Integer skip,
+			@RequestParam(value = "limit", required = false) Integer limit,
+			@RequestParam(value = "name", required = false) String name, HttpServletRequest request,
+			HttpServletResponse response) {
+		try {
+			List<User> list = userService.getUserList(skip, limit, name);
+			writeJson(list, response);
+		} catch (Exception e) {
+			e.printStackTrace();
+			error("查询失败！", response);
+		}
+	}
+
+	@ApiOperation(value = "获取用户总数", httpMethod = "GET")
+	@RequestMapping(value = "/total", method = RequestMethod.GET)
+	public void getUserCount(@RequestParam(value = "name", required = false) String name, HttpServletRequest request,
+			HttpServletResponse response) {
+		try {
+			long count = userService.getUserCount(name);
+			writeJson(count, response);
+		} catch (Exception e) {
+			e.printStackTrace();
+			error("查询失败！", response);
+		}
+	}
+	
+	
+	
+	@ApiOperation(value = "启用/禁用用户", httpMethod = "PUT")
+	@RequestMapping(value = "", method = RequestMethod.PUT)
+	public void putUser(@RequestBody UserPutVO instance, HttpServletRequest request, HttpServletResponse response) {
+		try {
+			userService.updateUserStatus(instance.getId().intValue(), instance.getStatus());
+			success("操作成功", response);
+		} catch (Exception e) {
+			e.printStackTrace();
+			error("操作出错！", response);
+		}
+	}
+	
 }

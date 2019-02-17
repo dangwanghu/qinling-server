@@ -10,6 +10,8 @@ public interface Repository<T extends Serializable> {
 	public void insertBatch(String sql, List<Object[]> batchArgs);
 	
 	public int update(String sql);
+	
+	public int updatePrepared(String sql, Object...args);
 
 	public T findOne(String sql);
 	

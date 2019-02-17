@@ -9,6 +9,7 @@ public class ResourceTree implements Serializable {
 
 	private Integer id;
 	private String label;
+	private String code;
 	private List<ResourceTree> children;
 	private Boolean isLeaf;
 	
@@ -46,6 +47,14 @@ public class ResourceTree implements Serializable {
 
 	public void setIsLeaf(Boolean isLeaf) {
 		this.isLeaf = isLeaf;
+	}
+
+	public String getCode() {
+		return code;
+	}
+
+	public void setCode(String code) {
+		this.code = code;
 	}
 
 }
