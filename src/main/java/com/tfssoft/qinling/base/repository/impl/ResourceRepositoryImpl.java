@@ -12,8 +12,8 @@ import com.tfssoft.qinling.base.repository.ResourceRepository;
 public class ResourceRepositoryImpl extends AbstractRepository<Resource> implements ResourceRepository {
 
 	@Override
-	public List<Resource> getResourceByParentId(Integer parentId) {
-		return this.findAll(ResourceSql.getListSql(parentId));
+	public List<Resource> getResourceByLevel(Integer level) {
+		return this.findAll(ResourceSql.getListSql(level));
 	}
 	
 }

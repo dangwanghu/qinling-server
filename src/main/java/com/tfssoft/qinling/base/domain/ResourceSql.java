@@ -5,17 +5,14 @@ public class ResourceSql {
 			+ "name like ";
 	
 
-	public static String getListSql(Integer parentId) {
+	public static String getListSql(Integer level) {
 		String sql = "";
 		sql += "select a.id, a.name, a.type, a.code, a.level, a.parent_id AS parentId ";
 		sql += "from resource a ";
 		
-		if (null != parentId) {
-			sql += "where parent_id = '" + parentId.intValue() + "'"; 
-		} else {
-			sql += "where parent_id is null"; 
-		}
-		
+		if (null != level) {
+			sql += "where level = '" + level.intValue() + "'"; 
+		} 
 		sql += " order by id asc";
 		
 		return sql;

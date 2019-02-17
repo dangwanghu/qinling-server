@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.tfssoft.qinling.base.domain.Dict;
-import com.tfssoft.qinling.base.domain.Resource;
+import com.tfssoft.qinling.base.domain.ResourceTree;
 import com.tfssoft.qinling.base.service.DictService;
 
 import io.swagger.annotations.Api;
@@ -52,10 +52,9 @@ public class DictController extends BaseController {
 	
 	@ApiOperation(value = "资源列表", httpMethod = "GET")
 	@RequestMapping(value = "/resource/list", method = RequestMethod.GET)
-	public void getResourceDict(@RequestParam(value = "parentId", required = false) Integer parentId,
-			HttpServletRequest request, HttpServletResponse response) {
+	public void getResourceDict(HttpServletRequest request, HttpServletResponse response) {
 		try {
-			List<Resource> result = dictService.getResourceByParentId(parentId);
+			List<ResourceTree> result = dictService.getResources(null);
 			writeJson(result, response);
 		} catch (Exception e) {
 			e.printStackTrace();

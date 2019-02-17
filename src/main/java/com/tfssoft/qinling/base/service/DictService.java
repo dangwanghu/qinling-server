@@ -3,7 +3,7 @@ package com.tfssoft.qinling.base.service;
 import java.util.List;
 
 import com.tfssoft.qinling.base.domain.Dict;
-import com.tfssoft.qinling.base.domain.Resource;
+import com.tfssoft.qinling.base.domain.ResourceTree;
 
 public interface DictService {
 	
@@ -11,6 +11,6 @@ public interface DictService {
 
 	public List<Dict> getXzList(Integer quxian);
 
-	public List<Resource> getResourceByParentId(Integer parentId);
+	public List<ResourceTree> getResources(Integer parentId);
 
 }

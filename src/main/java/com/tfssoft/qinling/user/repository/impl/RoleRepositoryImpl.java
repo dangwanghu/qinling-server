@@ -15,12 +15,22 @@ public class RoleRepositoryImpl extends AbstractRepository<Role> implements Role
 
 	@Override
 	public List<Role> getRolePageList(String name, int skip, int limit) {
-		return this.findAll(RoleSql.getPageListSql(name, skip, limit));
+		List<Role> list = this.findAll(RoleSql.getPageListSql(name, skip, limit));
+		for (Role role : list) {
+			Role tmp = this.findOne(RoleSql.getRoleIdsSql(role.getScope()));
+			role.setScopeIds(tmp.getScopeIds());
+		}
+		return list;
 	}
 
 	@Override
 	public List<Role> getRoleList(String name) {
-		return this.findAll(RoleSql.getListSql(name));
+		List<Role> list =  this.findAll(RoleSql.getListSql(name));
+		for (Role role : list) {
+			Role tmp = this.findOne(RoleSql.getRoleIdsSql(role.getScope()));
+			role.setScopeIds(tmp.getScopeIds());
+		}
+		return list;
 	}
 
 	@Override

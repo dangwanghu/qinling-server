@@ -4,7 +4,8 @@ import java.util.Date;
 
 public class RoleSql {
 	public static final String GET_ROLE_LIST = 
-			"SElECT a.id, a.scope, a.name, a.status, a.create_time AS createTime, a.update_time AS updateTime " 
+			"SElECT a.id, a.scope, "
+			+ "a.name, a.status, a.create_time AS createTime, a.update_time AS updateTime " 
 			+ "FROM role a ";
 	
 	public static final String GET_ROLE_COUNT = "SElECT count(id) FROM role a ";
@@ -58,6 +59,10 @@ public class RoleSql {
 		
 		sql += " where id = " + instance.getId().intValue();
 		return sql;
+	}
+	
+	public static String getRoleIdsSql(String codes) {
+		return "select GROUP_CONCAT(id) as scopeIds FROM resource where code in (" + codes + ")";
 	}
 
 }

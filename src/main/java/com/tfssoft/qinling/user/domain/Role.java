@@ -10,6 +10,7 @@ public class Role implements Serializable {
 	private String name;
 	private Integer status;
 	private String scope;
+	private String scopeIds;
 	private Date createTime;
 	private Date updateTime;
 
@@ -62,6 +63,14 @@ public class Role implements Serializable {
 
 	public void setUpdateTime(Date updateTime) {
 		this.updateTime = updateTime;
+	}
+
+	public String getScopeIds() {
+		return scopeIds;
+	}
+
+	public void setScopeIds(String scopeIds) {
+		this.scopeIds = scopeIds;
 	}
 	
 }
